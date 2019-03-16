@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Sample Page{% endblock %}
+
+{% block stylesheets %}
+    <style type="text/css">
+        .sample{
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for sampleEntity in sampleEntities %}
+            <li class="sample">{{ sampleEntity.id }} - {{ sampleEntity.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        console.log({{ count |  json_encode | raw }})
+    </script>
+{% endblock %}
