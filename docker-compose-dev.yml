@@ -2,12 +2,12 @@ version: '3'
 services:
     php-apache:
         build:
-          ./docker/php/
-        container_name: sran-apache-server
+          ./docker/php/dev
+        container_name: sran-apache-server-dev
         ports:
             - 80:80
         volumes:
-            - ./:/var/www/sran
+            - ./:/var/www/sran:z
             - ./docker/apache/vhosts:/etc/apache2/sites-enabled
         links:
             - 'mariadb'

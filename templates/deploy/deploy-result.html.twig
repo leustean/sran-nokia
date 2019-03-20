@@ -1,0 +1,19 @@
+{% extends "admin.html.twig" %}
+
+{% block title %}
+    Deploy Performed
+{% endblock %}
+
+{% block body %}
+    <div class="deploy-result">
+        <h1 class="deploy-result__title">Deploy Result</h1>
+        {% for deployOptionResult in deployResult %}
+            <div class="deploy-result__option">
+                <div class="deploy-result__option__status deploy-result__option__status--{{  deployOptionResult.isSuccessful() ? 'success' : 'fail' }}">
+                    Command  [{{ deployOptionResult.getDeployOption().getName() }}] {{ deployOptionResult.isSuccessful() ? 'Succeeded' : 'Failed' }}
+                </div>
+                <code class="deploy-result__option__output"><span>{{ deployOptionResult.getOutput() }}</span></code>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

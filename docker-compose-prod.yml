@@ -1,0 +1,31 @@
+version: '3'
+services:
+    php-apache:
+        build:
+          ./docker/php/prod
+        container_name: sran-apache-server
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www/sran:z
+            - ./docker/apache/vhosts:/etc/apache2/sites-enabled
+        links:
+            - 'mariadb'
+
+    mariadb:
+        image: mariadb:10.1
+        container_name: sran-mysql-server
+        volumes:
+            - mariadb:/var/lib/mysql
+        environment:
+            TZ: "Europe/Bucharest"
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+            MYSQL_ROOT_PASSWORD: 'sran_root'
+            MYSQL_USER: 'sran_user'
+            MYSQL_PASSWORD: 'sran_password'
+            MYSQL_DATABASE: 'sran'
+        ports:
+            - 3307:3306
+
+volumes:
+    mariadb:

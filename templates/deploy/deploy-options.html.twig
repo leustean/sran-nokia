@@ -1,0 +1,16 @@
+{% extends "admin.html.twig" %}
+
+{% block body %}
+    <form class="deploy-list" method="post" action="{{ path('deploy_option_perform') }}">
+        {% for option in options %}
+            <div class="deploy-list__option">
+                <label class="deploy-list__option__label">
+                    <input class="deploy-list__option__label__input" type="checkbox" name="{{ option.id }}" value="1">
+                    <span class="deploy-list__option__label__name">{{ option.name }}</span>
+                </label>
+                <code class="deploy-list__option__command">{{ option.command }}</code>
+            </div>
+        {% endfor %}
+        <input class="deploy-list__submit" type="submit" value="Deploy">
+    </form>
+{% endblock %}

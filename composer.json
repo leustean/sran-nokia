@@ -59,6 +59,11 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.11"
+        "roave/security-advisories": "dev-master",
+        "sensio/framework-extra-bundle": "^5.2",
+        "symfony/form": "4.2.*",
+        "symfony/maker-bundle": "^1.11",
+        "symfony/security-csrf": "4.2.*",
+        "symfony/validator": "4.2.*"
     }
 }

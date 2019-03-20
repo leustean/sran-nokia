@@ -1,0 +1,38 @@
+@import "../_vars";
+@import "../_messages";
+
+.deploy-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__title {
+    @extend %message;
+    @extend %info;
+  }
+
+  &__option {
+    margin: $margin;
+    border-bottom: $border black;
+
+    &__status {
+      @extend %message;
+
+      &--success {
+        @extend %success;
+      }
+
+      &--fail {
+        @extend %fail;
+      }
+    }
+
+    &__output {
+      @extend %message;
+      @extend %basic;
+      display: block;
+      white-space: pre;
+    }
+
+  }
+}

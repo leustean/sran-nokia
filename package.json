@@ -1,0 +1,16 @@
+{
+  "name": "sran",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "node-sass": "^4.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "watch-scss": "node-sass --source-map true --source-map-embed true --watch assets/scss/ --output public/css/",
+    "compile-scss": "node-sass --source-map true --source-map-embed true --output public/css/ assets/scss/"
+  },
+  "keywords": [],
+  "author": "Botici Alexandru",
+  "license": "Proprietary"
+}
