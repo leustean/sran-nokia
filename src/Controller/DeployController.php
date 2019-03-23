@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 
-use App\Entity\DeployResult;
+use App\Entity\DeployResultEntity;
 use App\Repository\DeployOptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/deploy", )
  */
-class Deploy extends AbstractController {
+class DeployController extends AbstractController {
 
 	private $currentWorkingDirectory;
 
@@ -63,7 +63,7 @@ class Deploy extends AbstractController {
 					$deployOption->getCommand(),
 					$output,
 					$status);
-				$deployResult[] = new DeployResult($deployOption, $status, implode($output,PHP_EOL));
+				$deployResult[] = new DeployResultEntity($deployOption, $status, implode($output,PHP_EOL));
 				$status = 1;
 				$output = [];
 			}

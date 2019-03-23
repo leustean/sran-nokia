@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\DeployOption;
+use App\Entity\DeployOptionEntity;
 
 class DeployOptionRepository {
 
@@ -24,12 +24,12 @@ class DeployOptionRepository {
 
 	public function __construct() {
 		foreach (self::$options as $option){
-			$this->deployOptions[$option['id']] = new DeployOption($option['id'],$option['name'],$option['command']);
+			$this->deployOptions[$option['id']] = new DeployOptionEntity($option['id'],$option['name'],$option['command']);
 		}
 	}
 
 	/**
-	 * @return DeployOption[]
+	 * @return DeployOptionEntity[]
 	 */
 	public function findAll(): array {
 		return $this->deployOptions;
@@ -37,9 +37,9 @@ class DeployOptionRepository {
 
 	/**
 	 * @param $id
-	 * @return DeployOption|null
+	 * @return DeployOptionEntity|null
 	 */
-	public function find($id): ?DeployOption {
+	public function find($id): ?DeployOptionEntity {
 		return $this->deployOptions[$id] ?? null;
 	}
 

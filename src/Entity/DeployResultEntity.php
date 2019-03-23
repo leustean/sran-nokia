@@ -9,10 +9,10 @@
 namespace App\Entity;
 
 
-class DeployResult {
+class DeployResultEntity {
 
 	/**
-	 * @var DeployOption
+	 * @var DeployOptionEntity
 	 */
 	private $deployOption;
 
@@ -28,11 +28,11 @@ class DeployResult {
 
 	/**
 	 * DeployResult constructor.
-	 * @param DeployOption $deployOption
-	 * @param int          $status
-	 * @param string       $output
+	 * @param DeployOptionEntity $deployOption
+	 * @param int                $status
+	 * @param string             $output
 	 */
-	public function __construct(DeployOption $deployOption, int $status, string $output) {
+	public function __construct(DeployOptionEntity $deployOption, int $status, string $output) {
 		$this->deployOption = $deployOption;
 		$this->status = $status;
 		$this->output = $output;
@@ -40,9 +40,9 @@ class DeployResult {
 
 
 	/**
-	 * @return DeployOption
+	 * @return DeployOptionEntity
 	 */
-	public function getDeployOption(): DeployOption {
+	public function getDeployOption(): DeployOptionEntity {
 		return $this->deployOption;
 	}
 

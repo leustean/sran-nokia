@@ -2,6 +2,3 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-sample_route:
-    path: /sample
-    controller: App\Controller\Sample::sampleAction

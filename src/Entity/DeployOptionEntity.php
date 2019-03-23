@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 
-class DeployOption {
+class DeployOptionEntity {
 
 	private $id;
 
