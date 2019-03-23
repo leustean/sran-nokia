@@ -52,12 +52,12 @@ There are no automated test yes.
 
 ### Coding style
 
-We use the PSR-4 with some adjustments for PHP and BEM for HTML and CSS
+We use the PSR-2 with some adjustments for PHP and BEM for HTML and CSS
 
 If you are using PhpStorm you can import the following [file](https://drive.google.com/open?id=1nBVtNTnfetoqtdR359AUw-Agb-OsW8YQ) to be able to reformat files to our codding standard.
 
 ```
-#PSR-4
+#PSR-2
 function()
 {
 
