@@ -1,6 +1,6 @@
 FROM php:7.2.1-apache
 
-RUN apt-get update && apt-get -y install gnupg git
+RUN apt-get update && apt-get -y install gnupg git zip unzip
 
 RUN docker-php-ext-install pdo_mysql
 
@@ -15,6 +15,3 @@ RUN mkdir -p /home/www-data/.composer && chown -R www-data:www-data /home/www-da
 
 
 WORKDIR /var/www/sran
-
-USER www-data
-RUN composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader && npm install && npm run compile-scss && php bin/console doctrine:migrations:migrate --no-interaction

@@ -1,6 +1,6 @@
 FROM php:7.2.1-apache
 
-RUN apt-get update && apt-get -y install gnupg git
+RUN apt-get update && apt-get -y install gnupg git zip unzip
 
 RUN docker-php-ext-install pdo_mysql
 
@@ -25,8 +25,4 @@ RUN pecl install xdebug; \
     echo "xdebug.remote_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini;
 
 
-
 WORKDIR /var/www/sran
-
-USER www-data
-RUN composer-install && npm install && npm run compile-scss && php bin/console doctrine:migrations:migrate --no-interaction

@@ -22,17 +22,21 @@ First you need to clone this repository.
 git clone https://<AtlassianId>@bitbucket.org/uvt-sran/sran.git
 ```
 
-Secondly you need to build you environment with docker. To do that first cd into the folder where the project was cloned. Then execute one of the following command build and start your servers.
+Secondly you need to build you environment with docker. To do that first cd into the folder where the project was cloned. Then execute the following command build and start your servers.
 
 ```
-#for production environment
-docker-compose -f docker-compose-dev.yml
-
-#for production environment
 docker-compose -f docker-compose-prod.yml
 ```
 
-Next you to add the following lines to your hosts file(On windows it is C:\Windows\System32\drivers\etc\hosts).
+If you need use xdebug on you local machine you can use the alternate docker-compose file(docker-compose-dev.yml), but when using this image you don't have access to composer commands in the docker VM.
+
+Then you need to run the initial deployment script.
+
+```
+bin/deploy-dev.sh
+```
+
+Next you need to add the following lines to your hosts file(On windows it is C:\Windows\System32\drivers\etc\hosts).
 
 ```
 127.0.0.1       sran.local

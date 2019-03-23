@@ -3,7 +3,7 @@ services:
     php-apache:
         build:
           ./docker/php/dev
-        container_name: sran-apache-server-dev
+        container_name: sran-apache-server
         ports:
             - 80:80
         volumes:
