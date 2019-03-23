@@ -15,3 +15,6 @@ RUN mkdir -p /home/www-data/.composer && chown -R www-data:www-data /home/www-da
 
 
 WORKDIR /var/www/sran
+
+USER www-data
+RUN composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader && npm install && npm run compile-scss && php bin/console doctrine:migrations:migrate --no-interaction

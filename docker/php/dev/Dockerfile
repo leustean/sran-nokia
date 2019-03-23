@@ -27,3 +27,6 @@ RUN pecl install xdebug; \
 
 
 WORKDIR /var/www/sran
+
+USER www-data
+RUN composer-install && npm install && npm run compile-scss && php bin/console doctrine:migrations:migrate --no-interaction
