@@ -19,7 +19,7 @@ Docker: https://www.docker.com/products/docker-desktop
 First you need to clone this repository.
 
 ```
-git clone https://<AtlassianId>@bitbucket.org/uvt-sran/sran.git
+git clone https://github.com/robery567/sran-nokia.git
 ```
 
 Secondly you need to build you environment with docker. To do that first cd into the folder where the project was cloned. Then execute the following command build and start your servers.
