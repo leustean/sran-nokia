@@ -78,6 +78,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "dragonmantank/cron-expression": {
+        "version": "v2.3.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
