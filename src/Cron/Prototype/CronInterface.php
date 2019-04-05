@@ -6,7 +6,7 @@
  * Time: 21:34
  */
 
-namespace App\Cron;
+namespace App\Cron\Prototype;
 
 
 use Cron\CronExpression;

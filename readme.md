@@ -36,7 +36,8 @@ Then you need to run the initial deployment script.
 bin/deploy-dev.sh
 ```
 
-Next you need to add the following lines to your hosts file(On windows it is C:\Windows\System32\drivers\etc\hosts).
+Optionally you can to add the following lines to your hosts file(On windows it is C:\Windows\System32\drivers\etc\hosts).
+If you skip this step, use localhost instead of ```sran.local``` 
 
 ```
 127.0.0.1       sran.local
@@ -67,6 +68,21 @@ function()
 function(){
 
 }
+
+```
+
+## Running cron jobs
+
+### Running a cron job when scheduled
+
+To schedule cron jobs they must be added to ```src/Repository/CronRepository.php``` in the ```setUpCronJobs``` method.
+
+### Running a cron job manually
+
+To run a cron job manually run the following command in the app root where ```#cron_id#``` is the ID of the cron you wish to run.
+
+```
+php bin/console app:cron:run:one #cron_id#
 
 ```
 

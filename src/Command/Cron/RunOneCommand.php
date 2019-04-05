@@ -8,20 +8,19 @@
 
 namespace App\Command\Cron;
 
-
+use App\Cron\Prototype\CronCommand;
 use App\Repository\CronRepository;
-use DateTimeImmutable;
 use RuntimeException;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RunOneCommand extends Command {
+class RunOneCommand extends CronCommand {
 
+	/**
+	 * @var CronRepository
+	 */
 	private $cronRepository;
-
-	private $now;
 
 	protected function configure() : void {
 		$this
@@ -34,16 +33,9 @@ class RunOneCommand extends Command {
 	/**
 	 * RunDueCommand constructor.
 	 * @param CronRepository         $cronRepository
-	 * @param DateTimeImmutable|null $now
-	 * @throws \Exception
 	 */
-	public function __construct(CronRepository $cronRepository, ?DateTimeImmutable $now = null) {
+	public function __construct(CronRepository $cronRepository) {
 		$this->cronRepository = $cronRepository;
-		if($now === null){
-			$now = new DateTimeImmutable();
-		}
-		$this->now = $now;
-
 		parent::__construct();
 	}
 
@@ -53,7 +45,7 @@ class RunOneCommand extends Command {
 		if($cron === null){
 			throw new RuntimeException('Cron not found');
 		}
-		$cron->run($this->now, $output);
+		$this->runCron($cron, $output);
 	}
 
 }

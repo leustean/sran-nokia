@@ -9,6 +9,7 @@
 namespace App\Cron;
 
 
+use App\Cron\Prototype\CronInterface;
 use Cron\CronExpression;
 use DateTimeImmutable;
 use Symfony\Component\Console\Output\OutputInterface;

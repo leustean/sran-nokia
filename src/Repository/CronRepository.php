@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Cron\CronInterface;
+use App\Cron\Prototype\CronInterface;
 use App\Cron\SampleCron;
 
 class CronRepository {
