@@ -77,6 +77,8 @@ function(){
 
 To schedule cron jobs they must be added to ```src/Repository/CronRepository.php``` in the ```setUpCronJobs``` method.
 
+Note: cron jobs can be scheduled only on the prod image
+
 ### Running a cron job manually
 
 To run a cron job manually run the following command in the app root where ```#cron_id#``` is the ID of the cron you wish to run.
