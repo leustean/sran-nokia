@@ -28,19 +28,18 @@ class RunDueCommand extends Command {
 
 	/**
 	 * RunDueCommand constructor.
-	 * @param string|null            $name
 	 * @param CronRepository         $cronRepository
 	 * @param DateTimeImmutable|null $now
 	 * @throws \Exception
 	 */
-	public function __construct(?string $name, CronRepository $cronRepository, ?DateTimeImmutable $now = null) {
+	public function __construct(CronRepository $cronRepository, ?DateTimeImmutable $now = null) {
 		$this->cronRepository = $cronRepository;
 		if($now === null){
 			$now = new DateTimeImmutable();
 		}
 		$this->now = $now;
 
-		parent::__construct($name);
+		parent::__construct();
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {

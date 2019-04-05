@@ -13,6 +13,7 @@ use App\Repository\CronRepository;
 use DateTimeImmutable;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -23,30 +24,32 @@ class RunOneCommand extends Command {
 	private $now;
 
 	protected function configure() : void {
-		$this->setName('app:cron:run:one')->setDescription('Runs the cron jobs with the given name.');
+		$this
+			->setName('app:cron:run:one')
+			->setDescription('Runs the cron jobs with the given name.')
+			->addArgument('cron', InputArgument::REQUIRED, 'The id of the cron to run');
 
 	}
 
 	/**
 	 * RunDueCommand constructor.
-	 * @param string|null            $name
 	 * @param CronRepository         $cronRepository
 	 * @param DateTimeImmutable|null $now
 	 * @throws \Exception
 	 */
-	public function __construct(?string $name, CronRepository $cronRepository, ?DateTimeImmutable $now = null) {
+	public function __construct(CronRepository $cronRepository, ?DateTimeImmutable $now = null) {
 		$this->cronRepository = $cronRepository;
 		if($now === null){
 			$now = new DateTimeImmutable();
 		}
 		$this->now = $now;
 
-		parent::__construct($name);
+		parent::__construct();
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 
-		$cron = $this->cronRepository->find($input->getFirstArgument());
+		$cron = $this->cronRepository->find($input->getArgument('cron'));
 		if($cron === null){
 			throw new RuntimeException('Cron not found');
 		}
