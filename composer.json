@@ -62,6 +62,7 @@
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
-        "symfony/maker-bundle": "^1.11"
+        "symfony/maker-bundle": "^1.11",
+        "symfony/phpunit-bridge": "*"
     }
 }
