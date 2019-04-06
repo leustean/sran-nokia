@@ -25,15 +25,19 @@ git clone https://github.com/robery567/sran-nokia.git
 Secondly you need to build you environment with docker. To do that first cd into the folder where the project was cloned. Then execute the following command build and start your servers.
 
 ```
-docker-compose -f docker-compose-prod.yml
+docker-compose up
 ```
 
-If you need use xdebug on you local machine you can use the alternate docker-compose file(docker-compose-dev.yml), but when using this image you don't have access to composer commands in the docker VM.
+If you need use xdebug on you local machine you can use the alternate docker-compose file(```docker-compose-xdebug.yml```), but when using this image you don't have access to composer commands in the docker VM.
 
 Then you need to run the initial deployment script.
 
 ```
+#when setting up you developemnt environment
 bin/deploy-dev.sh
+
+#when setting up a production environment
+bin/deploy-prod.sh
 ```
 
 Optionally you can to add the following lines to your hosts file(On windows it is C:\Windows\System32\drivers\etc\hosts).
@@ -48,7 +52,9 @@ Now when you go to http://sran.local/deploy/ you should see some deployment opti
 
 ## Running the tests
 
-There are no automated test yes.
+To run the test execute the following command in the project root(this will also install phpunit if not present).
+
+```php bin/phpunit```
 
 
 ### Coding style
@@ -77,7 +83,9 @@ function(){
 
 To schedule cron jobs they must be added to ```src/Repository/CronRepository.php``` in the ```setUpCronJobs``` method.
 
-Note: cron jobs can be scheduled only on the prod image
+Notes: 
+* cron jobs can be scheduled only on the prod image
+* cron log can be found at ```var/log/cron.log```
 
 ### Running a cron job manually
 
