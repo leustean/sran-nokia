@@ -48,9 +48,88 @@ class RunDueCommandTest extends TestCase {
 		$cronRepository
 			->method('findAll')
 			->willReturn([$dueCron, $notDueCron]);
-		$runOneCommand = new RunDueCommand($cronRepository);
+		$runDueCommand = new RunDueCommand($cronRepository);
 
-		$runOneCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
+		$runDueCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function test_startAndFinishTimesAreLogged_givenThereAreNoExceptions(): void {
+		$cronId = 'test-cron';
+
+		$dueCronExpression = $this->getMockCronExpression();
+		$dueCronExpression
+			->method('isDue')
+			->willReturn(true);
+		$dueCron = $this->getMockCronInterface();
+		$dueCron
+			->method('getCronExpresion')
+			->willReturn($dueCronExpression);
+		$dueCron
+			->method('getId')
+			->willReturn($cronId);
+		$dueCron
+			->expects($this->once())
+			->method('run');
+
+		$outputInterface = $this->getMockOutputInterface();
+		$outputInterface
+			->expects($this->exactly(2))
+			->method('writeln')
+			->withConsecutive(
+				[$this->stringEndsWith("Cron[{$cronId}] started.")],
+				[$this->stringEndsWith("Cron[{$cronId}] finished.")]
+			);
+
+		$cronRepository = $this->getMockCronRepository();
+		$cronRepository
+			->method('findAll')
+			->willReturn([$dueCron]);
+		$runDueCommand = new RunDueCommand($cronRepository);
+
+		$runDueCommand->run($this->getMockInputInterface(), $outputInterface);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function test_startAndFailTimesAreLogged_givenTheCronThrowsAnException(): void {
+		$cronId = 'test-cron';
+		$cronExceptionMessage = 'test-message';
+
+		$dueCronExpression = $this->getMockCronExpression();
+		$dueCronExpression
+			->method('isDue')
+			->willReturn(true);
+		$dueCron = $this->getMockCronInterface();
+		$dueCron
+			->method('getCronExpresion')
+			->willReturn($dueCronExpression);
+		$dueCron
+			->method('getId')
+			->willReturn($cronId);
+		$dueCron
+			->method('run')
+			->willThrowException(new Exception($cronExceptionMessage));
+
+		$outputInterface = $this->getMockOutputInterface();
+		$outputInterface
+			->expects($this->exactly(2))
+			->method('writeln')
+			->withConsecutive(
+				[$this->stringEndsWith("Cron[{$cronId}] started.")],
+				[$this->stringEndsWith("Cron[{$cronId}] failed with message: {$cronExceptionMessage}.")]
+			);
+
+		$cronRepository = $this->getMockCronRepository();
+		$cronRepository
+			->method('findAll')
+			->willReturn([$dueCron]);
+		$runDueCommand = new RunDueCommand($cronRepository);
+
+		$runDueCommand->run($this->getMockInputInterface(), $outputInterface);
 	}
 
 	/**

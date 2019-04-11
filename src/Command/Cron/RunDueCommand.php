@@ -9,12 +9,15 @@
 namespace App\Command\Cron;
 
 
-use App\Cron\Prototype\CronCommand;
+use App\Cron\Prototype\CronInterface;
 use App\Repository\CronRepository;
+use DateTimeImmutable;
+use Exception;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RunDueCommand extends CronCommand {
+class RunDueCommand extends Command {
 
 	/**
 	 * @var CronRepository
@@ -45,5 +48,20 @@ class RunDueCommand extends CronCommand {
 			}
 		}
 	}
+
+	private function runCron(CronInterface $cron, OutputInterface $output): void {
+		try{
+			$now = date('Y-m-d h:i:s');
+			$output->writeln("[{$now}] Cron[{$cron->getId()}] started.");
+			$cron->run(new DateTimeImmutable(), $output);
+			$now = date('Y-m-d h:i:s');
+			$output->writeln("[{$now}] Cron[{$cron->getId()}] finished.");
+		}catch (Exception $e){
+			$now = date('Y-m-d h:i:s');
+			$output->writeln("[{$now}] Cron[{$cron->getId()}] failed with message: {$e->getMessage()}.");
+		}
+	}
+
+
 
 }
