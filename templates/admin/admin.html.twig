@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}SRAN{% endblock %}</title>
     <link href="/css/admin.css" rel="stylesheet">
+    <link href="css/material-icons.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -14,7 +15,9 @@
                 <a class="wrapper__navbar__logo__link" href="#">SRAN</a>
             </div>
             <div class="wrapper__navbar__utils">
+                <i class="material-icons">help_outline</i>
                 <a class="wrapper__navbar__utils__link" href="#">Guide</a>
+                <i class="material-icons">account_circle</i>
                 <a class="wrapper__navbar__utils__link" href="#">Login</a>
             </div>
         {% endblock %}
@@ -35,7 +38,10 @@
 
         </div>
         <div class="wrapper__body__content">
-            {% block body %}{% endblock %}
+            {% block body %}
+            <div class="wrapper__body__content__box"></div>
+
+            {% endblock %}
         </div>
     </div>
 

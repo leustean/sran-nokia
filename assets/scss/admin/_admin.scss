@@ -3,6 +3,7 @@
 html {
   height: 100%;
   font-family: 'Roboto-Regular', sans-serif;
+
 }
 
 .wrapper {
@@ -13,7 +14,7 @@ html {
 
   &__navbar {
     background-color: white;
-    height: 75px;
+    height: 80px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -31,7 +32,7 @@ html {
     }
 
     &__utils {
-      margin-right: 30px;
+      margin-right: 45px;
       display: flex;
       align-items: center;
 
@@ -40,7 +41,7 @@ html {
         text-decoration: none;
         color: $primary-color;
         font-size: 20px;
-        margin-right: 35px;
+        margin-right: 40px;
       }
     }
   }
@@ -69,8 +70,8 @@ html {
           margin-top: 90px;
         }
 
-        font-size: 20px;
-        padding: 35px;
+        font-size: 25px;
+        padding: 30px;
         color: white;
 
         &__link {
@@ -87,6 +88,13 @@ html {
       min-height: 100%;
       background-color: $background-color;
       width: 100%;
+      &__box {
+        background-color: white;
+        min-width: 270px;
+        min-height: 520px;
+        padding: 0px;
+        margin: 70px;
+      }
     }
   }
 }
