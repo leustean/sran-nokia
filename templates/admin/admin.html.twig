@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>{% block title %}SRAN{% endblock %}</title>
     <link href="/css/admin.css" rel="stylesheet">
-    <link href="css/material-icons.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -15,25 +14,17 @@
                 <a class="wrapper__navbar__logo__link" href="#">SRAN</a>
             </div>
             <div class="wrapper__navbar__utils">
-                <i class="material-icons">help_outline</i>
-                <a class="wrapper__navbar__utils__link" href="#">Guide</a>
-                <i class="material-icons">account_circle</i>
-                <a class="wrapper__navbar__utils__link" href="#">Login</a>
+                <a class="wrapper__navbar__utils__link" href="#"><i class="material-icons">help_outline</i>Guide</a>
+                <a class="wrapper__navbar__utils__link" href="#"><i class="material-icons">account_circle</i>Login</a>
             </div>
         {% endblock %}
     </div>
     <div class="wrapper__body">
         <div class="wrapper__body__menu">
             {% block menu %}
-                <div class="wrapper__body__menu__option">
-                    <a class="wrapper__body__menu__option__link" href="#">Default time</a>
-                </div>
-                <div class="wrapper__body__menu__option">
-                    <a class="wrapper__body__menu__option__link" href="#">Add device</a>
-                </div>
-                <div class="wrapper__body__menu__option">
-                    <a class="wrapper__body__menu__option__link" href="#">Manage users</a>
-                </div>
+                    <a class="wrapper__body__menu__option" href="#">Default time</a>
+                    <a class="wrapper__body__menu__option" href="#">Add device</a>
+                    <a class="wrapper__body__menu__option" href="#">Manage users</a>
             {% endblock %}
 
         </div>
