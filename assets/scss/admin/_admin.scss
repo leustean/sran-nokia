@@ -24,7 +24,7 @@ html {
       display: flex;
       justify-content: center;
       min-height: 100%;
-      width: 250px;
+      width: 300px;
 
       &__link {
         font-size: 65px;
@@ -67,6 +67,7 @@ html {
 
       &__option {
         text-decoration: inherit;
+        text-align: center;
         &:hover {
           background-color: $secondary-color;
         }
