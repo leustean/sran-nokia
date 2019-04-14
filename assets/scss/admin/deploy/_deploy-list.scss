@@ -5,6 +5,16 @@
   flex-direction: column;
   width: 100%;
 
+  &__title {
+    color: $info-color;
+    background-color: $info-background;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin: $margin;
+    text-align: center;
+  }
+
   &__option{
     display: flex;
     flex-direction: column;
