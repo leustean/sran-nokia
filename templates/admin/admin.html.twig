@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SRAN{% endblock %}</title>
+    <link href="/css/admin.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="wrapper">
+    <div class="wrapper__navbar">
+        {% block navbar %}
+            <div class="wrapper__navbar__logo">
+                <a class="wrapper__navbar__logo__link" href="#">SRAN</a>
+            </div>
+            <div class="wrapper__navbar__utils">
+                <a class="wrapper__navbar__utils__link" href="#">Guide</a>
+                <a class="wrapper__navbar__utils__link" href="#">Login</a>
+            </div>
+        {% endblock %}
+    </div>
+    <div class="wrapper__body">
+        <div class="wrapper__body__menu">
+            {% block menu %}
+                <div class="wrapper__body__menu__option">
+                    <a class="wrapper__body__menu__option__link" href="#">Default time</a>
+                </div>
+                <div class="wrapper__body__menu__option">
+                    <a class="wrapper__body__menu__option__link" href="#">Add device</a>
+                </div>
+                <div class="wrapper__body__menu__option">
+                    <a class="wrapper__body__menu__option__link" href="#">Manage users</a>
+                </div>
+            {% endblock %}
+
+        </div>
+        <div class="wrapper__body__content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
