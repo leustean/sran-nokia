@@ -3,7 +3,6 @@
 html {
   height: 100%;
   font-family: 'Roboto-Regular', sans-serif;
-
 }
 
 .wrapper {
@@ -13,12 +12,13 @@ html {
   flex-direction: column;
 
   &__navbar {
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: $box-shadow;
     background-color: white;
     height: 80px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    z-index: 1;
 
     &__logo {
       display: flex;
@@ -38,6 +38,7 @@ html {
       margin-right: 45px;
       display: flex;
       align-items: center;
+
       &__link {
         text-decoration: none;
         color: $primary-color;
@@ -57,16 +58,23 @@ html {
 
 
     &__menu {
-      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+      box-shadow: $box-shadow;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       min-height: 100%;
       background-color: $primary-color;
-      width: 300px;
+      width: 250px;
+      z-index: 1;
+      flex-shrink: 0;
 
       &__option {
         text-decoration: inherit;
+        font-size: 25px;
+        padding: 30px;
+        color: white;
+        text-align: center;
+
         &:hover {
           background-color: $secondary-color;
         }
@@ -74,39 +82,24 @@ html {
         &:first-child {
           margin-top: 90px;
         }
-
-        font-size: 25px;
-        padding: 30px;
-        color: white;
-
       }
-
     }
 
     &__content {
       min-height: 100%;
       background-color: $background-color;
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+
       &__box {
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+        box-shadow: $box-shadow;
         background-color: white;
-        min-width: 270px;
-        min-height: 520px;
-        padding: 0px;
         margin: 70px;
+        border-radius: $border-radius;
+        height: 100%;
       }
     }
   }
 }
-
-  .wrapper__menu {
-    width: 300px;
-  }
-
-  .wrapper__content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
 

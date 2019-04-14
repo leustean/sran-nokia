@@ -1,5 +1,4 @@
 @import "../_vars";
-@import "../messages";
 
 .deploy-list{
   display: flex;
@@ -9,36 +8,25 @@
   &__option{
     display: flex;
     flex-direction: column;
-    @extend %message;
-    @extend %basic;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    color: $basic-color;
+    background-color: $basic-background;
+    padding: $padding;
+    margin: $margin;
 
-    &__label{
+    &__input{
       display: flex;
       align-items: center;
-      font-size: 1.1rem;
-
-      &__input{
-        margin: $margin;
-        width: 1.1rem;
-        height: 1.1rem;
-      }
     }
-
   }
 
   &__submit{
-    @extend %message;
-    @extend %info;
-    align-self: center;
     cursor: pointer;
-    min-width: 100px;
-    max-width: 200px;
-    width: 25%;
-    display: inline-block;
-    text-align: center;
-    white-space: nowrap;
-    user-select: none;
-    border: $border transparent;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 200px;
+    align-self: center;
+    margin: $margin;
+    color: $success-color;
+    background-color: $success-background;
   }
 }

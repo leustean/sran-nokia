@@ -13,12 +13,16 @@ use App\Entity\DeployResultEntity;
 use App\Repository\DeployOptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/deploy", )
  */
 class DeployController extends AbstractController {
+
+	private const DEPLOY_RESULT = 'DEPLOY_CONTROLLER_DEPLOY_RESULT';
 
 	private $currentWorkingDirectory;
 
@@ -32,9 +36,9 @@ class DeployController extends AbstractController {
 	/**
 	 * @Route("/", name="deploy_options_list", methods={"GET","POST"})
 	 * @param DeployOptionRepository $deployOptionRepository
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
-	public function showDeployOptions(DeployOptionRepository $deployOptionRepository): \Symfony\Component\HttpFoundation\Response {
+	public function showDeployOptions(DeployOptionRepository $deployOptionRepository): Response {
 		return $this->render(
 			'deploy/deploy-options.html.twig',
 			[
@@ -45,11 +49,12 @@ class DeployController extends AbstractController {
 
 	/**
 	 * @Route("/perform", name="deploy_option_perform", methods={"GET","POST"})
+	 * @param Session                $session
 	 * @param Request                $request
 	 * @param DeployOptionRepository $deployOptionRepository
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return Response
 	 */
-	public function performDeploy(Request $request, DeployOptionRepository $deployOptionRepository): \Symfony\Component\HttpFoundation\Response {
+	public function performDeploy(Session $session, Request $request, DeployOptionRepository $deployOptionRepository): Response {
 
 		$deployResult = [];
 		$this->setRunDirectory();
@@ -69,7 +74,18 @@ class DeployController extends AbstractController {
 			}
 		}
 		$this->restoreWorkingDirectory();
+		$session->set(self::DEPLOY_RESULT, $deployResult);
 
+		return $this->redirectToRoute('deploy_option_result');
+	}
+
+	/**
+	 * @Route("/result", name="deploy_option_result", methods={"GET","POST"})
+	 * @param Session $session
+	 * @return Response
+	 */
+	public function showDeployResult(Session $session): Response {
+		$deployResult = $session->get(self::DEPLOY_RESULT, []);
 		return $this->render(
 			'deploy/deploy-result.html.twig',
 			[

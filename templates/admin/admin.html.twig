@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}SRAN{% endblock %}</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href="/css/admin.css" rel="stylesheet">
-
 </head>
 <body>
 <div class="wrapper">
@@ -26,18 +26,13 @@
                     <a class="wrapper__body__menu__option" href="#">Add device</a>
                     <a class="wrapper__body__menu__option" href="#">Manage users</a>
             {% endblock %}
-
         </div>
         <div class="wrapper__body__content">
-            {% block body %}
-            <div class="wrapper__body__content__box"></div>
-
-            {% endblock %}
+            <div class="wrapper__body__content__box">
+                {% block body %}{% endblock %}
+            </div>
         </div>
     </div>
-
 </div>
-
-
 </body>
 </html>

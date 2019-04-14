@@ -1,5 +1,4 @@
 @import "../_vars";
-@import "../_messages";
 
 .deploy-result {
   display: flex;
@@ -7,32 +6,49 @@
   width: 100%;
 
   &__title {
-    @extend %message;
-    @extend %info;
+    color: $info-color;
+    background-color: $info-background;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin: $margin;
   }
 
   &__option {
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
     margin: $margin;
-    border-bottom: $border black;
 
     &__status {
-      @extend %message;
+      padding: $padding;
 
       &--success {
-        @extend %success;
+        color: $success-color;
+        background-color: $success-background;
       }
 
       &--fail {
-        @extend %fail;
+        color: $fail-color;
+        background-color: $fail-background;
       }
     }
 
     &__output {
-      @extend %message;
-      @extend %basic;
+      color: $basic-color;
+      background-color: $basic-background;
       display: block;
       white-space: pre;
+      padding: $padding;
     }
 
+  }
+
+  &__submit {
+    cursor: pointer;
+    width: 200px;
+    align-self: center;
+    margin: $margin;
+    color: $fail-color;
+    background-color: $fail-background;
   }
 }
