@@ -1,18 +1,105 @@
-.wrapper{
+@import "_vars.scss";
+
+html {
+  height: 100%;
+  font-family: 'Roboto-Regular', sans-serif;
+}
+
+.wrapper {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  font-family: Helvetica, sans-serif;
+  flex-direction: column;
 
-  .wrapper__menu{
-    width: 300px;
-  }
-
-  .wrapper__content{
-    flex-grow: 1;
+  &__navbar {
+    box-shadow: $box-shadow;
+    background-color: white;
+    height: 80px;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    z-index: 1;
+
+    &__logo {
+      display: flex;
+      justify-content: center;
+      min-height: 100%;
+      width: 250px;
+
+      &__link {
+        font-size: 65px;
+        color: $nokia-color;
+        text-decoration: none;
+        letter-spacing: 1.5px;
+      }
+    }
+
+    &__utils {
+      margin-right: 45px;
+      display: flex;
+      align-items: center;
+
+      &__link {
+        text-decoration: none;
+        color: $primary-color;
+        font-size: 20px;
+        margin-right: 40px;
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 
+
+  &__body {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+
+
+    &__menu {
+      box-shadow: $box-shadow;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 100%;
+      background-color: $primary-color;
+      width: 250px;
+      z-index: 1;
+      flex-shrink: 0;
+
+      &__option {
+        text-decoration: inherit;
+        font-size: 25px;
+        padding: 30px;
+        color: white;
+        text-align: center;
+
+        &:hover {
+          background-color: $secondary-color;
+        }
+
+        &:first-child {
+          margin-top: 90px;
+        }
+      }
+    }
+
+    &__content {
+      min-height: 100%;
+      background-color: $background-color;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+
+      &__box {
+        box-shadow: $box-shadow;
+        background-color: white;
+        margin: 70px;
+        border-radius: $border-radius;
+        height: 100%;
+      }
+    }
+  }
 }
+

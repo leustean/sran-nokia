@@ -1,16 +1,33 @@
-{% extends "admin.html.twig" %}
+{% extends "admin/admin.html.twig" %}
 
 {% block body %}
     <form class="deploy-list" method="post" action="{{ path('deploy_option_perform') }}">
+        <h1 class="deploy-list__title">Select Deploy Options</h1>
         {% for option in options %}
             <div class="deploy-list__option">
-                <label class="deploy-list__option__label">
-                    <input class="deploy-list__option__label__input" type="checkbox" name="{{ option.id }}" value="1">
-                    <span class="deploy-list__option__label__name">{{ option.name }}</span>
-                </label>
+                <div class="deploy-list__option__input">
+                    <div class="mdc-checkbox">
+                        <!--suppress HtmlFormInputWithoutLabel -->
+                        <input type="checkbox"
+                               class="mdc-checkbox__native-control"
+                               name="{{ option.id }}"
+                               value="1"
+                        />
+                        <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark"
+                                 viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path"
+                                      fill="none"
+                                      d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                        </div>
+                    </div>
+                    <label>{{ option.name }}</label>
+                </div>
                 <code class="deploy-list__option__command">{{ option.command }}</code>
             </div>
         {% endfor %}
-        <input class="deploy-list__submit" type="submit" value="Deploy">
+        <input class="deploy-list__submit button" type="submit" value="Deploy">
     </form>
 {% endblock %}
