@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SRAN{% endblock %}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <div class="wrapper__navbar">
+        <div class="wrapper__navbar__logo">
+            <a class="wrapper__navbar__logo__link" href="{{ path('main_index') }}">SRAN</a>
+        </div>
+        <div class="wrapper__navbar__utils">
+            <div class="wrapper__navbar__utils__body">
+                <a class="wrapper__navbar__utils__body__link" href="#">
+                    <i class="material-icons">help_outline</i>
+                    <span>Guide</span>
+                </a>
+                <span class="wrapper__navbar__utils__body__bar"></span>
+            </div>
+            <div class="wrapper__navbar__utils__body">
+                <a class="wrapper__navbar__utils__body__link" href="#">
+                    <i class="material-icons">account_circle</i>
+                    <span>
+                        {% if login.getLogin().isLogged() %}
+                            {{ login.getLogin().getPrincipal().getEmail() }}
+                        {% else %}
+                            Login
+                        {% endif %}
+                    </span>
+                </a>
+                <span class="wrapper__navbar__utils__body__bar"></span>
+                {% if login.getLogin().isLogged() %}
+                    <div class="wrapper__navbar__utils__body__dropdown">
+                        {% if login.getLogin().isAdmin() %}
+                            <a class="wrapper__navbar__utils__body__dropdown__link" href="{{ path('admin_index') }}">Admin</a>
+                        {% endif %}
+                        <a class="wrapper__navbar__utils__body__dropdown__link" href="{{ path('logout_index') }}">Logout</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="wrapper__body">
+        {% block body %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

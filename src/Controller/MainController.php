@@ -1,26 +1,26 @@
 <?php
 
+
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin", )
+ * Class MainController
+ * @package App\Controller
+ * @Route("/")
  */
-class AdminController extends AbstractAppController {
+class MainController extends AbstractAppController {
 
 	/**
-	 * @Route("/", name="admin_index", methods={"GET","POST"})
+	 * @Route("/", name="main_index", methods={"GET"})
 	 * @return Response
 	 */
 	public function indexAction(): Response {
-		if($this->shouldRedirectUser()){
-			return $this->redirectToCorrectPage();
-		}
-
 		return $this->render(
-			'admin/admin.html.twig'
+			'base.html.twig'
 		);
 	}
+
 }

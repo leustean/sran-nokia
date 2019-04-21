@@ -1,0 +1,76 @@
+<!--suppress HtmlFormInputWithoutLabel -->
+
+{%- block form_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div class="mdc-form__row" {% with {attr: row_attr|default({})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_errors(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block button_row -%}
+    <div class="mdc-form__button-row" {% with {attr: row_attr|default({})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <div class="mdc-form__error">
+            {%- for error in errors -%}
+                <span class="mdc-form__error__entry">{{ error.message }}</span>
+            {%- endfor -%}
+        </div>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+
+{%- block form_widget_simple -%}
+    <div class="mdc-text-box">
+        <input  class="mdc-text-box__input"
+                type="{{ type|default('text') }}"
+                {{ block('widget_attributes') }}
+                {% if value is not empty %}value="{{ value }}" {% endif %}>
+        <span class="mdc-text-box__decoration"></span>
+        <span class="mdc-text-box__bar"></span>
+        <label class="mdc-text-box__label">{{- form_label(form) -}}</label>
+    </div>
+{%- endblock form_widget_simple -%}
+
+{%- block checkbox_widget -%}
+    <div class="mdc-checkbox">
+        <input  type="checkbox"
+                class="mdc-checkbox__native-control"
+                {{ block('widget_attributes') }}
+                {% if value is defined %} value="{{ value }}"{% endif %}
+                {% if checked %} checked="checked"{% endif %}
+        />
+        <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark"
+                 viewBox="0 0 24 24">
+                <path class="mdc-checkbox__checkmark-path"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+        </div>
+    </div>
+    <label>{{- form_label(form) -}}</label>
+{%- endblock checkbox_widget -%}
+
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button class="mdc-button" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label }}</button>
+{%- endblock button_widget -%}
