@@ -3,9 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserEntityRepository")
+ * @Table(
+ *     name="user_entity",
+ *     indexes={@Index(name="user_entity__is_admin_idx", columns={"is_admin"})},
+ *     uniqueConstraints={@UniqueConstraint(name="user_entity__email_idx", columns={"email"})})
  */
 class UserEntity
 {

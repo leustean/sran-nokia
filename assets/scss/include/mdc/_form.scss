@@ -1,0 +1,30 @@
+@import "../../admin/_vars";
+
+.mdc-form{
+  display: flex;
+  flex-direction: column;
+
+  &__row{
+    overflow: hidden;
+    margin: 5px 0;
+  }
+
+  &__button-row{
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+  }
+
+  &__error{
+    display: flex;
+    flex-direction: column;
+    &__entry{
+      box-shadow: $box-shadow;
+      border-radius: $border-radius;
+      color: $fail-color;
+      background-color: $fail-background;
+      padding: $padding;
+      margin: 5px;
+    }
+  }
+}

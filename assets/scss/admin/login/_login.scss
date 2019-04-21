@@ -1,0 +1,17 @@
+@import "../_vars.scss";
+
+.login{
+  display: flex;
+  flex-direction: column;
+  margin: $margin;
+
+  &__form{
+    margin-top: $margin;
+    display: block;
+  }
+
+  &__header{
+    text-align: center;
+    margin: 0;
+  }
+}

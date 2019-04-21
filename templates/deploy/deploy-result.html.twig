@@ -4,7 +4,7 @@
     Deploy Performed
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <form class="deploy-result" method="post" action="{{ path('deploy_option_perform') }}">
         <h1 class="deploy-result__title">Deploy Result</h1>
         {% for deployOptionResult in deployResult %}
@@ -17,6 +17,6 @@
             </div>
             <input type="hidden" name="{{ deployOptionResult.getDeployOption().getId() }}" value="1"/>
         {% endfor %}
-        <input class="deploy-result__submit button" type="submit" value="Redeploy">
+        <input class="deploy-result__submit mdc-button" type="submit" value="Redeploy">
     </form>
 {% endblock %}

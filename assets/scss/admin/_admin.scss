@@ -3,6 +3,7 @@
 html {
   height: 100%;
   font-family: 'Roboto-Regular', sans-serif;
+  color: $primary-color;
 }
 
 .wrapper {
@@ -29,7 +30,6 @@ html {
       &__link {
         font-size: 65px;
         color: $nokia-color;
-        text-decoration: none;
         letter-spacing: 1.5px;
       }
     }
@@ -39,13 +39,63 @@ html {
       display: flex;
       align-items: center;
 
-      &__link {
-        text-decoration: none;
-        color: $primary-color;
-        font-size: 20px;
+      &__body {
+        position: relative;
+        height: 100%;
         margin-right: 40px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        &__link {
+          color: $primary-color;
+          font-size: 20px;
+          display: flex;
+          justify-content: center;
+          padding-bottom: 10px;
+        }
+
+        &__dropdown {
+          box-sizing: border-box;
+          box-shadow: $box-shadow;
+          background-color: white;
+          border-bottom-left-radius: $border-radius;
+          border-bottom-right-radius: $border-radius;
+          position: absolute;
+          top: 80px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          height: 0;
+          overflow: hidden;
+
+          &__link{
+            padding: $padding 20px;
+            font-size: 20px;
+            &:first-child{
+              margin-top: 15px;
+            }
+
+            &:hover{
+              color: white;
+              background-color: $secondary-color;
+            }
+          }
+        }
+
+        &__bar {
+          border: 5px solid transparent;
+        }
+
+        &:hover {
+          .wrapper__navbar__utils__body__bar {
+            border: 5px solid $secondary-color;
+          }
+
+          .wrapper__navbar__utils__body__dropdown {
+            height: auto;
+          }
+        }
       }
     }
   }
@@ -55,7 +105,7 @@ html {
     width: 100%;
     display: flex;
     flex-grow: 1;
-
+    background-color: $background-color;
 
     &__menu {
       box-shadow: $box-shadow;
@@ -69,7 +119,6 @@ html {
       flex-shrink: 0;
 
       &__option {
-        text-decoration: inherit;
         font-size: 25px;
         padding: 30px;
         color: white;
@@ -87,7 +136,6 @@ html {
 
     &__content {
       min-height: 100%;
-      background-color: $background-color;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -98,6 +146,13 @@ html {
         margin: 70px;
         border-radius: $border-radius;
         height: 100%;
+
+        &--login {
+          width: 300px;
+          height: auto;
+          align-self: center;
+          padding: $padding;
+        }
       }
     }
   }
