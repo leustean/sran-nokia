@@ -19,7 +19,7 @@ class MainController extends AbstractAppController {
 	 */
 	public function indexAction(): Response {
 		return $this->render(
-			'base.html.twig'
+			'home/home.html.twig'
 		);
 	}
 
