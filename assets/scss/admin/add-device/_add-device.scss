@@ -1,0 +1,37 @@
+@import "../_vars";
+
+.add-device {
+
+  &__form {
+
+    display:flex;
+    justify-content: center;
+
+       &__column {
+         width: 400px;
+         margin: 50px 100px 50px 50px;
+
+         .mdc-button {
+           padding: 5px 50px;
+           margin-top: 25px;
+           font-size: 20px;
+
+         }
+
+         .mdc-form__button-row {
+           justify-content: flex-start;
+         }
+
+       }
+
+
+  }
+  &__message{
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    margin: $margin;
+    color: $success-color;
+    background-color: $success-background;
+    padding: 15px;
+  }
+}
