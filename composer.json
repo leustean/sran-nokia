@@ -65,9 +65,8 @@
         }
     },
     "require-dev": {
+        "phpunit/phpunit": "^8",
         "roave/security-advisories": "dev-master",
-        "symfony/maker-bundle": "^1.11",
-        "symfony/phpunit-bridge": "*"
-    },
-    "bin": ["bin/phpunit"]
+        "symfony/maker-bundle": "^1.11"
+    }
 }
