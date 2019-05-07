@@ -1,0 +1,32 @@
+.users-form {
+  &__table {
+    display: flex;
+    &__column {
+      width: 50%;
+      min-height: 100%;
+      margin: 40px;
+
+      &__row {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+      &--first-row{
+        padding-left: 11px;
+        font-size: 30px;
+      }
+      }
+    }
+  }
+  &__button {
+    display: flex;
+    justify-content:center;
+    align-self: flex-end;
+    justify-self: flex-end;
+
+    .mdc-button{
+      font-size: 24px;
+      padding: 20px;
+      height: auto;
+    }
+  }
+}
