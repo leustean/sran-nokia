@@ -26,13 +26,14 @@
   background-color: white;
   border: none;
 
+
+  &:hover {
+    background-color: $secondary-color;
+    color: white;
+  }
+
   &--home {
     padding: 5px 50px;
     font-size: 20px;
-
-    &:hover {
-      background-color: $secondary-color;
-      color: white;
-    }
   }
 }
