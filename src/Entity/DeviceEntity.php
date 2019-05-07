@@ -4,10 +4,15 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeviceEntityRepository")
+ * @ORM\Table(
+ *     name="device_entity",
+ *     indexes={@Index(name="sbts_id_idx", columns={"sbts_id"})},
+ * )
  */
 class DeviceEntity
 {

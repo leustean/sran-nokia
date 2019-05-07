@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\DeviceEntityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,6 +21,15 @@ class MainController extends AbstractAppController {
 	public function indexAction(): Response {
 		return $this->render(
 			'home/home.html.twig'
+		);
+	}
+
+	public function showDevicesAction(DeviceEntityRepository $deviceEntityRepository){
+		return $this->render(
+			'home/devices.html.twig',
+			[
+				'devices' => $deviceEntityRepository->findBy([],['sbtsId' => 'ASC'])
+			]
 		);
 	}
 
