@@ -1,0 +1,19 @@
+.mdc-time {
+  display: flex;
+
+  .mdc-text-box {
+    width:25%;
+  }
+
+  &__separator {
+    position: relative;
+    margin: 35px 20px 20px;
+    font-size: 18px;
+  }
+
+  &__label {
+    position: relative;
+    margin: 35px 20px 20px 0;
+    font-size: 18px;
+  }
+}

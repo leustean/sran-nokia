@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeviceEntityRepository")
@@ -17,6 +19,17 @@ class DeviceEntity
     private $id;
 
     /**
+	 * @Assert\NotBlank(
+	 *     message="Please input the SBTS ID"
+	 * )
+	 * @Assert\Type(
+	 *     type = "digit",
+	 * 	   message="The SBTS ID must be a number"
+	 * )
+	 * @Assert\LessThanOrEqual(
+	 *      value = 2147483647,
+	 *      message = "The SBTS ID can't be greater than {{ limit }}"
+	 * )
      * @ORM\Column(type="integer")
      */
     private $sbtsId;
@@ -42,6 +55,13 @@ class DeviceEntity
     private $lastInformationRefresh;
 
     /**
+	 * @Assert\NotBlank(
+	 *     message="Please input an owner"
+	 * )
+	 * @Assert\Length(
+	 *      max = 255,
+	 *      maxMessage = "An owner can't have more than {{ limit }} characters"
+	 * )
      * @ORM\Column(type="string", length=255)
      */
     private $sbtsOwner;
@@ -116,6 +136,67 @@ class DeviceEntity
      */
     private $timesources = [];
 
+    /**
+	 * @Assert\NotBlank(
+	 *     message="Please input an IP"
+	 * )
+	 * @Assert\Length(
+	 *      max = 16,
+	 *      maxMessage = "An IP can't have more than {{ limit }} characters"
+	 * )
+	 * @Assert\Ip(
+	 *     message = "Invalid IP format"
+	 * )
+     * @ORM\Column(type="string", length=16)
+     */
+    private $ip;
+
+    /**
+	 * @Assert\NotBlank(
+	 *     message="Please input a port"
+	 * )
+	 * /**
+	 * @Assert\Type(
+	 *     type = "digit",
+	 * 	   message="A port must be a number"
+	 * )
+	 * @Assert\LessThanOrEqual(
+	 *      value = 65535,
+	 *      message = "A port can't be greater than {{ limit }} "
+	 * )
+     * @ORM\Column(type="integer")
+     */
+    private $port;
+
+    /**
+	 * @Assert\NotBlank(
+	 *     message="Please input a username"
+	 * )
+	 * @Assert\Length(
+	 *      max = 255,
+	 *      maxMessage = "A username can't have more than {{ limit }} characters"
+	 * )
+     * @ORM\Column(type="string", length=255)
+     */
+    private $user;
+
+    /**
+	 * @Assert\NotBlank(
+	 *     message="Please input a password"
+	 * )
+	 * @Assert\Length(
+	 *      max = 255,
+	 *      maxMessage = "A password can't have more than {{ limit }} characters"
+	 * )
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $refreshTime;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,7 +207,7 @@ class DeviceEntity
         return $this->sbtsId;
     }
 
-    public function setSbtsId(int $sbtsId): self
+    public function setSbtsId($sbtsId): self
     {
         $this->sbtsId = $sbtsId;
 
@@ -169,12 +250,12 @@ class DeviceEntity
         return $this;
     }
 
-    public function getLastInformationRefresh(): ?\DateTimeInterface
+    public function getLastInformationRefresh(): ?DateTimeInterface
     {
         return $this->lastInformationRefresh;
     }
 
-    public function setLastInformationRefresh(?\DateTimeInterface $lastInformationRefresh): self
+    public function setLastInformationRefresh(?DateTimeInterface $lastInformationRefresh): self
     {
         $this->lastInformationRefresh = $lastInformationRefresh;
 
@@ -357,6 +438,66 @@ class DeviceEntity
     public function setTimesources(?array $timesources): self
     {
         $this->timesources = $timesources;
+
+        return $this;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(string $ip): self
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getPort(): ?int
+    {
+        return $this->port;
+    }
+
+    public function setPort($port): self
+    {
+        $this->port = $port;
+
+        return $this;
+    }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser(string $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRefreshTime(): ?DateTimeInterface
+    {
+        return $this->refreshTime;
+    }
+
+    public function setRefreshTime(DateTimeInterface $refreshTime): self
+    {
+        $this->refreshTime = $refreshTime;
 
         return $this;
     }

@@ -74,3 +74,16 @@
     {%- endif -%}
     <button class="mdc-button" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label }}</button>
 {%- endblock button_widget -%}
+
+{%- block time_widget -%}
+    {%- if widget == 'single_text' -%}
+        {{ block('form_widget_simple') }}
+    {%- else -%}
+        {%- set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} -%}
+        <div class="mdc-time" {{ block('widget_container_attributes') }}>
+            <span class="mdc-time__label">{{ label }} :</span>{{ form_widget(form.hour, vars) }}{% if with_minutes %}<span class="mdc-time__separator">:</span>{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}<span class="mdc-time__separator">:</span>{{ form_widget(form.second, vars) }}{% endif %}
+        </div>
+    {%- endif -%}
+{%- endblock time_widget -%}
+
+
