@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -17,6 +18,10 @@ final class Version20190421112043 extends AbstractMigration
         return 'Added indexes for user_entity.';
     }
 
+	/**
+	 * @param Schema $schema
+	 * @throws DBALException
+	 */
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
@@ -26,6 +31,10 @@ final class Version20190421112043 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX user_entity__email_idx ON user_entity (email)');
     }
 
+	/**
+	 * @param Schema $schema
+	 * @throws DBALException
+	 */
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs

@@ -24,9 +24,14 @@ class MainController extends AbstractAppController {
 		);
 	}
 
-	public function showDevicesAction(DeviceEntityRepository $deviceEntityRepository){
+	/**
+	 * @Route("/sbts", name="main_sbts", methods={"GET"})
+	 * @param DeviceEntityRepository $deviceEntityRepository
+	 * @return Response
+	 */
+	public function showDevicesAction(DeviceEntityRepository $deviceEntityRepository): Response {
 		return $this->render(
-			'home/devices.html.twig',
+			'home/sbts.html.twig',
 			[
 				'devices' => $deviceEntityRepository->findBy([],['sbtsId' => 'ASC'])
 			]

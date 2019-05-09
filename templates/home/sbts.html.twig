@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="wrapper__body__content">
+        <div class="wrapper__body__content__box">
+            <div class="sbts">
+                <table class="sbts__table">
+                    <thead class="sbts__table__header">
+                    <tr class="sbts__table__header__row">
+                        <th class="sbts__table__header__row__column">ID</th>
+                        <th class="sbts__table__header__row__column">Status</th>
+                        <th class="sbts__table__header__row__column">HW config</th>
+                        <th class="sbts__table__header__row__column">SW release</th>
+                        <th class="sbts__table__header__row__column">Last updated</th>
+                        <th class="sbts__table__header__row__column">Owner</th>
+                    </tr>
+                    </thead>
+                    <tbody class="sbts__table__body">
+                    {% for device in devices %}
+                        <tr class="sbts__table__body__row">
+                            <td class="sbts__table__body__row__column">
+                                <a class="sbts__table__body__row__column__id" href="#">
+                                    <span class="sbts__table__body__row__column__id__text">#{{ device.sbtsId }}</span>
+                                    <i class="sbts__table__body__row__column__id__icon material-icons ">add_circle</i>
+                                </a>
+                            </td>
+                            <td class="sbts__table__body__row__column">{{ (device.sbtsStatus is empty) ? 'OFF' : 'ON' }}</td>
+                            <td class="sbts__table__body__row__column">{{ device.sbtsHwConfiguration }}</td>
+                            <td class="sbts__table__body__row__column">{{ device.sbtsSwRelease }}</td>
+                            <td class="sbts__table__body__row__column">{{ device.lastInformationRefresh.format('Y-m-d H:i') }}</td>
+                            <td class="sbts__table__body__row__column">{{ device.sbtsOwner }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

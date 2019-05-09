@@ -21,7 +21,7 @@
                 <span class="wrapper__navbar__utils__body__bar"></span>
             </div>
             <div class="wrapper__navbar__utils__body">
-                <a class="wrapper__navbar__utils__body__link" href="#">
+                <a class="wrapper__navbar__utils__body__link" href="{{ (login.getLogin().isLogged()) ? '#' : path('login_index') }}">
                     <i class="material-icons">account_circle</i>
                     <span>
                         {% if login.getLogin().isLogged() %}
