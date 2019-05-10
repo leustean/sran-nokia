@@ -10,9 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\DeployResultEntity;
+use App\Service\Login\LoginFactory;
 use App\Repository\DeployOptionRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/deploy", )
  */
-class DeployController extends AbstractController {
+class DeployController extends AbstractAppController {
 
 	private const DEPLOY_RESULT = 'DEPLOY_CONTROLLER_DEPLOY_RESULT';
 
@@ -28,7 +28,8 @@ class DeployController extends AbstractController {
 
 	private $commandRunDir;
 
-	public function __construct($commandRunDir) {
+	public function __construct(LoginFactory $loginFactory, $commandRunDir) {
+		parent::__construct($loginFactory);
 		$this->commandRunDir = $commandRunDir;
 		$this->currentWorkingDirectory = getcwd();
 	}
@@ -39,6 +40,10 @@ class DeployController extends AbstractController {
 	 * @return Response
 	 */
 	public function showDeployOptions(DeployOptionRepository $deployOptionRepository): Response {
+		if($this->shouldRedirectUser()){
+			return $this->redirectToCorrectPage();
+		}
+
 		return $this->render(
 			'deploy/deploy-options.html.twig',
 			[
@@ -48,13 +53,16 @@ class DeployController extends AbstractController {
 	}
 
 	/**
-	 * @Route("/perform", name="deploy_option_perform", methods={"GET","POST"})
+	 * @Route("/perform", name="deploy_option_perform", methods={"POST"})
 	 * @param Session                $session
 	 * @param Request                $request
 	 * @param DeployOptionRepository $deployOptionRepository
 	 * @return Response
 	 */
 	public function performDeploy(Session $session, Request $request, DeployOptionRepository $deployOptionRepository): Response {
+		if($this->shouldRedirectUser()){
+			return $this->redirectToCorrectPage();
+		}
 
 		$deployResult = [];
 		$this->setRunDirectory();
@@ -80,11 +88,15 @@ class DeployController extends AbstractController {
 	}
 
 	/**
-	 * @Route("/result", name="deploy_option_result", methods={"GET","POST"})
+	 * @Route("/result", name="deploy_option_result", methods={"GET"})
 	 * @param Session $session
 	 * @return Response
 	 */
 	public function showDeployResult(Session $session): Response {
+		if(!$this->login->isAdmin()){
+			return $this->redirectToRoute('login_index');
+		}
+
 		$deployResult = $session->get(self::DEPLOY_RESULT, []);
 		return $this->render(
 			'deploy/deploy-result.html.twig',

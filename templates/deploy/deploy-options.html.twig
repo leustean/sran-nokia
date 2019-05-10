@@ -1,6 +1,6 @@
 {% extends "admin/admin.html.twig" %}
 
-{% block body %}
+{% block content %}
     <form class="deploy-list" method="post" action="{{ path('deploy_option_perform') }}">
         <h1 class="deploy-list__title">Select Deploy Options</h1>
         {% for option in options %}
@@ -28,6 +28,6 @@
                 <code class="deploy-list__option__command">{{ option.command }}</code>
             </div>
         {% endfor %}
-        <input class="deploy-list__submit button" type="submit" value="Deploy">
+        <input class="deploy-list__submit mdc-button" type="submit" value="Deploy">
     </form>
 {% endblock %}

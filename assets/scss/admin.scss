@@ -1,8 +1,9 @@
-@import "include/mdc/_checkbox";
+@import "include/_mdc";
 @import "include/_normalize";
 @import "include/_fonts";
 @import "include/_icons";
-@import "admin/_buttons";
 @import "admin/_admin";
-@import "admin/deploy/_deploy-list";
-@import "admin/deploy/_deploy-result";
+@import "admin/deploy/_deploy";
+@import "admin/login/_login";
+@import "home/_home";
+@import "admin/add-device/_add-device";

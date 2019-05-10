@@ -28,3 +28,7 @@ services:
     App\Controller\DeployController:
         bind:
             $commandRunDir: '%kernel.project_dir%'
+
+    App\Service\Login\LoginFactory:
+        bind:
+            $env: '%kernel.environment%'

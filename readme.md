@@ -1,5 +1,4 @@
 # sRAN Advanced Detection of Available Resources
-
 This project has the objective of detecting the state of user defined network resources.
 
 ## Getting Started
@@ -48,7 +47,21 @@ If you skip this step, use localhost instead of ```sran.local```
 127.0.0.1       www.sran.local
 ```
 
-Now when you go to http://sran.local/deploy/ you should see some deployment options.
+Now when you go to http://sran.local/ you should see a working page.
+
+Note: when accessing the admin section on dev environment any user - password - domain combination is valid (the user will be created on the first login and after that you will need to set is_admin to 1 in the db for your user, logout and login again).
+
+## Keeping the app up to date
+
+You can keep the app up to date by using the integrated deploy options (http://sran.local/deploy).
+
+Deploy options include:
+
+* git pull
+* composer install and update
+* npm install
+* compile SCSS
+* doctrine commands
 
 ## Running the tests
 
