@@ -4,10 +4,15 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeviceEntityRepository")
+ * @ORM\Table(
+ *     name="device_entity",
+ *     uniqueConstraints={@UniqueConstraint(name="sbts_id", columns={"sbts_id"})})
+ * )
  */
 class DeviceEntity
 {
@@ -193,7 +198,7 @@ class DeviceEntity
     private $password;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time", nullable=true)
      */
     private $refreshTime;
 

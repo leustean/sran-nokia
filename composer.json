@@ -68,6 +68,8 @@
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^8",
         "roave/security-advisories": "dev-master",
+        "symfony/browser-kit": "4.2.*",
+        "symfony/css-selector": "4.2.*",
         "symfony/maker-bundle": "^1.11"
     }
 }
