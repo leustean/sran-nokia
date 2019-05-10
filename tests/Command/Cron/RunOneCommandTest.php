@@ -9,6 +9,7 @@ use App\Repository\CronRepository;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,11 +18,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class RunOneCommandTest extends TestCase {
 
 	/**
-	 * @expectedException RuntimeException
-	 * @expectedExceptionMessage Cron not found
 	 * @throws Exception
 	 */
 	public function test_exceptionIsThrown_givenTheCronIsNotFound(): void {
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Cron not found');
+
 		$cronRepository = $this->getMockCronRepository();
 		$cronRepository
 			->method('find')
@@ -50,6 +52,7 @@ class RunOneCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|CronRepository
+	 * @throws ReflectionException
 	 */
 	protected function getMockCronRepository(): MockObject {
 		return $this->getMockBuilder(CronRepository::class)->getMock();
@@ -57,6 +60,7 @@ class RunOneCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|InputInterface
+	 * @throws ReflectionException
 	 */
 	protected function getMockInputInterface(): MockObject {
 		return $this->getMockBuilder(InputInterface::class)->getMock();
@@ -64,6 +68,7 @@ class RunOneCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|OutputInterface
+	 * @throws ReflectionException
 	 */
 	protected function getMockOutputInterface(): MockObject {
 		return $this->getMockBuilder(OutputInterface::class)->getMock();
@@ -71,6 +76,7 @@ class RunOneCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|CronInterface
+	 * @throws ReflectionException
 	 */
 	protected function getMockCronInterface(): MockObject {
 		return $this->getMockBuilder(CronInterface::class)->getMock();

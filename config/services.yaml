@@ -30,5 +30,9 @@ services:
             $commandRunDir: '%kernel.project_dir%'
 
     App\Service\Login\LoginFactory:
+        public: true
         bind:
             $env: '%kernel.environment%'
+
+    App\Repository\DeviceEntityRepository:
+        public: true

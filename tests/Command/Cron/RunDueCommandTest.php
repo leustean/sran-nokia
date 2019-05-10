@@ -10,6 +10,7 @@ use Cron\CronExpression;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -134,6 +135,7 @@ class RunDueCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|CronRepository
+	 * @throws ReflectionException
 	 */
 	protected function getMockCronRepository(): MockObject {
 		return $this->getMockBuilder(CronRepository::class)->getMock();
@@ -141,6 +143,7 @@ class RunDueCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|InputInterface
+	 * @throws ReflectionException
 	 */
 	protected function getMockInputInterface(): MockObject {
 		return $this->getMockBuilder(InputInterface::class)->getMock();
@@ -148,6 +151,7 @@ class RunDueCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|OutputInterface
+	 * @throws ReflectionException
 	 */
 	protected function getMockOutputInterface(): MockObject {
 		return $this->getMockBuilder(OutputInterface::class)->getMock();
@@ -155,6 +159,7 @@ class RunDueCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|CronInterface
+	 * @throws ReflectionException
 	 */
 	protected function getMockCronInterface(): MockObject {
 		return $this->getMockBuilder(CronInterface::class)->getMock();
@@ -162,6 +167,7 @@ class RunDueCommandTest extends TestCase {
 
 	/**
 	 * @return MockObject|CronExpression
+	 * @throws ReflectionException
 	 */
 	protected function getMockCronExpression(): MockObject {
 		return $this->getMockBuilder(CronExpression::class)->disableOriginalConstructor()->getMock();

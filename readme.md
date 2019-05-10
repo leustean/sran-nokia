@@ -1,4 +1,8 @@
 # sRAN Advanced Detection of Available Resources
+[![Build Status](https://travis-ci.org/leustean/sran-nokia.png?branch=master)](https://travis-ci.org/leustean/sran-nokia) [![Known Vulnerabilities](https://snyk.io/test/github/leustean/sran-nokia/badge.svg?targetFile=package.json)](https://snyk.io/test/github/leustean/sran-nokia?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/leustean/sran-nokia/badge.svg?branch=master)](https://coveralls.io/github/leustean/sran-nokia?branch=master)
+
+
 This project has the objective of detecting the state of user defined network resources.
 
 ## Getting Started

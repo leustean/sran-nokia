@@ -1,0 +1,47 @@
+@import "../admin/_vars.scss";
+
+.sbts {
+  width: 100%;
+
+  &__table {
+    width: 100%;
+    font-size: 28px;
+    color: $primary-color;
+    border-collapse: collapse;
+
+    &__header {
+      border-bottom: 2px solid $basic-background;
+      &__row{
+        &__column{
+          padding: 20px 10px;
+          font-weight: normal;
+        }
+      }
+    }
+
+    &__body {
+      &__row{
+        &__column{
+          text-align: center;
+          padding: 20px 10px;
+          &__id{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &__icon{
+              font-size: inherit;
+              padding-left: 10px;
+            }
+            &:hover i{
+                color: $secondary-color;
+            }
+          }
+        }
+        &:hover{
+          background-color: $background-color;
+        }
+      }
+    }
+  }
+}
+
