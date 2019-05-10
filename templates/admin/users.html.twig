@@ -1,0 +1,62 @@
+{% extends "admin/admin.html.twig" %}
+
+{% block content %}
+    <form class="users-form" method="post" action="{{ path('admin_users') }}">
+
+        <div class="users-form__table">
+            <div class="users-form__table__column">
+                <div class="users-form__table__column__row users-form__table__column__row--first-row">Normal Users</div>
+            {% for user in normalUsers %}
+                <div class="users-form__table__column__row">
+                <div class="mdc-checkbox">
+                    <input  type="checkbox"
+                            class="mdc-checkbox__native-control"
+                            value="{{ user.getId() }}"
+                            name="normalUsers[]"
+                    />
+                    <div class="mdc-checkbox__background">
+                        <svg class="mdc-checkbox__checkmark"
+                             viewBox="0 0 24 24">
+                            <path class="mdc-checkbox__checkmark-path"
+                                  fill="none"
+                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                        </svg>
+                        <div class="mdc-checkbox__mixedmark"></div>
+                    </div>
+                </div>
+                <label>{{ user.getEmail() }}</label>
+                </div>
+            {% endfor%}
+
+        </div>
+            <div class="users-form__table__column"> <div class="users-form__table__column__row users-form__table__column__row--first-row">Administrators</div>
+
+                {% for user in adminUsers %}
+                <div class="users-form__table__column__row">
+                    <div class="mdc-checkbox">
+                        <input  type="checkbox"
+                                class="mdc-checkbox__native-control"
+                                value="{{ user.getId() }}"
+                                name="adminUsers[]"
+                        />
+                        <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark"
+                                 viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path"
+                                      fill="none"
+                                      d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                        </div>
+                    </div>
+                    <label>{{ user.getEmail() }}</label>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="users-form__button">
+            <input class="mdc-button" type="submit" value="Move selection">
+        </div>
+    </form>
+{% endblock %}

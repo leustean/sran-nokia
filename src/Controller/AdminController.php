@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Form\NewDeviceType;
+use App\Repository\UserEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\NewDeviceType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -62,6 +63,44 @@ class AdminController extends AbstractAppController {
 				'form' => $form->createView(),
 				'message' => $message
 			]
+		);
+	}
+
+	/**
+	 * @Route("/users", name="admin_users", methods={"GET","POST"})
+	 * @param UserEntityRepository   $userEntityRepository
+	 * @param Request                $request
+	 * @param EntityManagerInterface $entityManager
+	 * @return Response
+	 */
+	public function usersAction(UserEntityRepository $userEntityRepository, Request $request, EntityManagerInterface $entityManager): Response {
+		if ($this->shouldRedirectUser()) {
+			return $this->redirectToCorrectPage();
+		}
+
+		foreach ($request->get('normalUsers', []) as $user) {
+			$dbUser = $userEntityRepository->find($user);
+			if($dbUser !== null){
+				$dbUser->setIsAdmin(true);
+				$entityManager->persist($dbUser);
+			}
+		}
+		foreach ($request->get('adminUsers', []) as $user) {
+			$dbUser = $userEntityRepository->find($user);
+			if($dbUser !== null){
+				$dbUser->setIsAdmin(false);
+				$entityManager->persist($dbUser);
+			}
+		}
+		$entityManager->flush();
+
+		return $this->render(
+			'admin/users.html.twig',
+			[
+				'normalUsers' => $userEntityRepository->findBy(['isAdmin' => 0]),
+				'adminUsers' => $userEntityRepository->findBy(['isAdmin' => 1])
+			]
+
 		);
 	}
 }
