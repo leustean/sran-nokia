@@ -24,7 +24,7 @@ class MainControllerTest extends AbstractControllerTest {
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_sbtsAction(){
+	public function test_sbtsAction(): void {
 		$client = $this->getClient();
 		$deviceEntityRepository = $this->getMockBuilder(DeviceEntityRepository::class)->disableOriginalConstructor()->getMock();
 
