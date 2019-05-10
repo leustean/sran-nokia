@@ -19,7 +19,7 @@
                     {% for device in devices %}
                         <tr class="sbts__table__body__row">
                             <td class="sbts__table__body__row__column">
-                                <a class="sbts__table__body__row__column__id" href="#">
+                                <a class="sbts__table__body__row__column__id" href="{{ path('main_sbts_details', {'sbtsId' : device.sbtsId}) }}">
                                     <span class="sbts__table__body__row__column__id__text">#{{ device.sbtsId }}</span>
                                     <i class="sbts__table__body__row__column__id__icon material-icons ">add_circle</i>
                                 </a>
@@ -27,7 +27,7 @@
                             <td class="sbts__table__body__row__column">{{ (device.sbtsStatus is empty) ? 'OFF' : 'ON' }}</td>
                             <td class="sbts__table__body__row__column">{{ device.sbtsHwConfiguration }}</td>
                             <td class="sbts__table__body__row__column">{{ device.sbtsSwRelease }}</td>
-                            <td class="sbts__table__body__row__column">{{ device.lastInformationRefresh.format('Y-m-d H:i') }}</td>
+                            <td class="sbts__table__body__row__column">{{ device.lastInformationRefresh ? device.lastInformationRefresh.format('Y-m-d H:i') : '' }}</td>
                             <td class="sbts__table__body__row__column">{{ device.sbtsOwner }}</td>
                         </tr>
                     {% endfor %}

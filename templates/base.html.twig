@@ -24,11 +24,7 @@
                 <a class="wrapper__navbar__utils__body__link" href="{{ (login.getLogin().isLogged()) ? '#' : path('login_index') }}">
                     <i class="material-icons">account_circle</i>
                     <span>
-                        {% if login.getLogin().isLogged() %}
-                            {{ login.getLogin().getPrincipal().getEmail() }}
-                        {% else %}
-                            Login
-                        {% endif %}
+                        {{ login.getLogin().isLogged() ? login.getLogin().getPrincipal().getEmail() : 'Login' }}
                     </span>
                 </a>
                 <span class="wrapper__navbar__utils__body__bar"></span>
