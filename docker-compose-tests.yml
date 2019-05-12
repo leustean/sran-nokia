@@ -19,6 +19,7 @@ services:
             TZ: "Europe/Bucharest"
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
             MYSQL_ROOT_PASSWORD: ''
+            MYSQL_DATABASE: 'sran_test'
         ports:
             - 3306:3306
 
