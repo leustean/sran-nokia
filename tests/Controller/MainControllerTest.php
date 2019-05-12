@@ -26,7 +26,7 @@ class MainControllerTest extends AbstractControllerTest {
 	 */
 	public function test_sbtsAction(): void {
 		$client = $this->getClient();
-		$deviceEntityRepository = $this->getMockBuilder(DeviceEntityRepository::class)->disableOriginalConstructor()->getMock();
+		$deviceEntityRepository = $this->getMockDeviceEntityRepository();
 
 		$firstDevice = new DeviceEntity();
 		$firstDevice->setSbtsId(1);
@@ -38,7 +38,7 @@ class MainControllerTest extends AbstractControllerTest {
 			$firstDevice, $secondDevice
 		]);
 
-		$this->getContainer()->set(DeviceEntityRepository::class, $deviceEntityRepository);
+		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 
 		$client->request('GET', '/sbts');
 		$response = $client->getResponse();
