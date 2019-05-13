@@ -1,4 +1,4 @@
-@import "_vars.scss";
+@import "vars";
 
 html {
   height: 100%;
@@ -152,6 +152,10 @@ html {
           height: auto;
           align-self: center;
           padding: $padding;
+        }
+
+        &--device-detail{
+          margin-top: 0;
         }
       }
     }

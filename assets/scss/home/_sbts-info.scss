@@ -1,0 +1,14 @@
+.sbts-info {
+  margin: 20px 70px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 5px;
+
+  &__id {
+    font-size: 25px;
+  }
+
+  &__refresh-time {
+    font-size: 20px;
+  }
+}

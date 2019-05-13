@@ -1,4 +1,4 @@
-@import "../admin/_vars.scss";
+@import "../include/vars";
 
 .sbts {
   width: 100%;
@@ -11,8 +11,9 @@
 
     &__header {
       border-bottom: 2px solid $basic-background;
-      &__row{
-        &__column{
+
+      &__row {
+        &__column {
           padding: 20px 10px;
           font-weight: normal;
         }
@@ -20,24 +21,28 @@
     }
 
     &__body {
-      &__row{
-        &__column{
+      &__row {
+        &__column {
           text-align: center;
           padding: 20px 10px;
-          &__id{
+
+          &__id {
             display: flex;
             align-items: center;
             justify-content: center;
-            &__icon{
+
+            &__icon {
               font-size: inherit;
               padding-left: 10px;
             }
-            &:hover i{
-                color: $secondary-color;
+
+            &:hover i {
+              color: $secondary-color;
             }
           }
         }
-        &:hover{
+
+        &:hover {
           background-color: $background-color;
         }
       }

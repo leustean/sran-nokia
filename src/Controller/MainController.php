@@ -40,10 +40,33 @@ class MainController extends AbstractAppController {
 
 	/**
 	 * @Route("/sbts/{sbtsId}", name="main_sbts_details", methods={"GET","POST"}, requirements={"sbtsId"="\d+"})
-	 * @param int $sbtsId
+	 * @param int                    $sbtsId
+	 * @param DeviceEntityRepository $deviceEntityRepository
+	 * @return Response
 	 */
-	public function showSbtsAction($sbtsId): void {
-		echo $sbtsId;
+	public function showSbtsAction($sbtsId, DeviceEntityRepository $deviceEntityRepository): Response {
+		$deviceEntity = $deviceEntityRepository->findOneBy(['sbtsId' => $sbtsId]);
+
+		if($deviceEntity === null){
+			$this->addFlash('notice', "SBTS with id [{$sbtsId}] does not exist");
+			return $this->redirectToRoute('main_sbts');
+		}
+
+		$showSettingsTab = false;
+		$loggedUser = $this->login->getPrincipal();
+		if($loggedUser !== null){
+			if($loggedUser->getIsAdmin() || $loggedUser->getEmail() === $deviceEntity->getSbtsOwner()){
+				$showSettingsTab = true;
+			}
+		}
+
+		return $this->render(
+			'home/sbts-detail.html.twig',
+			[
+				'device' => $deviceEntity,
+				'showSettingsTab' => $showSettingsTab
+			]
+		);
 	}
 
 }

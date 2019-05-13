@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="wrapper__body__menu">
+        <a class="wrapper__body__menu__option js-sbts-data-link" href="#general">General</a>
+        <a class="wrapper__body__menu__option js-sbts-data-link" href="#hardware">Hardware</a>
+        <a class="wrapper__body__menu__option js-sbts-data-link" href="#rf-modules">RF Modules</a>
+        <a class="wrapper__body__menu__option js-sbts-data-link" href="#alarms">Active alarms</a>
+        {% if showSettingsTab %}
+            <a class="wrapper__body__menu__option" href="#">
+            <span class="icon-wrapper">
+                <i class="material-icons">settings</i>
+                <span>Settings</span>
+            </span>
+            </a>
+        {% endif %}
+    </div>
+    <div class="wrapper__body__content">
+        <div class="sbts-info">
+            <span class="sbts-info__id">SBTS ID: #{{ device.sbtsId }}</span>
+            <span class="sbts-info__refresh-time">Last Refresh: {{ device.lastInformationRefresh ? device.lastInformationRefresh.format('Y-m-d H:i') : 'Never' }}</span>
+        </div>
+        <div class="wrapper__body__content__box wrapper__body__content__box--device-detail">
+            <div id="general" class="sbts-data sbts-data-active js-sbts-data-tab">
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">Active SW version</div>
+                    <div class="sbts-data__row__data">{{ device.activeSwVersion ?: 'N/A' }}</div>
+                </div>
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">Passive SW version</div>
+                    <div class="sbts-data__row__data">{{ device.passiveSwVersion ?: 'N/A' }}</div>
+                </div>
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">State</div>
+                    <div class="sbts-data__row__data">{{ (device.sbtsState is same as (true)) ? 'Commissioned' : (device.sbtsState is same as (false)) ? 'Not commisoned' : 'N/A' }}</div>
+                </div>
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">LTE State</div>
+                    <div class="sbts-data__row__data">{{ device.lteState ?: 'N/A' }}</div>
+                </div>
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">WCDMA State</div>
+                    <div class="sbts-data__row__data">{{ device.wcdmaState ?: 'N/A' }}</div>
+                </div>
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">GSM State</div>
+                    <div class="sbts-data__row__data">{{ device.gsmState ?: 'N/A' }}</div>
+                </div>
+            </div>
+            <div id="hardware" class="sbts-data js-sbts-data-tab"></div>
+            <div id="rf-modules" class="sbts-data js-sbts-data-tab"></div>
+            <div id="alarms" class="sbts-data js-sbts-data-tab"></div>
+        </div>
+    </div>
+    <script>
+        (function (linkClassName, tabClassName, activeClassName) {
+            function dataLinkClick() {
+                if (this.hasAttribute('href')) {
+                    setTab(this.getAttribute('href').substr(1))
+                }
+            }
+
+            function setTab(link) {
+                const target = document.getElementById(link);
+                if (typeof target !== 'undefined') {
+                    for (const tab of document.getElementsByClassName(tabClassName)) {
+                        tab.classList.remove(activeClassName);
+                    }
+                    target.classList.add(activeClassName);
+                }
+            }
+
+            const dataLinks = document.getElementsByClassName(linkClassName);
+            const url = window.location.href.split('#');
+            if (typeof url[1] !== 'undefined') {
+                setTab(url[1]);
+            }
+
+            for (const dataLink of dataLinks) {
+                dataLink.addEventListener('click', dataLinkClick)
+            }
+        })('js-sbts-data-link', 'js-sbts-data-tab', 'sbts-data--active');
+    </script>
+{% endblock %}
