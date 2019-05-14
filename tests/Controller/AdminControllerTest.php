@@ -6,6 +6,7 @@ namespace App\Tests\Controller;
 
 use App\Entity\SettingsEntity;
 use App\Repository\SettingsEntityRepository;
+use App\Service\Login\LoginFactory;
 use DateTime;
 use Exception;
 use ReflectionException;
@@ -14,17 +15,62 @@ class AdminControllerTest extends AbstractControllerTest {
 
 	/**
 	 * @throws ReflectionException
-	 * @throws Exception
 	 */
-	public function setUp(): void {
-		parent::setUp();
+	public function test_adminPages_shouldRedirect_ifUserIsNotLoggedIn(): void {
+		$client = $this->getClient();
+
+		$loginFactory = $this->getMockLoginFactory();
+		$loginService = $this->getMockLogin();
+		$loginService->method('isLogged')->willReturn(false);
+		$loginFactory->method('getLogin')->willReturn($loginService);
+
+		$this->setService(LoginFactory::class, $loginFactory);
+
+		$client->request('GET', '/admin');
+
+		$response = $client->getResponse();
+		self::assertEquals(302, $response->getStatusCode());
+	}
+
+	/**
+	 * @throws ReflectionException
+	 */
+	public function test_adminPages_shouldRedirect_ifUserIsNotAdmin(): void {
+		$client = $this->getClient();
+
+		$loginFactory = $this->getMockLoginFactory();
+		$loginService = $this->getMockLogin();
+		$loginService->method('isLogged')->willReturn(true);
+		$loginService->method('isAdmin')->willReturn(false);
+		$loginFactory->method('getLogin')->willReturn($loginService);
+
+		$this->setService(LoginFactory::class, $loginFactory);
+
+		$client->request('GET', '/admin');
+
+		$response = $client->getResponse();
+		self::assertEquals(302, $response->getStatusCode());
+	}
+
+	/**
+	 * @throws ReflectionException
+	 */
+	public function test_adminPages_shouldNotRedirect_ifUserIsAdmin(): void {
 		$this->setMockLoginFactory();
+		$client = $this->getClient();
+
+
+		$client->request('GET', '/admin');
+
+		$response = $client->getResponse();
+		self::assertEquals(200, $response->getStatusCode());
 	}
 
 	/**
 	 * @throws ReflectionException
 	 */
 	public function test_refreshTimeAction(): void {
+		$this->setMockLoginFactory();
 		$client = $this->getClient();
 		$settingsEntityRepository = $this->getMockSettingsEnityRepository();
 
@@ -48,6 +94,7 @@ class AdminControllerTest extends AbstractControllerTest {
 	 * @throws Exception
 	 */
 	public function test_refreshTimeAction_formSubmit_givenValidData(): void {
+		$this->setMockLoginFactory();
 		$client = $this->getClient();
 		$client->disableReboot();
 

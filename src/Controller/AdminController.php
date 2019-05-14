@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractAppController {
 
 	/**
-	 * @Route("/", name="admin_index", methods={"GET","POST"})
+	 * @Route("", name="admin_index", methods={"GET","POST"})
 	 * @return Response
 	 */
 	public function indexAction(): Response {

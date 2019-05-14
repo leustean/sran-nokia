@@ -23,6 +23,10 @@ class AuthenticationController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function loginAction(Request $request): Response {
+		if($this->login->isLogged()){
+			return $this->getRedirect();
+		}
+
 		$form = $this->createForm(LoginType::class, null, ['attr' => ['class' => 'login__form form']]);
 		$form->handleRequest($request);
 
