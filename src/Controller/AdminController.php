@@ -6,6 +6,7 @@ use App\Form\GlobalRefreshTimeType;
 use App\Repository\SettingsEntityRepository;
 use App\Repository\UserEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\NewDeviceType;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,17 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin", )
  */
-class AdminController extends AbstractAppController {
+class AdminController extends AbstractController implements AdminControllerInterface {
 
 	/**
 	 * @Route("", name="admin_index", methods={"GET","POST"})
 	 * @return Response
 	 */
 	public function indexAction(): Response {
-		if ($this->shouldRedirectUser()) {
-			return $this->redirectToCorrectPage();
-		}
-
 		return $this->render(
 			'admin/admin.html.twig'
 		);
@@ -39,10 +36,6 @@ class AdminController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function addDeviceAction(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response {
-		if ($this->shouldRedirectUser()) {
-			return $this->redirectToCorrectPage();
-		}
-
 		$form = $this->createForm(NewDeviceType::class);
 		$form->handleRequest($request);
 
@@ -76,10 +69,6 @@ class AdminController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function usersAction(UserEntityRepository $userEntityRepository, Request $request, EntityManagerInterface $entityManager): Response {
-		if ($this->shouldRedirectUser()) {
-			return $this->redirectToCorrectPage();
-		}
-
 		foreach ($request->get('normalUsers', []) as $user) {
 			$dbUser = $userEntityRepository->find($user);
 			if ($dbUser !== null) {
@@ -115,10 +104,6 @@ class AdminController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function refreshTimeAction(Request $request, EntityManagerInterface $entityManager, SessionInterface $session, SettingsEntityRepository $settingsEntityRepository): Response {
-		if ($this->shouldRedirectUser()) {
-			return $this->redirectToCorrectPage();
-		}
-
 		$form = $this->createForm(
 			GlobalRefreshTimeType::class,
 			$settingsEntityRepository->findOneBy([], ['id' => 'DESC']));

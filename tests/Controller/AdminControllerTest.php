@@ -72,7 +72,7 @@ class AdminControllerTest extends AbstractControllerTest {
 	public function test_refreshTimeAction(): void {
 		$this->setMockLoginFactory();
 		$client = $this->getClient();
-		$settingsEntityRepository = $this->getMockSettingsEnityRepository();
+		$settingsEntityRepository = $this->getMockSettingsEntityRepository();
 
 		$settingsEntity = new SettingsEntity();
 		$time = new DateTime();
