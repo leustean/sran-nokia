@@ -9,15 +9,18 @@ use App\Cron\Prototype\CronInterface;
 use App\Repository\CronRepository;
 use App\Repository\DeviceEntityRepository;
 use App\Repository\SettingsEntityRepository;
+use App\Repository\UserEntityRepository;
 use App\Service\Login\LoginFactory;
 use App\Service\Login\LoginInterface;
 use Cron\CronExpression;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -51,6 +54,14 @@ trait MockMaker {
 	 */
 	public function getMockDeviceEntityRepository(): MockObject {
 		return $this->getMockBuilder(DeviceEntityRepository::class)->disableOriginalConstructor()->getMock();
+	}
+
+	/**
+	 * @return UserEntityRepository|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockUserEntityRepository(): MockObject {
+		return $this->getMockBuilder(UserEntityRepository::class)->disableOriginalConstructor()->getMock();
 	}
 
 	/**
@@ -130,6 +141,22 @@ trait MockMaker {
 	 */
 	public function getMockController(): MockObject {
 		return $this->getMockForAbstractClass(AbstractController::class);
+	}
+
+	/**
+	 * @return SessionInterface|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockSession(): MockObject {
+		return $this->getMockBuilder(SessionInterface::class)->getMock();
+	}
+
+	/**
+	 * @return EntityManagerInterface|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockEntityManager(): MockObject {
+		return $this->getMockBuilder(EntityManagerInterface::class)->getMock();
 	}
 
 }

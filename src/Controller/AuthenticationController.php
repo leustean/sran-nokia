@@ -40,7 +40,7 @@ class AuthenticationController extends AbstractController {
 			return $this->getRedirect();
 		}
 
-		$form = $this->createForm(LoginType::class, null, ['attr' => ['class' => 'login__form form']]);
+		$form = $this->createForm(LoginType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {

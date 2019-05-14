@@ -8,6 +8,7 @@ use App\Entity\LoginEntity;
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use App\Service\Login\FakeLogin;
+use App\Service\Login\LoginException;
 use App\Service\Login\LoginFactory;
 use Exception;
 use ReflectionException;
@@ -160,6 +161,48 @@ class AuthenticationControllerTest extends AbstractControllerTest {
 		self::assertEquals(200, $response->getStatusCode());
 		$url = $client->getContainer()->get('router')->generate('admin_index', [], false);
 		self::assertStringEndsWith($url, $client->getRequest()->getUri());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function test_loginAction_willShowMessage_givenAnLoginExceptionIsThrown(): void {
+		$client = $this->getClient();
+		$client->disableReboot();
+
+		$loginFactory = $this->getMockLoginFactory();
+
+		$loginService = $this->getMockLogin();
+
+		$loginService
+			->method('isLogged')
+			->willReturn(false);
+
+		$loginService
+			->method('authenticate')
+			->willThrowException(new LoginException());
+
+		$loginFactory
+			->method('getLogin')
+			->willReturn($loginService);
+
+
+		$this->setService(LoginFactory::class, $loginFactory);
+
+		$client->request('POST', '/login', [
+			'login' => [
+				'email' => self::EMAIL,
+				'password' => self::PASS,
+				'domain' => self::DOMAIN
+			]
+		]);
+
+		$response = $client->getResponse();
+		self::assertEquals(200, $response->getStatusCode());
+		$crawler = $client->getCrawler();
+		self::assertCount(1, $crawler->filter('input[name="login[email]"][value="' . self::EMAIL . '"]'));
+		self::assertCount(1, $crawler->filter('input[name="login[password]"]:not([value])'));
+		self::assertCount(1, $crawler->filter('input[name="login[domain]"][value="' . self::DOMAIN . '"]'));
 	}
 
 	/**
