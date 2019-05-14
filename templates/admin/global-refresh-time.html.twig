@@ -1,0 +1,10 @@
+{% extends "admin/admin.html.twig" %}
+
+{% block content %}
+    {% if message != null %}
+        <div class="add-device__message">{{ message }}</div>
+    {% endif %}
+
+    {% form_theme form "form/form.html.twig" %}
+    {{ form(form, {'attr': {'novalidate': 'novalidate', 'class': 'refresh-time form'}}) }}
+{% endblock %}

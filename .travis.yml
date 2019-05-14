@@ -3,6 +3,21 @@ language: php
 php:
   - "7.3"
 
+dist: trusty
+
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+
+before_script:
+  - mysql -e 'create database sran_test;'
+
 install:
   - composer install
 

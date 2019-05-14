@@ -6,7 +6,7 @@
     {% endif %}
 
     {% form_theme form "form/form.html.twig" %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'add-device__form form'}}) }}
     {{ form_errors(form) }}
     <div class="add-device__form__column">
         {{ form_row(form.sbtsId,{ 'label': 'SBTS ID' }) }}

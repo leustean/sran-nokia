@@ -69,9 +69,9 @@ Deploy options include:
 
 ## Running the tests
 
-To run the test execute the following command in the project root(this will also install phpunit if not present).
+To run the test execute the following command in the project root(while running the testing configuration( ``` docker-compose-tests.yml ``` )).
 
-```php bin/phpunit```
+```php ./vendor/phpunit/phpunit/phpunit```
 
 
 ### Coding style

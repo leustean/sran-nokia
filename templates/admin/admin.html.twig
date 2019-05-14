@@ -3,7 +3,7 @@
 {% block body %}
     <div class="wrapper__body__menu">
         {% block menu %}
-            <a class="wrapper__body__menu__option" href="#">Default time</a>
+            <a class="wrapper__body__menu__option" href="{{ path('admin_set_refreshTime') }}">Default time</a>
             <a class="wrapper__body__menu__option" href="{{ path('admin_add_device') }}">Add device</a>
             <a class="wrapper__body__menu__option" href="{{ path('admin_users') }}">Manage users</a>
         {% endblock %}
