@@ -6,8 +6,9 @@
         <a class="wrapper__body__menu__option js-sbts-data-link" href="#hardware">Hardware</a>
         <a class="wrapper__body__menu__option js-sbts-data-link" href="#rf-modules">RF Modules</a>
         <a class="wrapper__body__menu__option js-sbts-data-link" href="#alarms">Active alarms</a>
+        <a class="wrapper__body__menu__option js-sbts-data-link" href="#synchronisation">Synchronisation</a>
         {% if showSettingsTab %}
-            <a class="wrapper__body__menu__option" href="#">
+            <a class="wrapper__body__menu__option js-sbts-data-link" href="#settings">
             <span class="icon-wrapper">
                 <i class="material-icons">settings</i>
                 <span>Settings</span>
@@ -22,52 +23,57 @@
         </div>
         <div class="wrapper__body__content__box wrapper__body__content__box--device-detail">
             <div id="general" class="sbts-data sbts-data--active js-sbts-data-tab">
-                <div class="sbts-data__row">
-                    <div class="sbts-data__row__title">Active SW version</div>
-                    <div class="sbts-data__row__data">{{ device.activeSwVersion ?: 'N/A' }}</div>
-                </div>
-                <div class="sbts-data__row">
-                    <div class="sbts-data__row__title">Passive SW version</div>
-                    <div class="sbts-data__row__data">{{ device.passiveSwVersion ?: 'N/A' }}</div>
-                </div>
-                <div class="sbts-data__row">
-                    <div class="sbts-data__row__title">State</div>
-                    <div class="sbts-data__row__data">{{ (device.sbtsState is same as (true)) ? 'Commissioned' : (device.sbtsState is same as (false)) ? 'Not commisoned' : 'N/A' }}</div>
-                </div>
-                <div class="sbts-data__row">
-                    <div class="sbts-data__row__title">LTE State</div>
-                    <div class="sbts-data__row__data">{{ device.lteState ?: 'N/A' }}</div>
-                </div>
-                <div class="sbts-data__row">
-                    <div class="sbts-data__row__title">WCDMA State</div>
-                    <div class="sbts-data__row__data">{{ device.wcdmaState ?: 'N/A' }}</div>
-                </div>
-                <div class="sbts-data__row">
-                    <div class="sbts-data__row__title">GSM State</div>
-                    <div class="sbts-data__row__data">{{ device.gsmState ?: 'N/A' }}</div>
+                <div class="sbts-data__row sbts-data__row--column sbts-data__row--no-border">
+                    <div class="sbts-data__row__title">General</div>
+                    <div class="sbts-data__row__data">
+                        <div class="sbts-data__row">
+                            <div class="sbts-data__row__title">Active SW version</div>
+                            <div class="sbts-data__row__data">{{ device.activeSwVersion ?: 'N/A' }}</div>
+                        </div>
+                        <div class="sbts-data__row">
+                            <div class="sbts-data__row__title">Passive SW version</div>
+                            <div class="sbts-data__row__data">{{ device.passiveSwVersion ?: 'N/A' }}</div>
+                        </div>
+                        <div class="sbts-data__row">
+                            <div class="sbts-data__row__title">State</div>
+                            <div class="sbts-data__row__data">{{ (device.sbtsState is same as (true)) ? 'Commissioned' : (device.sbtsState is same as (false)) ? 'Not commisoned' : 'N/A' }}</div>
+                        </div>
+                        <div class="sbts-data__row">
+                            <div class="sbts-data__row__title">LTE State</div>
+                            <div class="sbts-data__row__data">{{ device.lteState ?: 'N/A' }}</div>
+                        </div>
+                        <div class="sbts-data__row">
+                            <div class="sbts-data__row__title">WCDMA State</div>
+                            <div class="sbts-data__row__data">{{ device.wcdmaState ?: 'N/A' }}</div>
+                        </div>
+                        <div class="sbts-data__row">
+                            <div class="sbts-data__row__title">GSM State</div>
+                            <div class="sbts-data__row__data">{{ device.gsmState ?: 'N/A' }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="hardware" class="sbts-data js-sbts-data-tab">
                 <div class="sbts-data sbts-data--active">
-                    <div class="sbts-data__row">
+                    <div class="sbts-data__row sbts-data__row--column sbts-data__row--no-border">
                         <div class="sbts-data__row__title">System modules</div>
                         <div class="sbts-data__row__data">
                             {% for hardware in device.smods %}
                                 <div class="sbts-data__row">
-                                    <div class="sbts-data__row__data">
-                                        <div class="sbts-data__row">
+                                    <div class="sbts-data__row__data sbts-data__row__data--no-margin">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Product name</div>
                                             <div class="sbts-data__row__data">{{ hardware.productName ?: 'N/A' }}</div>
                                         </div>
-                                        <div class="sbts-data__row">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Product code</div>
                                             <div class="sbts-data__row__data">{{ hardware.productCode ?: 'N/A' }}</div>
                                         </div>
-                                        <div class="sbts-data__row">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Serial number</div>
                                             <div class="sbts-data__row__data">{{ hardware.serialNumber ?: 'N/A' }}</div>
                                         </div>
-                                        <div class="sbts-data__row">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Usage state</div>
                                             <div class="sbts-data__row__data">{{ hardware.usageState ?: 'N/A' }}</div>
                                         </div>
@@ -76,25 +82,25 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="sbts-data__row">
+                    <div class="sbts-data__row sbts-data__row--column sbts-data__row--no-border">
                         <div class="sbts-data__row__title">Baseband modules</div>
                         <div class="sbts-data__row__data">
                             {% for hardware in device.bmods %}
                                 <div class="sbts-data__row">
-                                    <div class="sbts-data__row__data">
-                                        <div class="sbts-data__row">
+                                    <div class="sbts-data__row__data sbts-data__row__data--no-margin">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Product name</div>
                                             <div class="sbts-data__row__data">{{ hardware.productName ?: 'N/A' }}</div>
                                         </div>
-                                        <div class="sbts-data__row">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Product code</div>
                                             <div class="sbts-data__row__data">{{ hardware.productCode ?: 'N/A' }}</div>
                                         </div>
-                                        <div class="sbts-data__row">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Serial number</div>
                                             <div class="sbts-data__row__data">{{ hardware.serialNumber ?: 'N/A' }}</div>
                                         </div>
-                                        <div class="sbts-data__row">
+                                        <div class="sbts-data__row sbts-data__row--no-border">
                                             <div class="sbts-data__row__title">Usage state</div>
                                             <div class="sbts-data__row__data">{{ hardware.usageState ?: 'N/A' }}</div>
                                         </div>
@@ -106,25 +112,25 @@
                 </div>
             </div>
             <div id="rf-modules" class="sbts-data js-sbts-data-tab">
-                <div class="sbts-data__row">
+                <div class="sbts-data__row sbts-data__row--column sbts-data__row--no-border">
                     <div class="sbts-data__row__title">RF modules</div>
                     <div class="sbts-data__row__data">
                         {% for hardware in device.rfmods %}
                             <div class="sbts-data__row">
-                                <div class="sbts-data__row__data">
-                                    <div class="sbts-data__row">
+                                <div class="sbts-data__row__data sbts-data__row__data--no-margin">
+                                    <div class="sbts-data__row sbts-data__row--no-border">
                                         <div class="sbts-data__row__title">Product name</div>
                                         <div class="sbts-data__row__data">{{ hardware.productName ?: 'N/A' }}</div>
                                     </div>
-                                    <div class="sbts-data__row">
+                                    <div class="sbts-data__row sbts-data__row--no-border">
                                         <div class="sbts-data__row__title">Product code</div>
                                         <div class="sbts-data__row__data">{{ hardware.productCode ?: 'N/A' }}</div>
                                     </div>
-                                    <div class="sbts-data__row">
+                                    <div class="sbts-data__row sbts-data__row--no-border">
                                         <div class="sbts-data__row__title">Serial number</div>
                                         <div class="sbts-data__row__data">{{ hardware.serialNumber ?: 'N/A' }}</div>
                                     </div>
-                                    <div class="sbts-data__row">
+                                    <div class="sbts-data__row sbts-data__row--no-border">
                                         <div class="sbts-data__row__title">Usage state</div>
                                         <div class="sbts-data__row__data">{{ hardware.usageState ?: 'N/A' }}</div>
                                     </div>
@@ -134,7 +140,83 @@
                     </div>
                 </div>
             </div>
-            <div id="alarms" class="sbts-data js-sbts-data-tab"></div>
+            <div id="alarms" class="sbts-data js-sbts-data-tab">
+                <div class="sbts-data__row sbts-data__row--column sbts-data__row--no-border">
+                    <div class="sbts-data__row__title">Active alarms</div>
+                    <div class="sbts-data__row__data">
+                        {% for alarm in device.activeAlarms %}
+                            <div class="sbts-data__row">
+                                <div class="sbts-data__row__title">{{ alarm.alarmId ?: 'N/A' }}
+                                    - {{ alarm.alarmName ?: 'N/A' }} - {{ alarm.severity ?: 'N/A' }}</div>
+                                <div class="sbts-data__row__data sbts-data__row__data--no-margin">
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Alarm time</div>
+                                        <div class="sbts-data__row__data">{{ alarm.observationTime ? alarm.observationTime.format('Y-m-d h:i:s') : 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Alarm detail</div>
+                                        <div class="sbts-data__row__data">{{ alarm.alarmDetail ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Alarm detail number</div>
+                                        <div class="sbts-data__row__data">{{ alarm.alarmDetailNumber ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Fault description</div>
+                                        <div class="sbts-data__row__data">{{ alarm.faultDescription ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Fault ID</div>
+                                        <div class="sbts-data__row__data">{{ alarm.faultId ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Fault severity</div>
+                                        <div class="sbts-data__row__data">{{ alarm.faultSeverity ?: 'N/A' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div id="synchronisation" class="sbts-data js-sbts-data-tab">
+                <div class="sbts-data__row sbts-data__row--column sbts-data__row--no-border">
+                    <div class="sbts-data__row__title">Synchronisation</div>
+                    <div class="sbts-data__row__data">
+                        {% for syncSource in device.syncSources %}
+                            <div class="sbts-data__row">
+                                <div class="sbts-data__row__title">{{ syncSource.syncInputType ?: 'N/A' }}</div>
+                                <div class="sbts-data__row__data sbts-data__row__data--no-margin">
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Sync input PRIO</div>
+                                        <div class="sbts-data__row__data">{{ syncSource.syncInputPrio ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Active</div>
+                                        <div class="sbts-data__row__data">{{ (syncSource.isActive is same as (true)) ? 'Active' : (syncSource.isActive is same as (false)) ? 'Not active' : 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Availability</div>
+                                        <div class="sbts-data__row__data">{{ syncSource.availability ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row sbts-data__row--no-border">
+                                        <div class="sbts-data__row__title">Usability</div>
+                                        <div class="sbts-data__row__data">{{ syncSource.usability ?: 'N/A' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% if showSettingsTab %}
+                <div id="settings" class="sbts-data js-sbts-data-tab">
+                    {% use "form/device.html.twig" %}
+                    {% block device_form %}
+                        {{ parent() }}
+                    {% endblock %}
+                </div>
+            {% endif %}
         </div>
     </div>
     <script>

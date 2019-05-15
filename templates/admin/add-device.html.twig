@@ -1,25 +1,3 @@
 {% extends "admin/admin.html.twig" %}
 
-{% block content %}
-    {% if message != null %}
-        <div class="add-device__message">{{ message }}</div>
-    {% endif %}
-
-    {% form_theme form "form/form.html.twig" %}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'add-device__form form'}}) }}
-    {{ form_errors(form) }}
-    <div class="add-device__form__column">
-        {{ form_row(form.sbtsId,{ 'label': 'SBTS ID' }) }}
-        {{ form_row(form.sbtsOwner,{ 'label': 'SBTS Owner' }) }}
-        {{ form_row(form.refreshTime,{ 'label': 'Refresh time' }) }}
-        {{ form_row(form.submit) }}
-    </div>
-
-    <div class="add-device__form__column">
-        {{ form_row(form.ip,{ 'label': 'IP' }) }}
-        {{ form_row(form.port) }}
-        {{ form_row(form.user) }}
-        {{ form_row(form.password) }}
-    </div>
-    {{ form_end(form) }}
-{% endblock %}
+{% use "form/device.html.twig" with device_form as content%}

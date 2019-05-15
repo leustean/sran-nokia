@@ -94,7 +94,7 @@ class AdminControllerTest extends AbstractControllerTest {
 		$client->disableReboot();
 
 		$client->request('POST', '/admin/add-device', [
-			'new_device' => [
+			'device' => [
 				'sbtsId' => 1,
 				'sbtsOwner' => 'test@test.com',
 				'refreshTime' => [

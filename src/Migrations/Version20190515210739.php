@@ -1,0 +1,51 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20190515210739 extends AbstractMigration {
+
+	public function getDescription(): string {
+		return 'Create alarm and sync source entity';
+	}
+
+	/**
+	 * @param Schema $schema
+	 * @throws DBALException
+	 */
+	public function up(Schema $schema): void {
+		// this up() migration is auto-generated, please modify it to your needs
+		$this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+		$this->addSql('CREATE TABLE alarm_entity (id INT AUTO_INCREMENT NOT NULL, device_entity_id INT NOT NULL, severity VARCHAR(255) DEFAULT NULL, observation_time DATETIME DEFAULT NULL, alarm_id INT DEFAULT NULL, fault_id INT DEFAULT NULL, alarm_name VARCHAR(255) DEFAULT NULL, fault_severity VARCHAR(255) DEFAULT NULL, alarm_detail VARCHAR(255) DEFAULT NULL, alarm_detail_number INT DEFAULT NULL, fault_description VARCHAR(255) DEFAULT NULL, INDEX IDX_5305AF15BAC569CC (device_entity_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+		$this->addSql('CREATE TABLE sync_source_entity (id INT AUTO_INCREMENT NOT NULL, device_entity_id INT NOT NULL, sync_input_type VARCHAR(255) DEFAULT NULL, sync_input_prio VARCHAR(255) DEFAULT NULL, is_active TINYINT(1) DEFAULT NULL, availability VARCHAR(255) DEFAULT NULL, usability VARCHAR(255) DEFAULT NULL, INDEX IDX_CD4BC018BAC569CC (device_entity_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+		$this->addSql('ALTER TABLE alarm_entity ADD CONSTRAINT FK_5305AF15BAC569CC FOREIGN KEY (device_entity_id) REFERENCES device_entity (id)');
+		$this->addSql('ALTER TABLE sync_source_entity ADD CONSTRAINT FK_CD4BC018BAC569CC FOREIGN KEY (device_entity_id) REFERENCES device_entity (id)');
+		$this->addSql('ALTER TABLE device_entity DROP active_alarms, DROP synchronization_source, DROP synchronization_status, CHANGE sbts_status sbts_status TINYINT(1) DEFAULT NULL, CHANGE sbts_hw_configuration sbts_hw_configuration VARCHAR(255) DEFAULT NULL, CHANGE sbts_sw_release sbts_sw_release VARCHAR(255) DEFAULT NULL, CHANGE last_information_refresh last_information_refresh DATETIME DEFAULT NULL, CHANGE active_sw_version active_sw_version VARCHAR(255) DEFAULT NULL, CHANGE passive_sw_version passive_sw_version VARCHAR(255) DEFAULT NULL, CHANGE sbts_state sbts_state TINYINT(1) DEFAULT NULL, CHANGE lte_state lte_state VARCHAR(255) DEFAULT NULL, CHANGE wcdma_state wcdma_state VARCHAR(255) DEFAULT NULL, CHANGE gsm_state gsm_state VARCHAR(255) DEFAULT NULL, CHANGE ip_addresses ip_addresses JSON DEFAULT NULL, CHANGE controllers controllers JSON DEFAULT NULL, CHANGE timesources timesources JSON DEFAULT NULL, CHANGE refresh_time refresh_time TIME DEFAULT NULL');
+		$this->addSql('ALTER TABLE hardware_module_entity CHANGE product_name product_name VARCHAR(255) DEFAULT NULL, CHANGE product_code product_code VARCHAR(255) DEFAULT NULL, CHANGE serial_number serial_number VARCHAR(255) DEFAULT NULL, CHANGE usage_state usage_state VARCHAR(255) DEFAULT NULL, CHANGE type type INT DEFAULT NULL');
+		$this->addSql('ALTER TABLE settings_entity CHANGE global_refresh_time global_refresh_time TIME DEFAULT NULL');
+	}
+
+	/**
+	 * @param Schema $schema
+	 * @throws DBALException
+	 */
+	public function down(Schema $schema): void {
+		// this down() migration is auto-generated, please modify it to your needs
+		$this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+		$this->addSql('DROP TABLE alarm_entity');
+		$this->addSql('DROP TABLE sync_source_entity');
+		$this->addSql('ALTER TABLE device_entity ADD active_alarms LONGTEXT DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci COMMENT \'(DC2Type:array)\', ADD synchronization_source VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, ADD synchronization_status VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE sbts_status sbts_status TINYINT(1) DEFAULT \'NULL\', CHANGE sbts_hw_configuration sbts_hw_configuration VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE sbts_sw_release sbts_sw_release VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE last_information_refresh last_information_refresh DATETIME DEFAULT \'NULL\', CHANGE active_sw_version active_sw_version VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE passive_sw_version passive_sw_version VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE sbts_state sbts_state TINYINT(1) DEFAULT \'NULL\', CHANGE lte_state lte_state VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE wcdma_state wcdma_state VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE gsm_state gsm_state VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE ip_addresses ip_addresses LONGTEXT DEFAULT NULL COLLATE utf8mb4_bin, CHANGE controllers controllers LONGTEXT DEFAULT NULL COLLATE utf8mb4_bin, CHANGE timesources timesources LONGTEXT DEFAULT NULL COLLATE utf8mb4_bin, CHANGE refresh_time refresh_time TIME DEFAULT \'NULL\'');
+		$this->addSql('ALTER TABLE hardware_module_entity CHANGE product_name product_name VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE product_code product_code VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE serial_number serial_number VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE usage_state usage_state VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci, CHANGE type type INT DEFAULT NULL');
+		$this->addSql('ALTER TABLE settings_entity CHANGE global_refresh_time global_refresh_time TIME DEFAULT \'NULL\'');
+	}
+}

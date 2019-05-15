@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NewDeviceType extends AbstractType {
+class DeviceType extends AbstractType {
 
 	public function buildForm(FormBuilderInterface $builder, array $options): void {
 		$builder

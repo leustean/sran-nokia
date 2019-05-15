@@ -108,11 +108,6 @@ class DeviceEntity {
 	private $gsmState;
 
 	/**
-	 * @ORM\Column(type="array", nullable=true)
-	 */
-	private $activeAlarms = [];
-
-	/**
 	 * @ORM\Column(type="json", nullable=true)
 	 */
 	private $ipAddresses = [];
@@ -122,15 +117,6 @@ class DeviceEntity {
 	 */
 	private $controllers = [];
 
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $synchronizationSource;
-
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $synchronizationStatus;
 
 	/**
 	 * @ORM\Column(type="json", nullable=true)
@@ -199,15 +185,27 @@ class DeviceEntity {
 	 */
 	private $hardwareModules;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\SyncSourceEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 */
+	private $syncSources;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\AlarmEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 */
+	private $activeAlarms;
+
 	public function __construct() {
 		$this->hardwareModules = new ArrayCollection();
+		$this->syncSources = new ArrayCollection();
+		$this->activeAlarms = new ArrayCollection();
 	}
 
 	/**
 	 * @return Collection|HardwareModuleEntity[]
 	 */
 	public function getSmods(): Collection {
-		return $this->getHardwareModules()->filter(static function (HardwareModuleEntity $hardwareModuleEntity){
+		return $this->getHardwareModules()->filter(static function (HardwareModuleEntity $hardwareModuleEntity) {
 			return $hardwareModuleEntity->getType() === self::SMOD;
 		});
 	}
@@ -216,7 +214,7 @@ class DeviceEntity {
 	 * @return Collection|HardwareModuleEntity[]
 	 */
 	public function getBmods(): Collection {
-		return $this->getHardwareModules()->filter(static function (HardwareModuleEntity $hardwareModuleEntity){
+		return $this->getHardwareModules()->filter(static function (HardwareModuleEntity $hardwareModuleEntity) {
 			return $hardwareModuleEntity->getType() === self::BMOD;
 		});
 	}
@@ -225,7 +223,7 @@ class DeviceEntity {
 	 * @return Collection|HardwareModuleEntity[]
 	 */
 	public function getRfmods(): Collection {
-		return $this->getHardwareModules()->filter(static function (HardwareModuleEntity $hardwareModuleEntity){
+		return $this->getHardwareModules()->filter(static function (HardwareModuleEntity $hardwareModuleEntity) {
 			return $hardwareModuleEntity->getType() === self::RFMOD;
 		});
 	}
@@ -354,17 +352,6 @@ class DeviceEntity {
 		return $this;
 	}
 
-
-	public function getActiveAlarms(): ?array {
-		return $this->activeAlarms;
-	}
-
-	public function setActiveAlarms(?array $activeAlarms): self {
-		$this->activeAlarms = $activeAlarms;
-
-		return $this;
-	}
-
 	public function getIpAddresses(): ?array {
 		return $this->ipAddresses;
 	}
@@ -381,26 +368,6 @@ class DeviceEntity {
 
 	public function setControllers(?array $controllers): self {
 		$this->controllers = $controllers;
-
-		return $this;
-	}
-
-	public function getSynchronizationSource(): ?string {
-		return $this->synchronizationSource;
-	}
-
-	public function setSynchronizationSource(?string $synchronizationSource): self {
-		$this->synchronizationSource = $synchronizationSource;
-
-		return $this;
-	}
-
-	public function getSynchronizationStatus(): ?string {
-		return $this->synchronizationStatus;
-	}
-
-	public function setSynchronizationStatus(?string $synchronizationStatus): self {
-		$this->synchronizationStatus = $synchronizationStatus;
 
 		return $this;
 	}
@@ -487,6 +454,62 @@ class DeviceEntity {
 			// set the owning side to null (unless already changed)
 			if ($hardwareModule->getDeviceEntity() === $this) {
 				$hardwareModule->setDeviceEntity(null);
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection|SyncSourceEntity[]
+	 */
+	public function getSyncSources(): Collection {
+		return $this->syncSources;
+	}
+
+	public function addSyncSource(SyncSourceEntity $syncSource): self {
+		if (!$this->syncSources->contains($syncSource)) {
+			$this->syncSources[] = $syncSource;
+			$syncSource->setDeviceEntity($this);
+		}
+
+		return $this;
+	}
+
+	public function removeSyncSource(SyncSourceEntity $syncSource): self {
+		if ($this->syncSources->contains($syncSource)) {
+			$this->syncSources->removeElement($syncSource);
+			// set the owning side to null (unless already changed)
+			if ($syncSource->getDeviceEntity() === $this) {
+				$syncSource->setDeviceEntity(null);
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @return Collection|AlarmEntity[]
+	 */
+	public function getActiveAlarms(): Collection {
+		return $this->activeAlarms;
+	}
+
+	public function addActiveAlarm(AlarmEntity $activeAlarm): self {
+		if (!$this->activeAlarms->contains($activeAlarm)) {
+			$this->activeAlarms[] = $activeAlarm;
+			$activeAlarm->setDeviceEntity($this);
+		}
+
+		return $this;
+	}
+
+	public function removeActiveAlarm(AlarmEntity $activeAlarm): self {
+		if ($this->activeAlarms->contains($activeAlarm)) {
+			$this->activeAlarms->removeElement($activeAlarm);
+			// set the owning side to null (unless already changed)
+			if ($activeAlarm->getDeviceEntity() === $this) {
+				$activeAlarm->setDeviceEntity(null);
 			}
 		}
 

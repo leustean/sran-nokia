@@ -8,7 +8,7 @@ use App\Repository\UserEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\NewDeviceType;
+use App\Form\DeviceType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,7 +36,7 @@ class AdminController extends AbstractController implements AdminControllerInter
 	 * @return Response
 	 */
 	public function addDeviceAction(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response {
-		$form = $this->createForm(NewDeviceType::class);
+		$form = $this->createForm(DeviceType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
