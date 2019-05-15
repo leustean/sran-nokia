@@ -10,8 +10,8 @@ namespace App\Controller;
 
 
 use App\Entity\DeployResultEntity;
-use App\Service\Login\LoginFactory;
 use App\Repository\DeployOptionRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/deploy", )
  */
-class DeployController extends AbstractAppController {
+class DeployController extends AbstractController implements AdminControllerInterface {
 
 	private const DEPLOY_RESULT = 'DEPLOY_CONTROLLER_DEPLOY_RESULT';
 
@@ -28,8 +28,7 @@ class DeployController extends AbstractAppController {
 
 	private $commandRunDir;
 
-	public function __construct(LoginFactory $loginFactory, $commandRunDir) {
-		parent::__construct($loginFactory);
+	public function __construct($commandRunDir) {
 		$this->commandRunDir = $commandRunDir;
 		$this->currentWorkingDirectory = getcwd();
 	}
@@ -40,10 +39,6 @@ class DeployController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function showDeployOptions(DeployOptionRepository $deployOptionRepository): Response {
-		if($this->shouldRedirectUser()){
-			return $this->redirectToCorrectPage();
-		}
-
 		return $this->render(
 			'deploy/deploy-options.html.twig',
 			[
@@ -60,10 +55,6 @@ class DeployController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function performDeploy(Session $session, Request $request, DeployOptionRepository $deployOptionRepository): Response {
-		if($this->shouldRedirectUser()){
-			return $this->redirectToCorrectPage();
-		}
-
 		$deployResult = [];
 		$this->setRunDirectory();
 
@@ -93,10 +84,6 @@ class DeployController extends AbstractAppController {
 	 * @return Response
 	 */
 	public function showDeployResult(Session $session): Response {
-		if(!$this->login->isAdmin()){
-			return $this->redirectToRoute('login_index');
-		}
-
 		$deployResult = $session->get(self::DEPLOY_RESULT, []);
 		return $this->render(
 			'deploy/deploy-result.html.twig',

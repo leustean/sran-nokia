@@ -14,7 +14,7 @@ services:
 
     mariadb:
         image: mariadb:10.3
-        container_name: sran-mysql-server
+        container_name: sran-mysql-server-test
         environment:
             TZ: "Europe/Bucharest"
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'

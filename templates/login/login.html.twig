@@ -7,7 +7,7 @@
         <div class="wrapper__body__content__box  wrapper__body__content__box--login">
             <div class="login">
                 <h1 class="login__header">Login</h1>
-                {{ form(form) }}
+                {{ form(form, {'attr': {'novalidate': 'novalidate', 'class': 'login__form form'}}) }}
             </div>
         </div>
     </div>

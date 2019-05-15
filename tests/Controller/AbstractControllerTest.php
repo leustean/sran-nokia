@@ -4,22 +4,22 @@
 namespace App\Tests\Controller;
 
 use App\Entity\UserEntity;
-use App\Repository\DeviceEntityRepository;
-use App\Repository\SettingsEntityRepository;
 use App\Service\Login\LoginFactory;
-use App\Service\Login\LoginInterface;
+use App\Tests\MockMaker;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 abstract class AbstractControllerTest extends WebTestCase {
+	use MockMaker;
 
 	/**
 	 * @var Client
@@ -125,42 +125,25 @@ abstract class AbstractControllerTest extends WebTestCase {
 	}
 
 	/**
-	 * @return ObjectManager|object
+	 * @param String $serviceName
+	 * @return object
 	 */
-	protected function getEntityManager(){
+	protected function getService(String $serviceName) {
+		return self::$container->get('test.' . $serviceName);
+	}
+
+	/**
+	 * @return object|Session
+	 */
+	protected function getSession(){
+		return self::$container->get('session');
+	}
+
+	/**
+	 * @return EntityManagerInterface|ObjectManager|object
+	 */
+	protected function getEntityManager() {
 		return $this->entityManager;
 	}
-
-	/**
-	 * @return LoginFactory|MockObject
-	 * @throws ReflectionException
-	 */
-	protected function getMockLoginFactory(): MockObject {
-		return $this->getMockBuilder(LoginFactory::class)->disableOriginalConstructor()->getMock();
-	}
-
-	/**
-	 * @return LoginInterface|MockObject
-	 * @throws ReflectionException
-	 */
-	protected function getMockLogin(): MockObject {
-		return $this->getMockBuilder(LoginInterface::class)->getMock();
-	}
-
-	/**
-	 * @return DeviceEntityRepository|MockObject
-	 * @throws ReflectionException
-	 */
-	protected function getMockDeviceEntityRepository(): MockObject {
-		return $this->getMockBuilder(DeviceEntityRepository::class)->disableOriginalConstructor()->getMock();
-	}
-
-	/**
-	 * @return SettingsEntityRepository|MockObject
-	 * @throws ReflectionException
-	 */
-	protected function getMockSettingsEnityRepository(): MockObject {
-		return $this->getMockBuilder(SettingsEntityRepository::class)->disableOriginalConstructor()->getMock();
-	}
-
+	
 }

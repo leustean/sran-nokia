@@ -5,4 +5,5 @@ services:
     test.App\Repository\DeviceEntityRepository: '@App\Repository\DeviceEntityRepository'
     test.App\Repository\SettingsEntityRepository: '@App\Repository\SettingsEntityRepository'
     test.App\Service\Login\LoginFactory: '@App\Service\Login\LoginFactory'
+    test.App\Repository\UserEntityRepository: '@App\Repository\UserEntityRepository'
     test.Doctrine\ORM\EntityManagerInterface: '@Doctrine\ORM\EntityManagerInterface'
