@@ -4,6 +4,8 @@
 namespace App\Controller;
 
 use App\Repository\DeviceEntityRepository;
+use App\Service\Login\LoginFactory;
+use App\Service\Login\LoginInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/")
  */
 class MainController extends AbstractController {
+
+	/**
+	 * @var LoginInterface
+	 */
+	protected $login;
+
+
+	public function __construct(LoginFactory $loginFactory) {
+		$this->login = $loginFactory->getLogin();
+	}
 
 	/**
 	 * @Route("/", name="main_index", methods={"GET"})

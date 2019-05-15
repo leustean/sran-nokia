@@ -131,43 +131,4 @@ class AdminController extends AbstractController implements AdminControllerInter
 		);
 	}
 
-	/**
-	 * @Route("/refreshTime", name="admin_set_refreshTime", methods={"GET","POST"})
-	 * @param Request                  $request
-	 * @param EntityManagerInterface   $entityManager
-	 * @param SessionInterface         $session
-	 * @param SettingsEntityRepository $settingsEntityRepository
-	 * @return Response
-	 */
-	public function refreshTimeAction(Request $request, EntityManagerInterface $entityManager, SessionInterface $session, SettingsEntityRepository $settingsEntityRepository): Response {
-		if ($this->shouldRedirectUser()) {
-			return $this->redirectToCorrectPage();
-		}
-
-		$form = $this->createForm(
-			GlobalRefreshTimeType::class,
-			$settingsEntityRepository->findOneBy([], ['id' => 'DESC']));
-		$form->handleRequest($request);
-
-		if ($form->isSubmitted() && $form->isValid()) {
-			$entityManager->persist($form->getData());
-			$entityManager->flush();
-			$session->set('message', 'The global refresh time has been update successfully');
-			return $this->redirectToRoute('admin_set_refreshTime');
-		}
-
-		$message = null;
-		if ($session->has('message')) {
-			$message = $session->get('message');
-			$session->remove('message');
-		}
-
-		return $this->render(
-			'admin/global-refresh-time.html.twig',
-			[
-				'form' => $form->createView(),
-				'message' => $message
-			]
-		);
-	}
 }

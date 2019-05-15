@@ -21,7 +21,7 @@
             <span class="sbts-info__refresh-time">Last Refresh: {{ device.lastInformationRefresh ? device.lastInformationRefresh.format('Y-m-d H:i') : 'Never' }}</span>
         </div>
         <div class="wrapper__body__content__box wrapper__body__content__box--device-detail">
-            <div id="general" class="sbts-data sbts-data-active js-sbts-data-tab">
+            <div id="general" class="sbts-data sbts-data--active js-sbts-data-tab">
                 <div class="sbts-data__row">
                     <div class="sbts-data__row__title">Active SW version</div>
                     <div class="sbts-data__row__data">{{ device.activeSwVersion ?: 'N/A' }}</div>
@@ -47,8 +47,93 @@
                     <div class="sbts-data__row__data">{{ device.gsmState ?: 'N/A' }}</div>
                 </div>
             </div>
-            <div id="hardware" class="sbts-data js-sbts-data-tab"></div>
-            <div id="rf-modules" class="sbts-data js-sbts-data-tab"></div>
+            <div id="hardware" class="sbts-data js-sbts-data-tab">
+                <div class="sbts-data sbts-data--active">
+                    <div class="sbts-data__row">
+                        <div class="sbts-data__row__title">System modules</div>
+                        <div class="sbts-data__row__data">
+                            {% for hardware in device.smods %}
+                                <div class="sbts-data__row">
+                                    <div class="sbts-data__row__data">
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Product name</div>
+                                            <div class="sbts-data__row__data">{{ hardware.productName ?: 'N/A' }}</div>
+                                        </div>
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Product code</div>
+                                            <div class="sbts-data__row__data">{{ hardware.productCode ?: 'N/A' }}</div>
+                                        </div>
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Serial number</div>
+                                            <div class="sbts-data__row__data">{{ hardware.serialNumber ?: 'N/A' }}</div>
+                                        </div>
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Usage state</div>
+                                            <div class="sbts-data__row__data">{{ hardware.usageState ?: 'N/A' }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="sbts-data__row">
+                        <div class="sbts-data__row__title">Baseband modules</div>
+                        <div class="sbts-data__row__data">
+                            {% for hardware in device.bmods %}
+                                <div class="sbts-data__row">
+                                    <div class="sbts-data__row__data">
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Product name</div>
+                                            <div class="sbts-data__row__data">{{ hardware.productName ?: 'N/A' }}</div>
+                                        </div>
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Product code</div>
+                                            <div class="sbts-data__row__data">{{ hardware.productCode ?: 'N/A' }}</div>
+                                        </div>
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Serial number</div>
+                                            <div class="sbts-data__row__data">{{ hardware.serialNumber ?: 'N/A' }}</div>
+                                        </div>
+                                        <div class="sbts-data__row">
+                                            <div class="sbts-data__row__title">Usage state</div>
+                                            <div class="sbts-data__row__data">{{ hardware.usageState ?: 'N/A' }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="rf-modules" class="sbts-data js-sbts-data-tab">
+                <div class="sbts-data__row">
+                    <div class="sbts-data__row__title">RF modules</div>
+                    <div class="sbts-data__row__data">
+                        {% for hardware in device.rfmods %}
+                            <div class="sbts-data__row">
+                                <div class="sbts-data__row__data">
+                                    <div class="sbts-data__row">
+                                        <div class="sbts-data__row__title">Product name</div>
+                                        <div class="sbts-data__row__data">{{ hardware.productName ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row">
+                                        <div class="sbts-data__row__title">Product code</div>
+                                        <div class="sbts-data__row__data">{{ hardware.productCode ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row">
+                                        <div class="sbts-data__row__title">Serial number</div>
+                                        <div class="sbts-data__row__data">{{ hardware.serialNumber ?: 'N/A' }}</div>
+                                    </div>
+                                    <div class="sbts-data__row">
+                                        <div class="sbts-data__row__title">Usage state</div>
+                                        <div class="sbts-data__row__data">{{ hardware.usageState ?: 'N/A' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
             <div id="alarms" class="sbts-data js-sbts-data-tab"></div>
         </div>
     </div>
