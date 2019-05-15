@@ -80,21 +80,24 @@ class MainController extends AbstractController {
 			}
 		}
 
-		$form = $this->createForm(DeviceType::class, $deviceEntity);
-		$form->handleRequest($request);
-
-		if ($form->isSubmitted() && $form->isValid()) {
-			$entityManager->persist($form->getData());
-			$entityManager->flush();
-			$session->set('message', 'The device has been modified successfully');
-			return $this->redirect($this->generateUrl('main_sbts_details', ['sbtsId' => $deviceEntity->getSbtsId()]) . '#settings');
-		}
-
 		$message = null;
-		if ($session->has('message')) {
-			$message = $session->get('message');
-			$session->remove('message');
+		$form = $this->createForm(DeviceType::class, $deviceEntity);
+		if($showSettingsTab){
+			$form->handleRequest($request);
+
+			if ($form->isSubmitted() && $form->isValid()) {
+				$entityManager->persist($form->getData());
+				$entityManager->flush();
+				$session->set('message', 'The device has been modified successfully');
+				return $this->redirect($this->generateUrl('main_sbts_details', ['sbtsId' => $deviceEntity->getSbtsId()]) . '#settings');
+			}
+
+			if ($session->has('message')) {
+				$message = $session->get('message');
+				$session->remove('message');
+			}
 		}
+
 
 		return $this->render(
 			'home/sbts-detail.html.twig',

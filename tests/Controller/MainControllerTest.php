@@ -55,7 +55,7 @@ class MainControllerTest extends AbstractControllerTest {
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_sbtsAction_allowAdminToSettings(): void {
+	public function test_showSbtsAction_allowAdminToSettings(): void {
 		$client = $this->getClient();
 
 		$loginFactory = $this->getMockLoginFactory();
@@ -93,7 +93,7 @@ class MainControllerTest extends AbstractControllerTest {
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_sbtsAction_allowOwnerToSettings(): void {
+	public function test_showSbtsAction_allowOwnerToSettings(): void {
 		$client = $this->getClient();
 
 		$loginFactory = $this->getMockLoginFactory();
@@ -130,7 +130,7 @@ class MainControllerTest extends AbstractControllerTest {
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_sbtsAction_dontAllowOtherUsersToSettings(): void {
+	public function test_showSbtsAction_dontAllowOtherUsersToSettings(): void {
 		$client = $this->getClient();
 
 		$loginFactory = $this->getMockLoginFactory();
@@ -167,7 +167,7 @@ class MainControllerTest extends AbstractControllerTest {
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_sbtsAction_formSubmit(): void {
+	public function test_showSbtsAction_formSubmit(): void {
 		$this->setMockLoginFactory();
 		$client = $this->getClient();
 		$client->disableReboot();
@@ -234,6 +234,71 @@ class MainControllerTest extends AbstractControllerTest {
 		self::assertSame(3000, $device->getPort());
 		self::assertSame('test', $device->getUser());
 		self::assertSame('test.pass', $device->getPassword());
+	}
+
+	public function test_showSbtsAction_formSubmit_shouldNotWorkIfNotLogged(): void {
+		$client = $this->getClient();
+		$client->disableReboot();
+
+		$time = new DateTime();
+		$time->setTime(6, 40);
+		$device = new DeviceEntity();
+
+		$device
+			->setSbtsId(1)
+			->setSbtsOwner('pre@test.com')
+			->setRefreshTime($time)
+			->setIp('192.168.1.2')
+			->setPort('3001')
+			->setUser('pre')
+			->setPassword('pre.test.pass');
+
+		$entityManager = $this->getEntityManager();
+		$entityManager->persist($device);
+		$entityManager->flush();
+
+		$client->request('POST', '/sbts/1', [
+			'device' => [
+				'sbtsId' => 2,
+				'sbtsOwner' => 'test@test.com',
+				'refreshTime' => [
+					'hour' => 7,
+					'minute' => 25
+				],
+				'ip' => '192.168.1.1',
+				'port' => '3000',
+				'user' => 'test',
+				'password' => 'test.pass'
+			]
+		]);
+
+		/**
+		 * @var DeviceEntityRepository $deviceEntityRepository
+		 */
+		$deviceEntityRepository = $this->getService(DeviceEntityRepository::class);
+
+		$response = $client->getResponse();
+		self::assertEquals(200, $response->getStatusCode());
+
+		$devices = $deviceEntityRepository->findAll();
+		self::assertCount(1, $devices);
+		$device = $devices[0];
+		self::assertSame(1, $device->getSbtsId());
+		self::assertSame('pre@test.com', $device->getSbtsOwner());
+		self::assertSame('06:40', $device->getRefreshTime()->format('h:i'));
+		self::assertSame('192.168.1.2', $device->getIp());
+		self::assertSame(3001, $device->getPort());
+		self::assertSame('pre', $device->getUser());
+		self::assertSame('pre.test.pass', $device->getPassword());
+	}
+
+	public function test_showSbtsAction_deviceNotFound_shouldRedirect(): void {
+		$client = $this->getClient();
+
+		$client->request('GET', '/sbts/1');
+		$response = $client->getResponse();
+
+		self::assertEquals(302, $response->getStatusCode());
 	}
 
 }
