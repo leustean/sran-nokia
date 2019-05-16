@@ -1,15 +1,16 @@
-@import "../_vars";
+@import "../include/vars";
 
-.add-device {
+.device {
 
   &__form {
-
+    width: 100%;
     display:flex;
-    justify-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
        &__column {
          width: 400px;
-         margin: 50px 100px 50px 50px;
+         margin: 50px;
 
          .mdc-button {
            padding: 5px 50px;

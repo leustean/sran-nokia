@@ -1,0 +1,41 @@
+.sbts-data {
+  display: none;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+
+  &--active {
+    display: flex;
+  }
+
+  &__row {
+    margin: 10px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid;
+
+    &--column{
+      width: 500px;
+    }
+
+    &--no-border{
+      border-bottom: none;
+    }
+
+    &__title {
+      padding: 5px;
+      margin-right: 10px;
+      font-size: 25px;
+    }
+
+    &__data {
+      padding: 5px;
+      margin-left: 50px;
+
+      &--no-margin{
+        margin-left: 0;
+      }
+    }
+  }
+}
