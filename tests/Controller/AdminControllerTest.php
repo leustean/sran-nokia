@@ -8,11 +8,12 @@ use App\Entity\SettingsEntity;
 use App\Entity\UserEntity;
 use App\Repository\DeviceEntityRepository;
 use App\Repository\SettingsEntityRepository;
+use App\Tests\AbstractIntegrationTest;
 use DateTime;
 use Exception;
 use ReflectionException;
 
-class AdminControllerTest extends AbstractControllerTest {
+class AdminControllerTest extends AbstractIntegrationTest {
 
 	/**
 	 * @throws ReflectionException

@@ -6,89 +6,175 @@ namespace App\Service\SBTS;
 
 use App\Entity\DeviceEntity;
 
-class Sync {
-    private $executableExtension;
+class Sync implements SyncInterface {
 
-    private $commandToExecute;
+	/**
+	 * @var string
+	 */
+	private $commandToExecute;
 
-    private $commandAttributes;
+	/**
+	 * @var array
+	 */
+	private $commandAttributes;
 
-    private $proceduresToRun;
+	/**
+	 * @var array
+	 */
+	private $proceduresToRun;
 
-    private const executableName = 'get-info';
+	/**
+	 * @var string
+	 */
+	private const executableName = 'get-info';
 
-    private const executablePath = __DIR__ . '../../../bin/admin-cli/';
+	/**
+	 * @var string
+	 */
+	private const executablePath = __DIR__ . '../../../bin/admin-cli/';
 
-    private const outputFileName = 'output.json';
+	/**
+	 * @var string
+	 */
+	private const outputFileName = '.output.json';
 
-    private const debugFileName = 'debug.txt';
+	/**
+	 * @var string
+	 */
+	private const debugFileName = '.debug.txt';
 
-    public function __construct() {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $this->executableExtension = '.bat';
-            $this->commandToExecute = self::executablePath . self::executableName . $this->executableExtension;
-        } else {
-            $this->executableExtension = '.sh';
-            $this->commandToExecute = 'sh ' . self::executablePath . self::executableName . $this->executableExtension;
-        }
+	/**
+	 * Sync constructor.
+	 */
+	public function __construct() {
+		if (stripos(PHP_OS, 'WIN') === 0) {
+			$this->commandToExecute = self::executablePath . self::executableName . '.bat';
+		} else {
+			$this->commandToExecute = 'sh ' . self::executablePath . self::executableName . '.sh';
+		}
 
-        $this->commandAttributes = [
-                'bts-username' => '',
-                'bts-password' => '',
-                'bts-host' => '',
-                'bts-port' => '3600',
-                'data' => '{}',
-                'format' => 'human',
-                'output-json' => self::executablePath . self::outputFileName,
-                'debug' => self::executablePath . self::debugFileName
-        ];
+		$this->commandAttributes = [
+			'bts-username' => '',
+			'bts-password' => '',
+			'bts-host' => '',
+			'bts-port' => '3600',
+			'data' => '{}',
+			'format' => 'human',
+			'output-json' => self::executablePath . self::outputFileName,
+			'debug' => self::executablePath . self::debugFileName
+		];
 
-        $this->proceduresToRun = ['getBtsInformation', 'getSynchronizationInformation', 'getActiveAlarms'];
-    }
+		$this->proceduresToRun = ['getBtsInformation', 'getSynchronizationInformation', 'getActiveAlarms'];
+	}
 
-    public function setDevice(DeviceEntity $deviceEntity) {
-        $this->commandAttributes['bts-host'] = $deviceEntity->getIp();
-        $this->commandAttributes['bts-username'] = $deviceEntity->getUser();
-        $this->commandAttributes['bts-password'] = $deviceEntity->getPassword();
-        $this->commandAttributes['bts-port'] = $deviceEntity->getPort();
-    }
+	/**
+	 * @return array
+	 */
+	public function getProcedures(): array {
+		return $this->proceduresToRun;
+	}
 
-    private function setPayload(array $payload) {
-        $this->commandAttributes['data'] = json_encode($payload);
-    }
+	/**
+	 * @param DeviceEntity $deviceEntity
+	 * @return $this
+	 */
+	public function setDevice(DeviceEntity $deviceEntity): SyncInterface {
+		$this->commandAttributes['bts-host'] = $deviceEntity->getIp();
+		$this->commandAttributes['bts-username'] = $deviceEntity->getUser();
+		$this->commandAttributes['bts-password'] = $deviceEntity->getPassword();
+		$this->commandAttributes['bts-port'] = $deviceEntity->getPort();
 
-    public function addProcedure(String $procedureName) : string {
-        $this->proceduresToRun[] = $procedureName;
-    }
+		return $this;
+	}
 
-    private function injectCommandAttributes() {
-        $commandToExecute = $this->commandToExecute;
+	/**
+	 * @return $this
+	 */
+	private function setSetFileNames(): self {
+		$requestId = uniqid('sbts', true);
+		$this->commandAttributes['output-json'] = self::executablePath . $requestId . self::outputFileName;
+		$this->commandAttributes['debug'] = self::executablePath . $requestId . self::debugFileName;
 
-        foreach($this->commandAttributes as $commandAttribute => $attributeValue) {
-            $commandToExecute .=  ' --' . $commandAttribute . '="' . $attributeValue . '"';
-        }
+		return $this;
+	}
 
-        return $commandToExecute;
-    }
+	/**
+	 * @return string
+	 */
+	protected function getOutputFileName(): string {
+		return $this->commandAttributes['output-json'];
+	}
 
-    public function fetchData() : array {
-        $fetchedData = [];
-        foreach ($this->proceduresToRun as $procedure) {
-            $this->setPayLoad([
-                'requestId' => 1,
-                'parameters' => [
-                    'name' => $procedure
-                ]
-            ]);
+	/**
+	 * @return string
+	 */
+	protected function getDebugFileName(): string {
+		return $this->commandAttributes['debug'];
+	}
 
-            exec($this->injectCommandAttributes());
-            $fullPathOutput = self::executablePath . self::outputFileName;
+	/**
+	 * @param array $payload
+	 * @return $this
+	 */
+	private function setPayload(array $payload): self {
+		$this->commandAttributes['data'] = json_encode($payload);
 
-            if (file_exists($fullPathOutput)) {
-                $fetchedData[$procedure] = json_decode(file_get_contents($fullPathOutput), true);
-            }
-        }
+		return $this;
+	}
 
-        return $fetchedData;
-    }
+	/**
+	 * @param String $procedureName
+	 * @return $this
+	 */
+	public function addProcedure(String $procedureName): self {
+		$this->proceduresToRun[] = $procedureName;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getCommand(): string {
+		$commandToExecute = $this->commandToExecute;
+
+		foreach ($this->commandAttributes as $commandAttribute => $attributeValue) {
+			$commandToExecute .= ' --' . $commandAttribute . '="' . $attributeValue . '"';
+		}
+
+		return $commandToExecute;
+	}
+
+	/**
+	 * @return array
+	 * @throws SyncException
+	 */
+	public function fetchData(): array {
+		$fetchedData = [];
+		foreach ($this->proceduresToRun as $procedure) {
+			exec($this
+				->setPayLoad([
+				'requestId' => 1,
+				'parameters' => [
+					'name' => $procedure
+				]
+			])
+				->setSetFileNames()
+				->getCommand()
+			);
+			$fullPathOutput = self::executablePath . self::outputFileName;
+
+			if (!file_exists($fullPathOutput)) {
+				throw new SyncException("Can't find output file");
+			}
+
+			$fetchedData[$procedure] = json_decode(file_get_contents($fullPathOutput), false);
+
+			if($fetchedData[$procedure] === null || json_last_error() !== JSON_ERROR_NONE){
+				throw new SyncException('Error parsing output file');
+			}
+		}
+
+		return $fetchedData;
+	}
 }

@@ -515,4 +515,31 @@ class DeviceEntity {
 
 		return $this;
 	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearActiveAlarms(): self {
+		$this->activeAlarms->clear();
+
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearSyncSources(): self {
+		$this->syncSources->clear();
+
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearHardwareModules(): self {
+		$this->hardwareModules->clear();
+
+		return $this;
+	}
 }

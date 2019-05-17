@@ -4,11 +4,11 @@
 namespace App\Tests\Command\Cron;
 
 use App\Command\Cron\RunDueCommand;
-use App\Tests\AbstractTest;
+use App\Tests\AbstractUnitTest;
 use Exception;
 
 
-class RunDueCommandTest extends AbstractTest {
+class RunDueCommandTest extends AbstractUnitTest {
 
 	/**
 	 * @throws Exception
@@ -42,7 +42,8 @@ class RunDueCommandTest extends AbstractTest {
 		$cronRepository
 			->method('findAll')
 			->willReturn([$dueCron, $notDueCron]);
-		$runDueCommand = new RunDueCommand($cronRepository);
+
+		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer());
 
 		$runDueCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}
@@ -81,7 +82,7 @@ class RunDueCommandTest extends AbstractTest {
 		$cronRepository
 			->method('findAll')
 			->willReturn([$dueCron]);
-		$runDueCommand = new RunDueCommand($cronRepository);
+		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer());
 
 		$runDueCommand->run($this->getMockInputInterface(), $outputInterface);
 	}
@@ -121,7 +122,7 @@ class RunDueCommandTest extends AbstractTest {
 		$cronRepository
 			->method('findAll')
 			->willReturn([$dueCron]);
-		$runDueCommand = new RunDueCommand($cronRepository);
+		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer());
 
 		$runDueCommand->run($this->getMockInputInterface(), $outputInterface);
 	}

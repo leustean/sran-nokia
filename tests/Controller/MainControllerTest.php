@@ -8,10 +8,11 @@ use App\Entity\DeviceEntity;
 use App\Entity\UserEntity;
 use App\Repository\DeviceEntityRepository;
 use App\Service\Login\LoginFactory;
+use App\Tests\AbstractIntegrationTest;
 use DateTime;
 use ReflectionException;
 
-class MainControllerTest extends AbstractControllerTest {
+class MainControllerTest extends AbstractIntegrationTest {
 
 	public function test_indexAction(): void {
 		$client = $this->getClient();

@@ -1,0 +1,41 @@
+{
+   "time": "5:00:28 PM",
+   "requestId": 1,
+   "requestStatus": "completed",
+   "requestMessage": [
+      {
+         "severity": "Major",
+         "observationTime": "20190404135241.934+0300",
+         "alarmId": 1234,
+         "faultId": 12345,
+         "alarmName": "BASE STATION SECURITY PROBLEM",
+         "faultSeverity": "Major",
+         "alarmInformation": {
+            "alarmDetail": "Automatic BTS Operator Certificate retrieval unsuccessful",
+            "alarmDetailNbr": 123456,
+            "faultDescription": "Automatic BTS Operator Certificate retrieval unsuccessful",
+            "alarmAdditionalInfo": {
+               "additionalFaultID": 1234567
+            }
+         }
+      },
+      {
+         "severity": "Minor",
+         "observationTime": "20190404135241.934+0300",
+         "alarmId": 1234,
+         "faultId": 12345,
+         "alarmName": "BASE STATION INFORMATION",
+         "faultSeverity": "Minor",
+         "alarmInformation": {
+            "alarmDetail": "Diagnostic Files collected",
+            "alarmDetailNbr": 123456,
+            "faultDescription": "Diagnostic Files collected",
+            "alarmAdditionalInfo": {
+               "shared": "NotUsed",
+               "additionalFaultID": 1234567
+            }
+         }
+      }
+   ],
+   "errorCode": 0
+}

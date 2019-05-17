@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\DeviceEntity;
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,39 +13,31 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method DeviceEntity[]    findAll()
  * @method DeviceEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DeviceEntityRepository extends ServiceEntityRepository
-{
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, DeviceEntity::class);
-    }
+class DeviceEntityRepository extends ServiceEntityRepository {
 
-    // /**
-    //  * @return DeviceEntity[] Returns an array of DeviceEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+	public function __construct(RegistryInterface $registry) {
+		parent::__construct($registry, DeviceEntity::class);
+	}
 
-    /*
-    public function findOneBySomeField($value): ?DeviceEntity
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+	/**
+	 * @param DateTimeInterface $dateTime
+	 * @return DeviceEntity[]
+	 */
+	public function findDevicesThatNeedRefresh(DateTimeInterface $dateTime): array {
+		return $this->createQueryBuilder('device_entity')
+			->andWhere('TIME(device_entity.refreshTime) = TIME(:refreshTime)')
+			->setParameter('refreshTime', $dateTime->format('h:i'))
+			->getQuery()
+			->getResult();
+	}
+
+	/**
+	 * @return DeviceEntity[]
+	 */
+	public function findDevicesThatUseTheDefaultRefreshTime(): array {
+		return $this->createQueryBuilder('device_entity')
+			->andWhere('device_entity.refreshTime IS NULL')
+			->getQuery()
+			->getResult();
+	}
 }

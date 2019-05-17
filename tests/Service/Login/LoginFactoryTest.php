@@ -7,11 +7,11 @@ namespace App\Tests\Service\Login;
 use App\Service\Login\FakeLogin;
 use App\Service\Login\LdapLogin;
 use App\Service\Login\LoginFactory;
-use App\Tests\AbstractTest;
+use App\Tests\AbstractUnitTest;
 use ReflectionException;
 
 
-class LoginFactoryTest extends AbstractTest {
+class LoginFactoryTest extends AbstractUnitTest {
 
 	/**
 	 * @throws ReflectionException

@@ -6,6 +6,7 @@ use App\Form\GlobalRefreshTimeType;
 use App\Repository\SettingsEntityRepository;
 use App\Repository\UserEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\DeviceType;
@@ -102,11 +103,12 @@ class AdminController extends AbstractController implements AdminControllerInter
 	 * @param SessionInterface         $session
 	 * @param SettingsEntityRepository $settingsEntityRepository
 	 * @return Response
+	 * @throws NonUniqueResultException
 	 */
 	public function refreshTimeAction(Request $request, EntityManagerInterface $entityManager, SessionInterface $session, SettingsEntityRepository $settingsEntityRepository): Response {
 		$form = $this->createForm(
 			GlobalRefreshTimeType::class,
-			$settingsEntityRepository->findOneBy([], ['id' => 'DESC']));
+			$settingsEntityRepository->findLatest());
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {

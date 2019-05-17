@@ -10,10 +10,11 @@ use App\Repository\UserEntityRepository;
 use App\Service\Login\FakeLogin;
 use App\Service\Login\LoginException;
 use App\Service\Login\LoginFactory;
+use App\Tests\AbstractIntegrationTest;
 use Exception;
 use ReflectionException;
 
-class AuthenticationControllerTest extends AbstractControllerTest {
+class AuthenticationControllerTest extends AbstractIntegrationTest {
 
 	protected const EMAIL = 'test@test.com';
 

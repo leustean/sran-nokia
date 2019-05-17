@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Tests\Controller;
+namespace App\Tests;
 
 use App\Entity\UserEntity;
 use App\Service\Login\LoginFactory;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-abstract class AbstractControllerTest extends WebTestCase {
+abstract class AbstractIntegrationTest extends WebTestCase {
 	use MockMaker;
 
 	/**

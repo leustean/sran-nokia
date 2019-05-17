@@ -5,9 +5,9 @@ namespace App\Tests\Repository;
 
 
 use App\Repository\DeployOptionRepository;
-use App\Tests\AbstractTest;
+use App\Tests\AbstractUnitTest;
 
-class DeployOptionRepositoryTest extends AbstractTest {
+class DeployOptionRepositoryTest extends AbstractUnitTest {
 
 	public function test_findAll(): void {
 		$deployOptionRepository = new DeployOptionRepository();

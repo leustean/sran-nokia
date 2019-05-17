@@ -1,0 +1,26 @@
+<?php
+
+
+namespace App\Service\SBTS;
+
+
+use App\Entity\DeviceEntity;
+
+class FakeSync implements SyncInterface {
+
+	public function setDevice(DeviceEntity $deviceEntity): SyncInterface {
+		return $this;
+	}
+
+	public function getProcedures(): array {
+		return ['getBtsInformation', 'getSynchronizationInformation', 'getActiveAlarms'];
+	}
+
+	public function fetchData(): array {
+		return [
+			'getBtsInformation' => json_decode(file_get_contents(__DIR__ . '/1.output.json'), false),
+			'getSynchronizationInformation' => json_decode(file_get_contents(__DIR__ . '/3.output.json'), false),
+			'getActiveAlarms' => json_decode(file_get_contents(__DIR__ . '/2.output.json'), false)
+		];
+	}
+}

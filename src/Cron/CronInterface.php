@@ -6,14 +6,21 @@
  * Time: 21:34
  */
 
-namespace App\Cron\Prototype;
+namespace App\Cron;
 
 
 use Cron\CronExpression;
 use DateTimeImmutable;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 interface CronInterface {
+
+	/**
+	 * Sets the needed dependencies
+	 * @param ContainerInterface $container
+	 */
+	public function setUp(ContainerInterface $container) : void;
 
 	/**
 	 * The name of the cron, should only contain a-z characters and "-"

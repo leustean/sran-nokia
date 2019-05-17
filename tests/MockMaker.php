@@ -20,6 +20,7 @@ use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -157,6 +158,14 @@ trait MockMaker {
 	 */
 	public function getMockEntityManager(): MockObject {
 		return $this->getMockBuilder(EntityManagerInterface::class)->getMock();
+	}
+
+	/**
+	 * @return Container|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockContainer(): MockObject {
+		return $this->getMockBuilder(Container::class)->getMock();
 	}
 
 }
