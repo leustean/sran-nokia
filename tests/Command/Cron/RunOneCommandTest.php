@@ -7,9 +7,6 @@ use App\Command\Cron\RunOneCommand;
 use App\Tests\AbstractUnitTest;
 use Exception;
 use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Tests\Controller\AbstractControllerTest;
-
 
 class RunOneCommandTest extends AbstractUnitTest {
 
@@ -24,7 +21,7 @@ class RunOneCommandTest extends AbstractUnitTest {
 		$cronRepository
 			->method('find')
 			->willReturn(null);
-		$runOneCommand = new RunOneCommand($cronRepository, $this->getMockContainer());
+		$runOneCommand = new RunOneCommand($cronRepository, $this->getMockContainer(), $this->getMockLogger());
 
 		$runOneCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}
@@ -41,7 +38,7 @@ class RunOneCommandTest extends AbstractUnitTest {
 		$cronRepository
 			->method('find')
 			->willReturn($cronInterface);
-		$runOneCommand = new RunOneCommand($cronRepository, $this->getMockContainer());
+		$runOneCommand = new RunOneCommand($cronRepository, $this->getMockContainer(), $this->getMockLogger());
 
 		$runOneCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}

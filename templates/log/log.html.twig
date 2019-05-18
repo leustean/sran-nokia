@@ -1,0 +1,9 @@
+{% extends "admin/admin.html.twig" %}
+
+{% block title %}
+    App Log
+{% endblock %}
+
+{% block content %}
+    <pre class="log">{{ appLog | raw }}</pre>
+{% endblock %}

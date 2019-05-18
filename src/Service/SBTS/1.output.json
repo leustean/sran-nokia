@@ -4,6 +4,9 @@
    "requestStatus": "completed",
    "requestMessage": {
       "name": "MockName",
+      "id": {
+         "configuration": "MRMOCK"
+      },
       "swInfo": {
          "swVersion": "SBTS_MOCK_MOCK_MOCK_MOCK",
          "lteRatVersion": "LTE_MOCK_MOCK_MOCK_MOCK",
@@ -59,7 +62,7 @@
                }
             },
             {
-               "productName": "FRGY",
+               "productName": "FRMOCK",
                "productCode": "472MOCK",
                "serialNumber": "EA17MOCK",
                "status": {
@@ -71,9 +74,9 @@
                }
             },
             {
-               "productName": "FRGY",
-               "productCode": "472854A.101",
-               "serialNumber": "EA170731316",
+               "productName": "FRMOCK",
+               "productCode": "47MOCK",
+               "serialNumber": "EA17MOCK",
                "status": {
                   "administrativeState": "Unlocked",
                   "availabilityStatus": "Online",

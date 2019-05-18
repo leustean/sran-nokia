@@ -5,7 +5,6 @@ namespace App\Tests;
 
 use App\Entity\UserEntity;
 use App\Service\Login\LoginFactory;
-use App\Tests\MockMaker;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -121,7 +120,7 @@ abstract class AbstractIntegrationTest extends WebTestCase {
 	 * @param        $serviceInstance
 	 */
 	protected function setService(String $serviceName, $serviceInstance): void {
-		self::$container->set('test.' . $serviceName, $serviceInstance);
+		self::$container->set($serviceName, $serviceInstance);
 	}
 
 	/**

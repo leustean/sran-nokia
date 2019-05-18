@@ -11,6 +11,7 @@ namespace App\Command\Cron;
 use App\Repository\CronRepository;
 use DateTimeImmutable;
 use Exception;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -30,6 +31,11 @@ class RunOneCommand extends Command {
 	 */
 	protected $container;
 
+	/**
+	 * @var LoggerInterface
+	 */
+	protected $logger;
+
 	protected function configure() : void {
 		$this
 			->setName('app:cron:run:one')
@@ -39,13 +45,15 @@ class RunOneCommand extends Command {
 	}
 
 	/**
-	 * RunDueCommand constructor.
+	 * RunOneCommand constructor.
 	 * @param CronRepository     $cronRepository
 	 * @param ContainerInterface $container
+	 * @param LoggerInterface    $logger
 	 */
-	public function __construct(CronRepository $cronRepository, ContainerInterface $container) {
+	public function __construct(CronRepository $cronRepository, ContainerInterface $container, LoggerInterface $logger) {
 		$this->cronRepository = $cronRepository;
 		$this->container = $container;
+		$this->logger= $logger;
 
 		parent::__construct();
 	}
@@ -65,7 +73,7 @@ class RunOneCommand extends Command {
 		$timestamp = new DateTimeImmutable($timestamp ?: 'now');
 
 		$cron->setUp($this->container);
-		$cron->run($timestamp, $output);
+		$cron->run($timestamp, $this->logger);
 	}
 
 }

@@ -26,7 +26,7 @@ class DeviceEntityRepository extends ServiceEntityRepository {
 	public function findDevicesThatNeedRefresh(DateTimeInterface $dateTime): array {
 		return $this->createQueryBuilder('device_entity')
 			->andWhere('TIME(device_entity.refreshTime) = TIME(:refreshTime)')
-			->setParameter('refreshTime', $dateTime->format('h:i'))
+			->setParameter('refreshTime', $dateTime->format('H:i'))
 			->getQuery()
 			->getResult();
 	}

@@ -18,7 +18,7 @@ ENV HOME=/home/www-data/
 ENV COMPOSER_HOME=/home/www-data/.composer
 RUN mkdir -p /home/www-data/.composer && chown -R www-data:www-data /home/www-data/
 
-RUN crontab -l | { cat; echo "* * * * * /usr/local/bin/php /var/www/sran/bin/console app:cron:run:due >> /var/www/sran/var/log/cron.log 2>&1"; } | crontab -
+RUN crontab -l | { cat; echo "* * * * * /usr/local/bin/php /var/www/sran/bin/console app:cron:run:due >> /var/www/sran/var/log/crontab.log 2>&1"; } | crontab -
 
 WORKDIR /var/www/sran
 

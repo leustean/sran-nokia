@@ -40,7 +40,7 @@ class AdminControllerTest extends AbstractIntegrationTest {
 		$time = new DateTime();
 		$time->setTime(5, 30);
 		$settingsEntity->setGlobalRefreshTime($time);
-		$settingsEntityRepository->method('findOneBy')->willReturn($settingsEntity);
+		$settingsEntityRepository->method('findLatest')->willReturn($settingsEntity);
 		$this->setService(SettingsEntityRepository::class, $settingsEntityRepository);
 
 		$client->request('GET', '/admin/refreshTime');

@@ -36,6 +36,10 @@ services:
         bind:
             $commandRunDir: '%kernel.project_dir%'
 
+    App\Controller\LogController:
+        bind:
+            $appDir: '%kernel.project_dir%'
+
     App\Service\Login\LoginFactory:
         bind:
             $env: '%kernel.environment%'
@@ -43,3 +47,11 @@ services:
     App\Service\SBTS\SyncFactory:
         bind:
             $env: '%kernel.environment%'
+
+monolog:
+    handlers:
+        app:
+            type: rotating_file
+            path: /var/www/sran/var/log/app.log
+            level: notice
+            max_files: 1

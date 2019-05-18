@@ -13,7 +13,12 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+    public function __construct(string $environment, bool $debug) {
+    	date_default_timezone_set(getenv('TZ') ?: 'Europe/Bucharest');
+		parent::__construct($environment, $debug);
+	}
+
+	private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
     public function registerBundles(): iterable
     {

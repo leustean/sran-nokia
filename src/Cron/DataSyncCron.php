@@ -4,6 +4,7 @@
 namespace App\Cron;
 
 
+use App\Entity\DeviceEntity;
 use App\Entity\SettingsEntity;
 use App\Repository\DeviceEntityRepository;
 use App\Repository\SettingsEntityRepository;
@@ -12,7 +13,8 @@ use Cron\CronExpression;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
-use Symfony\Component\Console\Output\OutputInterface;
+use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DataSyncCron implements CronInterface {
@@ -67,19 +69,41 @@ class DataSyncCron implements CronInterface {
 	/**
 	 * The main method of the cron
 	 * @param DateTimeImmutable $now
-	 * @param OutputInterface   $output
+	 * @param LoggerInterface   $logger
 	 */
-	public function run(DateTimeImmutable $now, OutputInterface $output): void {
+	public function run(DateTimeImmutable $now, LoggerInterface $logger): void {
 		$devices = $this->deviceEntityRepository->findDevicesThatNeedRefresh($now) ?: [];
 
 		$globalRefreshTime = $this->settingsEntity ? $this->settingsEntity->getGlobalRefreshTime() : null;
-		if ($globalRefreshTime && $now->format('h:i') === $globalRefreshTime->format('h:i')) {
-			$devices = array_merge($devices, $this->deviceEntityRepository->findDevicesThatNeedRefresh($globalRefreshTime) ?: []);
+		if ($globalRefreshTime && $now->format('H:i') === $globalRefreshTime->format('H:i')) {
+			$devices = array_merge($devices, $this->deviceEntityRepository->findDevicesThatUseTheDefaultRefreshTime() ?: []);
 		}
 
+		$devicesUpdate = [];
+		$devicesNotUpdate = [];
+
 		foreach ($devices as $device) {
-			$this->deviceManager->refreshDeviceData($device);
-			$this->entityManager->persist($device);
+			/**
+			 * @var DeviceEntity $device
+			 */
+			try{
+				$this->deviceManager->refreshDeviceData($device);
+				$this->entityManager->persist($device);
+				$devicesUpdate[] = $device->getSbtsId();
+			}catch (Exception $e){
+				$devicesNotUpdate += $device->getSbtsId();
+			}
+		}
+
+		$this->entityManager->flush();
+
+		$devicesUpdateCount = count($devicesUpdate);
+		$devicesNotUpdateCount = count($devicesNotUpdate);
+		if($devicesUpdateCount !== 0){
+			$logger->notice("Updated {$devicesUpdateCount} devices:" . implode(',', $devicesUpdate));
+		}
+		if($devicesNotUpdateCount !== 0){
+			$logger->notice("Failed to update {$devicesNotUpdateCount} devices:" . implode(', ', $devicesNotUpdate));
 		}
 	}
 }

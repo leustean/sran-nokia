@@ -5,7 +5,7 @@ namespace App\Tests;
 
 
 use App\Controller\AdminControllerInterface;
-use App\Cron\Prototype\CronInterface;
+use App\Cron\CronInterface;
 use App\Repository\CronRepository;
 use App\Repository\DeviceEntityRepository;
 use App\Repository\SettingsEntityRepository;
@@ -16,6 +16,7 @@ use Cron\CronExpression;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\LoggerInterface;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\InputInterface;
@@ -166,6 +167,14 @@ trait MockMaker {
 	 */
 	public function getMockContainer(): MockObject {
 		return $this->getMockBuilder(Container::class)->getMock();
+	}
+
+	/**
+	 * @return LoggerInterface|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockLogger(): MockObject {
+		return $this->getMockBuilder(LoggerInterface::class)->getMock();
 	}
 
 }

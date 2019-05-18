@@ -181,17 +181,17 @@ class DeviceEntity {
 	private $refreshTime;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\HardwareModuleEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="App\Entity\HardwareModuleEntity", mappedBy="deviceEntity", orphanRemoval=true, cascade={"persist", "remove"})
 	 */
 	private $hardwareModules;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\SyncSourceEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="App\Entity\SyncSourceEntity", mappedBy="deviceEntity", orphanRemoval=true, cascade={"persist", "remove"})
 	 */
 	private $syncSources;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\AlarmEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="App\Entity\AlarmEntity", mappedBy="deviceEntity", orphanRemoval=true, cascade={"persist", "remove"})
 	 */
 	private $activeAlarms;
 

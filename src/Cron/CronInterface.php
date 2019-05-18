@@ -11,7 +11,7 @@ namespace App\Cron;
 
 use Cron\CronExpression;
 use DateTimeImmutable;
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 interface CronInterface {
@@ -37,8 +37,8 @@ interface CronInterface {
 	/**
 	 * The main method of the cron
 	 * @param DateTimeImmutable $now
-	 * @param OutputInterface    $output
+	 * @param LoggerInterface   $logger
 	 */
-	public function run(DateTimeImmutable $now, OutputInterface $output) : void;
+	public function run(DateTimeImmutable $now, LoggerInterface $logger) : void;
 
 }

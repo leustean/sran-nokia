@@ -43,7 +43,7 @@ class RunDueCommandTest extends AbstractUnitTest {
 			->method('findAll')
 			->willReturn([$dueCron, $notDueCron]);
 
-		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer());
+		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer(), $this->getMockLogger());
 
 		$runDueCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}
@@ -69,10 +69,10 @@ class RunDueCommandTest extends AbstractUnitTest {
 			->expects($this->once())
 			->method('run');
 
-		$outputInterface = $this->getMockOutputInterface();
-		$outputInterface
+		$logger = $this->getMockLogger();
+		$logger
 			->expects($this->exactly(2))
-			->method('writeln')
+			->method('notice')
 			->withConsecutive(
 				[$this->stringEndsWith("Cron[{$cronId}] started.")],
 				[$this->stringEndsWith("Cron[{$cronId}] finished.")]
@@ -82,9 +82,9 @@ class RunDueCommandTest extends AbstractUnitTest {
 		$cronRepository
 			->method('findAll')
 			->willReturn([$dueCron]);
-		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer());
+		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer(), $logger);
 
-		$runDueCommand->run($this->getMockInputInterface(), $outputInterface);
+		$runDueCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}
 
 	/**
@@ -105,26 +105,28 @@ class RunDueCommandTest extends AbstractUnitTest {
 		$dueCron
 			->method('getId')
 			->willReturn($cronId);
+		$cronException = new Exception($cronExceptionMessage);
 		$dueCron
 			->method('run')
-			->willThrowException(new Exception($cronExceptionMessage));
+			->willThrowException($cronException);
 
-		$outputInterface = $this->getMockOutputInterface();
-		$outputInterface
-			->expects($this->exactly(2))
-			->method('writeln')
-			->withConsecutive(
-				[$this->stringEndsWith("Cron[{$cronId}] started.")],
-				[$this->stringEndsWith("Cron[{$cronId}] failed with message: {$cronExceptionMessage}.")]
-			);
+		$logger = $this->getMockLogger();
+		$logger
+			->expects($this->once())
+			->method('notice')
+			->with($this->stringEndsWith("Cron[{$cronId}] started."));
+		$logger
+			->expects($this->once())
+			->method('error')
+			->with($this->stringStartsWith("Cron[{$cronId}] failed"));
 
 		$cronRepository = $this->getMockCronRepository();
 		$cronRepository
 			->method('findAll')
 			->willReturn([$dueCron]);
-		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer());
+		$runDueCommand = new RunDueCommand($cronRepository, $this->getMockContainer(), $logger);
 
-		$runDueCommand->run($this->getMockInputInterface(), $outputInterface);
+		$runDueCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}
 
 }

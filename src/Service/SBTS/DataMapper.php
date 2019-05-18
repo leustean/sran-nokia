@@ -38,7 +38,7 @@ class DataMapper {
 			$this->$mappingFunction($deviceEntity, $fetchedData[$procedure]);
 		}
 		$deviceEntity->setSbtsStatus(true);
-		$deviceEntity->setRefreshTime(new DateTime());
+		$deviceEntity->setLastInformationRefresh(new DateTime());
 
 		return $deviceEntity;
 	}
@@ -49,6 +49,7 @@ class DataMapper {
 	 */
 	protected function mapGeneralDataToDevice(DeviceEntity $deviceEntity, $data): void {
 		$data = $data->requestMessage;
+		$deviceEntity->setSbtsHwConfiguration($data->id->configuration ?? null);
 		$deviceEntity->setSbtsSwRelease($data->swInfo->swVersion ?? null);
 		$deviceEntity->setLteState($data->ratState->lte ?? null);
 		$deviceEntity->setWcdmaState($data->ratState->wcdma ?? null);
