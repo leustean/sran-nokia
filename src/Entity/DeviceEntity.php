@@ -426,7 +426,7 @@ class DeviceEntity {
 		return $this->refreshTime;
 	}
 
-	public function setRefreshTime(DateTimeInterface $refreshTime): self {
+	public function setRefreshTime(?DateTimeInterface $refreshTime): self {
 		$this->refreshTime = $refreshTime;
 
 		return $this;

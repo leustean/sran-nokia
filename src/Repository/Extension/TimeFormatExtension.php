@@ -8,12 +8,20 @@ use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Query\SqlWalker;
 
-class TimeExtension extends FunctionNode {
+class TimeFormatExtension extends FunctionNode {
 
-	public $time;
+	/**
+	 * @var string
+	 */
+	protected $time;
+
+	/**
+	 * @var string
+	 */
+	protected $format;
 
 	public function getSql(SqlWalker $sqlWalker): string {
-		return 'TIME(' . $sqlWalker->walkArithmeticPrimary($this->time) . ')';
+		return 'TIME_FORMAT(' . $sqlWalker->walkArithmeticPrimary($this->time) . ',' . $sqlWalker->walkArithmeticPrimary($this->format) . ')';
 	}
 
 	/**
@@ -24,6 +32,8 @@ class TimeExtension extends FunctionNode {
 		$parser->match(Lexer::T_IDENTIFIER);
 		$parser->match(Lexer::T_OPEN_PARENTHESIS);
 		$this->time = $parser->ArithmeticPrimary();
+		$parser->Match(Lexer::T_COMMA);
+		$this->format = $parser->ArithmeticPrimary();
 		$parser->match(Lexer::T_CLOSE_PARENTHESIS);
 	}
 }

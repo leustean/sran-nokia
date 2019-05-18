@@ -38,7 +38,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		$secondDevice = new DeviceEntity();
 		$secondDevice->setSbtsId(5);
 
-		$deviceEntityRepository->method('findBy')->willReturn([
+		$deviceEntityRepository->method('findAllOrderedBySbtsId')->willReturn([
 			$firstDevice, $secondDevice
 		]);
 
@@ -78,7 +78,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		$device->setSbtsId(1);
 		$device->setSbtsOwner('other@test.com');
 
-		$deviceEntityRepository->method('findOneBy')->willReturn($device);
+		$deviceEntityRepository->method('getBySbtsId')->willReturn($device);
 
 		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 
@@ -116,7 +116,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		$device->setSbtsId(1);
 		$device->setSbtsOwner('test@test.com');
 
-		$deviceEntityRepository->method('findOneBy')->willReturn($device);
+		$deviceEntityRepository->method('getBySbtsId')->willReturn($device);
 
 		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 
@@ -153,7 +153,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		$device->setSbtsId(1);
 		$device->setSbtsOwner('other@test.com');
 
-		$deviceEntityRepository->method('findOneBy')->willReturn($device);
+		$deviceEntityRepository->method('getBySbtsId')->willReturn($device);
 
 		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 

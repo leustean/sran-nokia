@@ -91,7 +91,7 @@ class DataSyncCron implements CronInterface {
 				$this->entityManager->persist($device);
 				$devicesUpdate[] = $device->getSbtsId();
 			}catch (Exception $e){
-				$devicesNotUpdate += $device->getSbtsId();
+				$devicesNotUpdate[] = $device->getSbtsId();
 			}
 		}
 

@@ -29,4 +29,4 @@ doctrine:
                 alias: App
         dql:
             string_functions:
-                TIME: App\Repository\Extension\TimeExtension
+                TIME_FORMAT: App\Repository\Extension\TimeFormatExtension

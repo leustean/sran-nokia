@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\DeviceEntity;
 use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -20,12 +21,36 @@ class DeviceEntityRepository extends ServiceEntityRepository {
 	}
 
 	/**
+	 * @param int $sbtsId
+	 * @return DeviceEntity
+	 * @throws NonUniqueResultException
+	 */
+	public function getBySbtsId(int $sbtsId): ?DeviceEntity {
+		return $this->createQueryBuilder('device_entity')
+			->andWhere('device_entity.sbtsId = :sbtsId')
+			->setParameter('sbtsId', $sbtsId)
+			->setMaxResults(1)
+			->getQuery()
+			->getOneOrNullResult();
+	}
+
+	/**
+	 * @return DeviceEntity[]
+	 */
+	public function findAllOrderedBySbtsId(): array {
+		return $this->createQueryBuilder('device_entity')
+			->orderBy('device_entity.sbtsId', 'ASC')
+			->getQuery()
+			->getResult();
+	}
+
+	/**
 	 * @param DateTimeInterface $dateTime
 	 * @return DeviceEntity[]
 	 */
 	public function findDevicesThatNeedRefresh(DateTimeInterface $dateTime): array {
 		return $this->createQueryBuilder('device_entity')
-			->andWhere('TIME(device_entity.refreshTime) = TIME(:refreshTime)')
+			->andWhere("TIME_FORMAT(device_entity.refreshTime ,'%H:%i') = :refreshTime")
 			->setParameter('refreshTime', $dateTime->format('H:i'))
 			->getQuery()
 			->getResult();

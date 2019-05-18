@@ -12,6 +12,10 @@ use App\Repository\SettingsEntityRepository;
 use App\Repository\UserEntityRepository;
 use App\Service\Login\LoginFactory;
 use App\Service\Login\LoginInterface;
+use App\Service\SBTS\DataMapper;
+use App\Service\SBTS\DeviceManager;
+use App\Service\SBTS\SyncFactory;
+use App\Service\SBTS\SyncInterface;
 use Cron\CronExpression;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockBuilder;
@@ -175,6 +179,38 @@ trait MockMaker {
 	 */
 	public function getMockLogger(): MockObject {
 		return $this->getMockBuilder(LoggerInterface::class)->getMock();
+	}
+
+	/**
+	 * @return SyncInterface|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockSync(): MockObject {
+		return $this->getMockBuilder(SyncInterface::class)->getMock();
+	}
+
+	/**
+	 * @return DataMapper|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockDataMapper(): MockObject {
+		return $this->getMockBuilder(DataMapper::class)->getMock();
+	}
+
+	/**
+	 * @return SyncFactory|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockSyncFactory(): MockObject {
+		return $this->getMockBuilder(SyncFactory::class)->disableOriginalConstructor()->getMock();
+	}
+
+	/**
+	 * @return DeviceManager|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockDeviceManager(): MockObject {
+		return $this->getMockBuilder(DeviceManager::class)->disableOriginalConstructor()->getMock();
 	}
 
 }

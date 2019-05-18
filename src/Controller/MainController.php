@@ -8,6 +8,7 @@ use App\Repository\DeviceEntityRepository;
 use App\Service\Login\LoginFactory;
 use App\Service\Login\LoginInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,7 +51,7 @@ class MainController extends AbstractController {
 		return $this->render(
 			'home/sbts.html.twig',
 			[
-				'devices' => $deviceEntityRepository->findBy([], ['sbtsId' => 'ASC'])
+				'devices' => $deviceEntityRepository->findAllOrderedBySbtsId()
 			]
 		);
 	}
@@ -63,9 +64,10 @@ class MainController extends AbstractController {
 	 * @param EntityManagerInterface $entityManager
 	 * @param SessionInterface       $session
 	 * @return Response
+	 * @throws NonUniqueResultException
 	 */
 	public function showSbtsAction($sbtsId, DeviceEntityRepository $deviceEntityRepository, Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response {
-		$deviceEntity = $deviceEntityRepository->findOneBy(['sbtsId' => $sbtsId]);
+		$deviceEntity = $deviceEntityRepository->getBySbtsId($sbtsId);
 
 		if ($deviceEntity === null) {
 			$this->addFlash('notice', "SBTS with id [{$sbtsId}] does not exist");
