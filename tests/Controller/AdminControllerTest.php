@@ -18,7 +18,7 @@ class AdminControllerTest extends AbstractIntegrationTest {
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_adminPages(): void {
+	public function test_indexAction(): void {
 		$this->setMockLoginFactory();
 		$client = $this->getClient();
 

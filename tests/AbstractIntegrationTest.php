@@ -128,7 +128,7 @@ abstract class AbstractIntegrationTest extends WebTestCase {
 	 * @return object
 	 */
 	protected function getService(String $serviceName) {
-		return self::$container->get('test.' . $serviceName);
+		return self::$container->get($serviceName);
 	}
 
 	/**

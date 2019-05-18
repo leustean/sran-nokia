@@ -13,6 +13,7 @@ services:
             - 'mariadb'
         environment:
             TZ: "Europe/Bucharest"
+            DATABASE_URL: 'mysql://root@sran-mysql-server-test:3306/sran_test'
         image: sran/dev:v4
 
     mariadb:
@@ -22,8 +23,6 @@ services:
             TZ: "Europe/Bucharest"
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
             MYSQL_ROOT_PASSWORD: ''
-            MYSQL_DATABASE: 'sran_test'
-            DATABASE_UR: 'mysql://root@sran-mysql-server-test:3306/sran_test'
         ports:
             - 3306:3306
 

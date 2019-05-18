@@ -71,7 +71,7 @@ Deploy options include:
 
 To run the test execute the following command in the project root(while running the testing configuration( ``` docker-compose-tests.yml ``` )).
 
-```php ./vendor/phpunit/phpunit/phpunit```
+```php ./vendor/phpunit/phpunit/phpunit -c ./phpunit.xml.dist```
 
 
 ### Coding style
@@ -99,10 +99,6 @@ function(){
 ### Running a cron job when scheduled
 
 To schedule cron jobs they must be added to ```src/Repository/CronRepository.php``` in the ```setUpCronJobs``` method.
-
-Notes: 
-* cron jobs can be scheduled only on the prod image
-* cron log can be found at ```var/log/cron.log```
 
 ### Running a cron job manually
 
