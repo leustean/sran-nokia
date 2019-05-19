@@ -85,7 +85,7 @@ class DataMapper {
 			$syncSourceEntity->setSyncInputPrio($syncSource->syncInputPrio ?? null);
 			$syncSourceEntity->setIsActive($syncSource->isActive ?? null);
 			$syncSourceEntity->setAvailability($syncSource->status->availability ?? null);
-			$syncSourceEntity->setAvailability($syncSource->status->usability ?? null);
+			$syncSourceEntity->setUsability($syncSource->status->usability ?? null);
 			$deviceEntity->addSyncSource($syncSourceEntity);
 		}
 	}

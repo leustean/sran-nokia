@@ -29,14 +29,14 @@
 
 
 {%- block form_widget_simple -%}
-    <div class="mdc-text-box">
-        <input  class="mdc-text-box__input"
-                type="{{ type|default('text') }}"
+    <div class="mdc-text-field">
+        <input type="text"
+               class="mdc-text-field__input"
                 {{ block('widget_attributes') }}
-                {% if value is not empty %}value="{{ value }}" {% endif %}>
-        <span class="mdc-text-box__decoration"></span>
-        <span class="mdc-text-box__bar"></span>
-        <label class="mdc-text-box__label">{{- form_label(form) -}}</label>
+                {% if value is not empty %}value="{{ value }}" {% endif %}
+        >
+        <label class="mdc-floating-label" for="my-text-field">{{- form_label(form) -}}</label>
+        <div class="mdc-line-ripple"></div>
     </div>
 {%- endblock form_widget_simple -%}
 

@@ -38,7 +38,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		$secondDevice = new DeviceEntity();
 		$secondDevice->setSbtsId(5);
 
-		$deviceEntityRepository->method('findAllOrderedBySbtsId')->willReturn([
+		$deviceEntityRepository->method('findSearchResult')->willReturn([
 			$firstDevice, $secondDevice
 		]);
 

@@ -65,4 +65,34 @@ class DeviceEntityRepository extends ServiceEntityRepository {
 			->getQuery()
 			->getResult();
 	}
+
+	/**
+	 * @param array $filters
+	 * @return DeviceEntity[]
+	 */
+	public function findSearchResult(array $filters): array {
+		$query = $this->createQueryBuilder('device_entity');
+		if (isset($filters['device'])) {
+			foreach ($filters['device']['fields'] as $filterName => $filterValue) {
+				$query->andWhere('device_entity.' . $filterName . ' = :' . $filterName);
+				$query->setParameter($filterName, $filterValue);
+			}
+			unset($filters['device']);
+		}
+		foreach ($filters as $tableAlias => $table) {
+			$query->join($table['table'], $tableAlias, 'WITH', $tableAlias . '.deviceEntity = device_entity.id');
+			if (isset($table['condition'])) {
+				$query->andWhere($tableAlias . '.' . $table['condition']);
+			}
+
+			foreach ($filters[$tableAlias]['fields'] as $filterName => $filterValue) {
+				$query->andWhere($tableAlias . '.' . $filterName . ' = :' . $tableAlias . '_' . $filterName);
+				$query->setParameter($tableAlias . '_' . $filterName, $filterValue);
+			}
+		}
+
+		$query->orderBy('device_entity.sbtsId');
+
+		return $query->getQuery()->getResult();
+	}
 }

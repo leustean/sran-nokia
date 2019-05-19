@@ -1,16 +1,20 @@
 @import "../include/vars";
 
-.login{
+.login {
   display: flex;
   flex-direction: column;
   margin: $margin;
 
-  &__form{
+  &__form {
     margin-top: $margin;
     display: block;
+
+    .mdc-text-field {
+      width: 100%;
+    }
   }
 
-  &__header{
+  &__header {
     text-align: center;
     margin: 0;
   }

@@ -1,5 +1,9 @@
 @import "vars";
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
   font-family: 'Roboto-Regular', sans-serif;
@@ -69,14 +73,15 @@ html {
           height: 0;
           overflow: hidden;
 
-          &__link{
+          &__link {
             padding: $padding 20px;
             font-size: 20px;
-            &:first-child{
+
+            &:first-child {
               margin-top: 15px;
             }
 
-            &:hover{
+            &:hover {
               color: white;
               background-color: $secondary-color;
             }
@@ -154,7 +159,7 @@ html {
           padding: $padding;
         }
 
-        &--device-detail{
+        &--device-detail {
           margin-top: 0;
         }
       }
