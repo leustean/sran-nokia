@@ -9,6 +9,8 @@ use App\Entity\DeviceEntity;
 use App\Entity\HardwareModuleEntity;
 use App\Entity\SyncSourceEntity;
 use DateTime;
+use DateTimeImmutable;
+use Exception;
 
 class DataMapper {
 
@@ -94,12 +96,16 @@ class DataMapper {
 	 * @param DeviceEntity $deviceEntity
 	 * @param              $data
 	 * @return void
+	 * @throws Exception
 	 */
 	protected function mapAlarmDataToDevice(DeviceEntity $deviceEntity, $data): void {
 		$deviceEntity->clearActiveAlarms();
 		foreach ($data->requestMessage ?? [] as $alarm) {
 			$alarmEntity = new AlarmEntity();
 			$alarmEntity->setSeverity($alarm->severity ?? null);
+			if(property_exists($alarm, 'observationTime')){
+				$alarmEntity->setObservationTime(new DateTime($alarm->observationTime));
+			}
 			$alarmEntity->setAlarmId($alarm->alarmId ?? null);
 			$alarmEntity->setFaultId($alarm->faultId ?? null);
 			$alarmEntity->setAlarmName($alarm->alarmName ?? null);

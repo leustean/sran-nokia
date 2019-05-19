@@ -10,6 +10,8 @@ use App\Repository\DeviceEntityRepository;
 use App\Service\Login\LoginFactory;
 use App\Tests\AbstractIntegrationTest;
 use DateTime;
+use DateTimeImmutable;
+use Exception;
 use ReflectionException;
 
 class MainControllerTest extends AbstractIntegrationTest {
@@ -26,31 +28,51 @@ class MainControllerTest extends AbstractIntegrationTest {
 	}
 
 	/**
-	 * @throws ReflectionException
+	 * @throws Exception
 	 */
 	public function test_sbtsAction(): void {
 		$client = $this->getClient();
-		$deviceEntityRepository = $this->getMockDeviceEntityRepository();
 
 		$firstDevice = new DeviceEntity();
-		$firstDevice->setSbtsId(1);
+		$firstDevice
+			->setSbtsId(1)
+			->setSbtsOwner('pre@test.com')
+			->setRefreshTime(new DateTimeImmutable())
+			->setIp('192.168.1.2')
+			->setPort('3001')
+			->setUser('pre')
+			->setPassword('pre.test.pass');
 
 		$secondDevice = new DeviceEntity();
-		$secondDevice->setSbtsId(5);
+		$secondDevice
+			->setSbtsId(5)
+			->setSbtsState(true)
+			->setSbtsOwner('pre@test.com')
+			->setRefreshTime(new DateTimeImmutable())
+			->setIp('192.168.1.2')
+			->setPort('3001')
+			->setUser('pre')
+			->setPassword('pre.test.pass');
 
-		$deviceEntityRepository->method('findSearchResult')->willReturn([
-			$firstDevice, $secondDevice
-		]);
+		$entityManager = $this->getEntityManager();
+		$entityManager->persist($firstDevice);
+		$entityManager->persist($secondDevice);
+		$entityManager->flush();
 
-		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
-
-		$client->request('GET', '/sbts');
+		$client->request('POST', '/sbts',
+			[
+				'device' => [
+					'sbtsState' => 1
+				]
+			]
+		);
 		$response = $client->getResponse();
 		$crawler = $client->getCrawler();
 
 		self::assertEquals(200, $response->getStatusCode());
-		self::assertCount(1, $crawler->filter('a[href="/sbts/1"]'));
+		self::assertCount(0, $crawler->filter('a[href="/sbts/1"]'));
 		self::assertCount(1, $crawler->filter('a[href="/sbts/5"]'));
+		self::assertCount(1, $crawler->filter('select[name="device[sbtsState]"] > option[value="1"][selected]'));
 	}
 
 	/**

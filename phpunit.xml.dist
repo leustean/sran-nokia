@@ -22,6 +22,10 @@
     <filter>
         <whitelist>
             <directory suffix="php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/Entity/</directory>
+                <directory suffix=".php">src/Migrations/</directory>
+            </exclude>
         </whitelist>
     </filter>
 
