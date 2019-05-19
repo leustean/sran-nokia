@@ -5,6 +5,7 @@ namespace App\Tests\Controller;
 
 
 use App\Entity\DeviceEntity;
+use App\Entity\HardwareModuleEntity;
 use App\Entity\UserEntity;
 use App\Repository\DeviceEntityRepository;
 use App\Service\Login\LoginFactory;
@@ -54,6 +55,12 @@ class MainControllerTest extends AbstractIntegrationTest {
 			->setUser('pre')
 			->setPassword('pre.test.pass');
 
+		$module = new HardwareModuleEntity();
+		$module->setType(1);
+		$module->setProductName('test');
+
+		$secondDevice->addHardwareModule($module);
+
 		$entityManager = $this->getEntityManager();
 		$entityManager->persist($firstDevice);
 		$entityManager->persist($secondDevice);
@@ -63,6 +70,9 @@ class MainControllerTest extends AbstractIntegrationTest {
 			[
 				'device' => [
 					'sbtsState' => 1
+				],
+				'smod' => [
+					'productName' => 'test'
 				]
 			]
 		);
@@ -73,6 +83,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		self::assertCount(0, $crawler->filter('a[href="/sbts/1"]'));
 		self::assertCount(1, $crawler->filter('a[href="/sbts/5"]'));
 		self::assertCount(1, $crawler->filter('select[name="device[sbtsState]"] > option[value="1"][selected]'));
+		self::assertCount(1, $crawler->filter('select[name="smod[productName]"] > option[value="test"][selected]'));
 	}
 
 	/**

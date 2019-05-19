@@ -184,8 +184,6 @@ class SearchFieldsRepository {
 		]
 	];
 
-	protected static $fetched = false;
-
 	/**
 	 * @var Connection
 	 */
@@ -221,15 +219,11 @@ class SearchFieldsRepository {
 	 * @throws DBALException
 	 */
 	public function getTables(): array {
-		if (self::$fetched) {
-			return self::$tables;
-		}
 		foreach (self::$tables as $tableName => $table) {
 			foreach (array_keys($table['tableColumns']) as $fieldName) {
 				self::$tables[$tableName]['tableColumns'][$fieldName]['data'] = $this->findAllDistinctValues($table['realTableName'], $fieldName, $table['tableCondition']);
 			}
 		}
-		self::$fetched = true;
 		return self::$tables;
 	}
 

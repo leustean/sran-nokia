@@ -35,16 +35,6 @@ class DeviceEntityRepository extends ServiceEntityRepository {
 	}
 
 	/**
-	 * @return DeviceEntity[]
-	 */
-	public function findAllOrderedBySbtsId(): array {
-		return $this->createQueryBuilder('device_entity')
-			->orderBy('device_entity.sbtsId', 'ASC')
-			->getQuery()
-			->getResult();
-	}
-
-	/**
 	 * @param DateTimeInterface $dateTime
 	 * @return DeviceEntity[]
 	 */
