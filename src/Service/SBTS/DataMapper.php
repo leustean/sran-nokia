@@ -96,15 +96,18 @@ class DataMapper {
 	 * @param DeviceEntity $deviceEntity
 	 * @param              $data
 	 * @return void
-	 * @throws Exception
 	 */
 	protected function mapAlarmDataToDevice(DeviceEntity $deviceEntity, $data): void {
 		$deviceEntity->clearActiveAlarms();
 		foreach ($data->requestMessage ?? [] as $alarm) {
 			$alarmEntity = new AlarmEntity();
 			$alarmEntity->setSeverity($alarm->severity ?? null);
-			if(property_exists($alarm, 'observationTime')){
-				$alarmEntity->setObservationTime(new DateTime($alarm->observationTime));
+			if (property_exists($alarm, 'observationTime')) {
+				try {
+					$alarmEntity->setObservationTime(DateTime::createFromFormat('YmdHis.vO',$alarm->observationTime));
+				} catch (Exception $e) {
+					$alarmEntity->setObservationTime(null);
+				}
 			}
 			$alarmEntity->setAlarmId($alarm->alarmId ?? null);
 			$alarmEntity->setFaultId($alarm->faultId ?? null);
