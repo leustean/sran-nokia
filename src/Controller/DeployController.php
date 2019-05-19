@@ -34,7 +34,7 @@ class DeployController extends AbstractController implements AdminControllerInte
 	}
 
 	/**
-	 * @Route("/", name="deploy_options_list", methods={"GET","POST"})
+	 * @Route("", name="deploy_options_list", methods={"GET","POST"})
 	 * @param DeployOptionRepository $deployOptionRepository
 	 * @return Response
 	 */
@@ -60,7 +60,11 @@ class DeployController extends AbstractController implements AdminControllerInte
 
 		$status = 1;
 		$output = [];
-		foreach ($request->request->keys() as $option) {
+		foreach ($request->get('deploy', []) as $option => $value) {
+			if(!$value){
+				continue;
+			}
+
 			$deployOption = $deployOptionRepository->find($option);
 			if ($deployOption !== null) {
 				exec(
@@ -74,10 +78,10 @@ class DeployController extends AbstractController implements AdminControllerInte
 		}
 		$this->restoreWorkingDirectory();
 		$session->set(self::DEPLOY_RESULT, $deployResult);
+
 		if (function_exists('opcache_reset')) {
 			opcache_reset();
 		}
-
 
 		return $this->redirectToRoute('deploy_option_result');
 	}

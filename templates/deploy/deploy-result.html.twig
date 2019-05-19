@@ -15,7 +15,7 @@
                 </div>
                 <code class="deploy-result__option__output"><span>{{ deployOptionResult.getOutput() }}</span></code>
             </div>
-            <input type="hidden" name="{{ deployOptionResult.getDeployOption().getId() }}" value="1"/>
+            <input type="hidden" name="deploy[{{ deployOptionResult.getDeployOption().getId() }}]" value="1"/>
         {% endfor %}
         <input class="deploy-result__submit mdc-button" type="submit" value="Redeploy">
     </form>
