@@ -74,6 +74,7 @@ class DeployController extends AbstractController implements AdminControllerInte
 		}
 		$this->restoreWorkingDirectory();
 		$session->set(self::DEPLOY_RESULT, $deployResult);
+		opcache_reset();
 
 		return $this->redirectToRoute('deploy_option_result');
 	}

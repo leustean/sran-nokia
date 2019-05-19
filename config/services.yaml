@@ -48,6 +48,10 @@ services:
         bind:
             $env: '%kernel.environment%'
 
+    App\Repository\DeployOptionRepository:
+        bind:
+            $env: '%kernel.environment%'
+
 monolog:
     handlers:
         app:
