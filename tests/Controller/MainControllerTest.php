@@ -256,7 +256,7 @@ class MainControllerTest extends AbstractIntegrationTest {
 		self::assertCount(1, $crawler->filter('input[name="device[ip]"][value="192.168.1.1"]'));
 		self::assertCount(1, $crawler->filter('input[name="device[port]"][value="3000"]'));
 		self::assertCount(1, $crawler->filter('input[name="device[user]"][value="test"]'));
-		self::assertCount(0, $crawler->filter('input[name="device[password]"][value]'));
+		self::assertCount(1, $crawler->filter('input[name="device[password]"][value="test.pass"]'));
 
 		$devices = $deviceEntityRepository->findAll();
 		self::assertCount(1, $devices);

@@ -105,7 +105,7 @@ class LdapLogin implements LoginInterface {
 	 * @return UserEntity
 	 */
 	private function findUserEntity(LoginEntity $loginEntity): ?UserEntity {
-		return $this->userEntityRepository->findOneBy(['email' => $loginEntity->getEmail()]);
+		return $this->userEntityRepository->findOneByEmail($loginEntity->getEmail());
 	}
 
 	/**
@@ -117,6 +117,10 @@ class LdapLogin implements LoginInterface {
 		$userEntity
 			->setEmail($loginEntity->getEmail())
 			->setIsAdmin(false);
+		if (!$this->userEntityRepository->adminUserExists()) {
+			$userEntity->setIsAdmin(true);
+		}
+
 		$this->entityManager->persist($userEntity);
 		$this->entityManager->flush();
 		return $userEntity;

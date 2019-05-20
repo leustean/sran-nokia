@@ -129,7 +129,7 @@ html {
         color: white;
         text-align: center;
 
-        &:hover {
+        &--active, &:hover {
           background-color: $secondary-color;
         }
 

@@ -9,7 +9,6 @@ use App\Entity\DeviceEntity;
 use App\Entity\HardwareModuleEntity;
 use App\Entity\SyncSourceEntity;
 use DateTime;
-use DateTimeImmutable;
 use Exception;
 
 class DataMapper {
@@ -72,7 +71,8 @@ class DataMapper {
 			$hardwareModule = $this->mapHardwareModule($module, DeviceEntity::RFMOD);
 			$deviceEntity->addHardwareModule($hardwareModule);
 		}
-		$deviceEntity->setSbtsState($data->status->operationalState ? false : $data->status->operationalState === 'Enabled');
+		$state = $data->status->operationalState ?? null;
+		$deviceEntity->setSbtsState($state === null ? null : $state === 'Enabled');
 	}
 
 	/**

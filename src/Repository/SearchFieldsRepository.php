@@ -20,6 +20,10 @@ class SearchFieldsRepository {
 			'realTableName' => 'device_entity',
 			'tableCondition' => null,
 			'tableColumns' => [
+				'sbts_hw_configuration' => [
+					'displayName' => 'Hardware configuration',
+					'columnName' => 'sbtsHwConfiguration'
+				],
 				'sbts_sw_release' => [
 					'displayName' => 'SW release',
 					'columnName' => 'sbtsSwRelease'
@@ -39,6 +43,10 @@ class SearchFieldsRepository {
 				'gsm_state' => [
 					'displayName' => 'GSM state',
 					'columnName' => 'gsmState'
+				],
+				'sbts_owner' => [
+					'displayName' => 'Owner',
+					'columnName' => 'sbtsOwner'
 				]
 			]
 		],
