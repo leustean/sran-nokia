@@ -21,31 +21,28 @@ class UserEntityRepository extends ServiceEntityRepository {
 	/**
 	 * @param string $email
 	 * @return UserEntity|null
+	 * @throws NonUniqueResultException
 	 */
 	public function findOneByEmail(string $email): ?UserEntity {
-		try {
-			return $this->createQueryBuilder('user_entity')
-				->andWhere('user_entity.email = :email')
-				->setParameter('email', $email)
-				->setMaxResults(1)
-				->getQuery()
-				->getOneOrNullResult();
-		} catch (NonUniqueResultException $e) {
-			return null;
-		}
+		return $this->createQueryBuilder('user_entity')
+			->andWhere('user_entity.email = :email')
+			->setParameter('email', $email)
+			->setMaxResults(1)
+			->getQuery()
+			->getOneOrNullResult();
 	}
 
+	/**
+	 * @return bool
+	 * @throws NonUniqueResultException
+	 */
 	public function adminUserExists(): bool {
-		try {
-			$result = $this->createQueryBuilder('user_entity')
-				->andWhere('user_entity.isAdmin = 1')
-				->setMaxResults(1)
-				->getQuery()
-				->getOneOrNullResult();
+		$result = $this->createQueryBuilder('user_entity')
+			->andWhere('user_entity.isAdmin = 1')
+			->setMaxResults(1)
+			->getQuery()
+			->getOneOrNullResult();
 
-			return $result !== null;
-		} catch (NonUniqueResultException $e) {
-			return true;
-		}
+		return $result !== null;
 	}
 }

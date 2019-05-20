@@ -8,6 +8,7 @@ use App\Entity\LoginEntity;
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use ErrorException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -45,6 +46,7 @@ class LdapLogin implements LoginInterface {
 	/**
 	 * @param LoginEntity $loginEntity
 	 * @throws LoginException
+	 * @throws NonUniqueResultException
 	 */
 	public function authenticate(LoginEntity $loginEntity): void {
 		$ldapConnection = $this->connectToDomain($loginEntity);
@@ -83,6 +85,7 @@ class LdapLogin implements LoginInterface {
 
 	/**
 	 * @param LoginEntity $loginEntity
+	 * @throws NonUniqueResultException
 	 */
 	protected function setAuthenticatedUser(LoginEntity $loginEntity): void {
 		$userEntity = $this->findUserEntity($loginEntity);
@@ -103,6 +106,7 @@ class LdapLogin implements LoginInterface {
 	/**
 	 * @param LoginEntity $loginEntity
 	 * @return UserEntity
+	 * @throws NonUniqueResultException
 	 */
 	private function findUserEntity(LoginEntity $loginEntity): ?UserEntity {
 		return $this->userEntityRepository->findOneByEmail($loginEntity->getEmail());
@@ -111,6 +115,7 @@ class LdapLogin implements LoginInterface {
 	/**
 	 * @param LoginEntity $loginEntity
 	 * @return UserEntity
+	 * @throws NonUniqueResultException
 	 */
 	private function persistNewUser(LoginEntity $loginEntity): UserEntity {
 		$userEntity = new UserEntity();
