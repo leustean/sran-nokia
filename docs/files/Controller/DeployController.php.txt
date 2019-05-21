@@ -1,0 +1,113 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alexb
+ * Date: 2019-03-19
+ * Time: 17:28
+ */
+
+namespace App\Controller;
+
+
+use App\Entity\DeployResultEntity;
+use App\Repository\DeployOptionRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/deploy", )
+ */
+class DeployController extends AbstractController implements AdminControllerInterface {
+
+	private const DEPLOY_RESULT = 'DEPLOY_CONTROLLER_DEPLOY_RESULT';
+
+	private $currentWorkingDirectory;
+
+	private $commandRunDir;
+
+	public function __construct($commandRunDir) {
+		$this->commandRunDir = $commandRunDir;
+		$this->currentWorkingDirectory = getcwd();
+	}
+
+	/**
+	 * @Route("", name="deploy_options_list", methods={"GET","POST"})
+	 * @param DeployOptionRepository $deployOptionRepository
+	 * @return Response
+	 */
+	public function showDeployOptions(DeployOptionRepository $deployOptionRepository): Response {
+		return $this->render(
+			'deploy/deploy-options.html.twig',
+			[
+				'options' => $deployOptionRepository->findAll()
+			]
+		);
+	}
+
+	/**
+	 * @Route("/perform", name="deploy_option_perform", methods={"POST"})
+	 * @param Session                $session
+	 * @param Request                $request
+	 * @param DeployOptionRepository $deployOptionRepository
+	 * @return Response
+	 */
+	public function performDeploy(Session $session, Request $request, DeployOptionRepository $deployOptionRepository): Response {
+		$deployResult = [];
+		$this->setRunDirectory();
+
+		$status = 1;
+		$output = [];
+		foreach ($request->get('deploy', []) as $option => $value) {
+			if(!$value){
+				continue;
+			}
+
+			$deployOption = $deployOptionRepository->find($option);
+			if ($deployOption !== null) {
+				exec(
+					$deployOption->getCommand(),
+					$output,
+					$status);
+				$deployResult[] = new DeployResultEntity($deployOption, $status, implode($output, PHP_EOL));
+				$status = 1;
+				$output = [];
+			}
+		}
+		$this->restoreWorkingDirectory();
+		$session->set(self::DEPLOY_RESULT, $deployResult);
+
+		if (function_exists('opcache_reset')) {
+			opcache_reset();
+		}
+
+		return $this->redirectToRoute('deploy_option_result');
+	}
+
+	/**
+	 * @Route("/result", name="deploy_option_result", methods={"GET"})
+	 * @param Session $session
+	 * @return Response
+	 */
+	public function showDeployResult(Session $session): Response {
+		$deployResult = $session->get(self::DEPLOY_RESULT, []);
+		return $this->render(
+			'deploy/deploy-result.html.twig',
+			[
+				'deployResult' => $deployResult
+			]
+		);
+	}
+
+
+	private function setRunDirectory(): void {
+		chdir($this->commandRunDir);
+	}
+
+	private function restoreWorkingDirectory(): void {
+		chdir($this->currentWorkingDirectory);
+	}
+
+}

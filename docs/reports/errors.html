@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta charset="utf-8"/>
+    <title> &raquo; Compilation errors
+    </title>
+    <meta content="" name="author"/>
+    <meta content="" name="description"/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" media="all" rel="stylesheet"/>
+    <link href="../css/template.css" media="all" rel="stylesheet"/>
+
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+
+    <link href="../images/favicon.ico" rel="shortcut icon"/>
+    <link href="../images/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link href="../images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"/>
+    <link href="../images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="../index.html">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../namespaces/App.html">\App</a></li>
+                            <li><a href="../namespaces/DoctrineMigrations.html">\DoctrineMigrations</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="charts-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">218</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                    <i class="icon-list-alt"></i>&#160;Markers <span
+                                        class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                    <i class="icon-list-alt"></i>&#160;Deprecated <span
+                                        class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div class="container-fluid" id="___">
+    <section class="row-fluid">
+        <div class="span2 sidebar">
+
+            <ul class="side-nav nav nav-list">
+                <li class="nav-header">Navigation</li>
+                <li><a href="#Command/Cron/RunDueCommand.php"><i class="icon-file"></i>
+                    Command/Cron/RunDueCommand.php</a></li>
+                <li><a href="#Command/Cron/RunOneCommand.php"><i class="icon-file"></i>
+                    Command/Cron/RunOneCommand.php</a></li>
+                <li><a href="#Controller/AdminController.php"><i class="icon-file"></i>
+                    Controller/AdminController.php</a></li>
+                <li><a href="#Controller/AdminControllerInterface.php"><i class="icon-file"></i>
+                    Controller/AdminControllerInterface.php</a></li>
+                <li><a href="#Controller/AuthenticationController.php"><i class="icon-file"></i>
+                    Controller/AuthenticationController.php</a></li>
+                <li><a href="#Controller/DeployController.php"><i class="icon-file"></i> Controller/DeployController.php</a>
+                </li>
+                <li><a href="#Controller/LogController.php"><i class="icon-file"></i> Controller/LogController.php</a>
+                </li>
+                <li><a href="#Controller/MainController.php"><i class="icon-file"></i> Controller/MainController.php</a>
+                </li>
+                <li><a href="#Cron/CronInterface.php"><i class="icon-file"></i> Cron/CronInterface.php</a></li>
+                <li><a href="#Cron/DataSyncCron.php"><i class="icon-file"></i> Cron/DataSyncCron.php</a></li>
+                <li><a href="#Entity/AlarmEntity.php"><i class="icon-file"></i> Entity/AlarmEntity.php</a></li>
+                <li><a href="#Entity/DeployOptionEntity.php"><i class="icon-file"></i> Entity/DeployOptionEntity.php</a>
+                </li>
+                <li><a href="#Entity/DeployResultEntity.php"><i class="icon-file"></i> Entity/DeployResultEntity.php</a>
+                </li>
+                <li><a href="#Entity/DeviceEntity.php"><i class="icon-file"></i> Entity/DeviceEntity.php</a></li>
+                <li><a href="#Entity/HardwareModuleEntity.php"><i class="icon-file"></i> Entity/HardwareModuleEntity.php</a>
+                </li>
+                <li><a href="#Entity/LoginEntity.php"><i class="icon-file"></i> Entity/LoginEntity.php</a></li>
+                <li><a href="#Entity/SettingsEntity.php"><i class="icon-file"></i> Entity/SettingsEntity.php</a></li>
+                <li><a href="#Entity/SyncSourceEntity.php"><i class="icon-file"></i> Entity/SyncSourceEntity.php</a>
+                </li>
+                <li><a href="#Entity/UserEntity.php"><i class="icon-file"></i> Entity/UserEntity.php</a></li>
+                <li><a href="#EventSubscriber/SecuritySubscriber.php"><i class="icon-file"></i>
+                    EventSubscriber/SecuritySubscriber.php</a></li>
+                <li><a href="#Form/DeviceType.php"><i class="icon-file"></i> Form/DeviceType.php</a></li>
+                <li><a href="#Form/GlobalRefreshTimeType.php"><i class="icon-file"></i>
+                    Form/GlobalRefreshTimeType.php</a></li>
+                <li><a href="#Form/LoginType.php"><i class="icon-file"></i> Form/LoginType.php</a></li>
+                <li><a href="#Kernel.php"><i class="icon-file"></i> Kernel.php</a></li>
+                <li><a href="#Migrations/Version20190420113407.php"><i class="icon-file"></i>
+                    Migrations/Version20190420113407.php</a></li>
+                <li><a href="#Migrations/Version20190421112043.php"><i class="icon-file"></i>
+                    Migrations/Version20190421112043.php</a></li>
+                <li><a href="#Migrations/Version20190421170003.php"><i class="icon-file"></i>
+                    Migrations/Version20190421170003.php</a></li>
+                <li><a href="#Migrations/Version20190508230724.php"><i class="icon-file"></i>
+                    Migrations/Version20190508230724.php</a></li>
+                <li><a href="#Migrations/Version20190510150350.php"><i class="icon-file"></i>
+                    Migrations/Version20190510150350.php</a></li>
+                <li><a href="#Migrations/Version20190515191840.php"><i class="icon-file"></i>
+                    Migrations/Version20190515191840.php</a></li>
+                <li><a href="#Migrations/Version20190515210739.php"><i class="icon-file"></i>
+                    Migrations/Version20190515210739.php</a></li>
+                <li><a href="#Migrations/Version20190520195606.php"><i class="icon-file"></i>
+                    Migrations/Version20190520195606.php</a></li>
+                <li><a href="#Repository/AlarmEntityRepository.php"><i class="icon-file"></i>
+                    Repository/AlarmEntityRepository.php</a></li>
+                <li><a href="#Repository/CronRepository.php"><i class="icon-file"></i> Repository/CronRepository.php</a>
+                </li>
+                <li><a href="#Repository/DeployOptionRepository.php"><i class="icon-file"></i>
+                    Repository/DeployOptionRepository.php</a></li>
+                <li><a href="#Repository/DeviceEntityRepository.php"><i class="icon-file"></i>
+                    Repository/DeviceEntityRepository.php</a></li>
+                <li><a href="#Repository/Extension/TimeFormatExtension.php"><i class="icon-file"></i>
+                    Repository/Extension/TimeFormatExtension.php</a></li>
+                <li><a href="#Repository/HardwareModuleEntityRepository.php"><i class="icon-file"></i>
+                    Repository/HardwareModuleEntityRepository.php</a></li>
+                <li><a href="#Repository/SearchFieldsRepository.php"><i class="icon-file"></i>
+                    Repository/SearchFieldsRepository.php</a></li>
+                <li><a href="#Repository/SettingsEntityRepository.php"><i class="icon-file"></i>
+                    Repository/SettingsEntityRepository.php</a></li>
+                <li><a href="#Repository/SyncSourceEntityRepository.php"><i class="icon-file"></i>
+                    Repository/SyncSourceEntityRepository.php</a></li>
+                <li><a href="#Repository/UserEntityRepository.php"><i class="icon-file"></i>
+                    Repository/UserEntityRepository.php</a></li>
+                <li><a href="#Service/Login/FakeLogin.php"><i class="icon-file"></i> Service/Login/FakeLogin.php</a>
+                </li>
+                <li><a href="#Service/Login/LdapLogin.php"><i class="icon-file"></i> Service/Login/LdapLogin.php</a>
+                </li>
+                <li><a href="#Service/Login/LoginException.php"><i class="icon-file"></i>
+                    Service/Login/LoginException.php</a></li>
+                <li><a href="#Service/Login/LoginFactory.php"><i class="icon-file"></i>
+                    Service/Login/LoginFactory.php</a></li>
+                <li><a href="#Service/Login/LoginInterface.php"><i class="icon-file"></i>
+                    Service/Login/LoginInterface.php</a></li>
+                <li><a href="#Service/SBTS/DataMapper.php"><i class="icon-file"></i> Service/SBTS/DataMapper.php</a>
+                </li>
+                <li><a href="#Service/SBTS/DeviceManager.php"><i class="icon-file"></i>
+                    Service/SBTS/DeviceManager.php</a></li>
+                <li><a href="#Service/SBTS/FakeSync.php"><i class="icon-file"></i> Service/SBTS/FakeSync.php</a></li>
+                <li><a href="#Service/SBTS/Sync.php"><i class="icon-file"></i> Service/SBTS/Sync.php</a></li>
+                <li><a href="#Service/SBTS/SyncException.php"><i class="icon-file"></i>
+                    Service/SBTS/SyncException.php</a></li>
+                <li><a href="#Service/SBTS/SyncFactory.php"><i class="icon-file"></i> Service/SBTS/SyncFactory.php</a>
+                </li>
+                <li><a href="#Service/SBTS/SyncInterface.php"><i class="icon-file"></i>
+                    Service/SBTS/SyncInterface.php</a></li>
+            </ul>
+        </div>
+
+        <div class="span10 offset2">
+            <ul class="breadcrumb">
+                <li><a href="../"><i class="icon-remove-sign"></i></a><span class="divider">\</span></li>
+                <li>Compilation Errors</li>
+            </ul>
+
+
+            <div class="package-contents">
+                <a id="Command/Cron/RunDueCommand.php" name="Command/Cron/RunDueCommand.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Command/Cron/RunDueCommand.php
+                    <small style="float: right;padding-right: 10px;">9</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>22</td>
+                            <td>No summary for class \App\Command\Cron\RunDueCommand</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>39</td>
+                            <td>No summary for method configure()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>59</td>
+                            <td>Argument $input is missing from the Docblock of execute</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>59</td>
+                            <td>Argument $output is missing from the Docblock of execute</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>59</td>
+                            <td>No summary for method execute()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>70</td>
+                            <td>No summary for method runCron()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>27</td>
+                            <td>No summary for property $cronRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>32</td>
+                            <td>No summary for property $container</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>37</td>
+                            <td>No summary for property $logger</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Command/Cron/RunOneCommand.php" name="Command/Cron/RunOneCommand.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Command/Cron/RunOneCommand.php
+                    <small style="float: right;padding-right: 10px;">6</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>22</td>
+                            <td>No summary for class \App\Command\Cron\RunOneCommand</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>39</td>
+                            <td>No summary for method configure()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>67</td>
+                            <td>No summary for method execute()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>27</td>
+                            <td>No summary for property $cronRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>32</td>
+                            <td>No summary for property $container</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>37</td>
+                            <td>No summary for property $logger</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Controller/AdminController.php" name="Controller/AdminController.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Controller/AdminController.php
+                    <small style="float: right;padding-right: 10px;">6</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>20</td>
+                            <td>No summary for class \App\Controller\AdminController</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>26</td>
+                            <td>No summary for method indexAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>39</td>
+                            <td>No summary for method addDeviceAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>72</td>
+                            <td>No summary for method usersAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>108</td>
+                            <td>No summary for method refreshTimeAction()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Controller/AdminControllerInterface.php" name="Controller/AdminControllerInterface.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Controller/AdminControllerInterface.php
+                    <small style="float: right;padding-right: 10px;">2</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>7</td>
+                            <td>No summary for interface \App\Controller\AdminControllerInterface</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Controller/AuthenticationController.php" name="Controller/AuthenticationController.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Controller/AuthenticationController.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>29</td>
+                            <td>Argument $loginFactory is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>29</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>38</td>
+                            <td>No summary for method loginAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>67</td>
+                            <td>No summary for method logoutAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>75</td>
+                            <td>No summary for method getRedirect()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>26</td>
+                            <td>No summary for property $login</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Controller/DeployController.php" name="Controller/DeployController.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Controller/DeployController.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Controller/LogController.php" name="Controller/LogController.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Controller/LogController.php
+                    <small style="float: right;padding-right: 10px;">6</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>13</td>
+                            <td>No summary for class \App\Controller\LogController</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>20</td>
+                            <td>Argument $appDir is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>20</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>29</td>
+                            <td>No summary for method indexAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>18</td>
+                            <td>No summary for property $logDir</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Controller/MainController.php" name="Controller/MainController.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Controller/MainController.php
+                    <small style="float: right;padding-right: 10px;">10</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>33</td>
+                            <td>Argument $loginFactory is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>33</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>41</td>
+                            <td>No summary for method indexAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>54</td>
+                            <td>Argument $request is missing from the Docblock of sbtsAction</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>54</td>
+                            <td>Name of argument $request does not match with the DocBlock&#039;s name
+                                $searchFieldsRepository in sbtsAction()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>54</td>
+                            <td>The type hint of the argument is incorrect for the type definition of the @param tag
+                                with argument $request in sbtsAction()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>54</td>
+                            <td>No summary for method sbtsAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>95</td>
+                            <td>No summary for method showSbtsAction()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>30</td>
+                            <td>No summary for property $login</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Cron/CronInterface.php" name="Cron/CronInterface.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Cron/CronInterface.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>No summary for interface \App\Cron\CronInterface</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Cron/DataSyncCron.php" name="Cron/DataSyncCron.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Cron/DataSyncCron.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>20</td>
+                            <td>No summary for class \App\Cron\DataSyncCron</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>65</td>
+                            <td>No summary for method getCronExpresion()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for property $entityManager</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>30</td>
+                            <td>No summary for property $deviceManager</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>35</td>
+                            <td>No summary for property $deviceEntityRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>40</td>
+                            <td>No summary for property $settingsEntity</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/AlarmEntity.php" name="Entity/AlarmEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/AlarmEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/DeployOptionEntity.php" name="Entity/DeployOptionEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/DeployOptionEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/DeployResultEntity.php" name="Entity/DeployResultEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/DeployResultEntity.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>12</td>
+                            <td>No summary for class \App\Entity\DeployResultEntity</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>45</td>
+                            <td>No summary for method getDeployOption()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>52</td>
+                            <td>No summary for method isSuccessful()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>60</td>
+                            <td>No summary for method getOutput()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>No summary for property $deployOption</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>22</td>
+                            <td>No summary for property $status</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>27</td>
+                            <td>No summary for property $output</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/DeviceEntity.php" name="Entity/DeviceEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/DeviceEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/HardwareModuleEntity.php" name="Entity/HardwareModuleEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/HardwareModuleEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/LoginEntity.php" name="Entity/LoginEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/LoginEntity.php
+                    <small style="float: right;padding-right: 10px;">11</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>8</td>
+                            <td>No summary for class \App\Entity\LoginEntity</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>28</td>
+                            <td>No summary for method getEmail()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>36</td>
+                            <td>No summary for method setEmail()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>44</td>
+                            <td>No summary for method getPassword()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>52</td>
+                            <td>No summary for method setPassword()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>60</td>
+                            <td>No summary for method getDomain()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>68</td>
+                            <td>No summary for method setDomain()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>13</td>
+                            <td>No summary for property $email</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>18</td>
+                            <td>No summary for property $password</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>23</td>
+                            <td>No summary for property $domain</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/SettingsEntity.php" name="Entity/SettingsEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/SettingsEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/SyncSourceEntity.php" name="Entity/SyncSourceEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/SyncSourceEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Entity/UserEntity.php" name="Entity/UserEntity.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Entity/UserEntity.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="EventSubscriber/SecuritySubscriber.php" name="EventSubscriber/SecuritySubscriber.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    EventSubscriber/SecuritySubscriber.php
+                    <small style="float: right;padding-right: 10px;">11</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>14</td>
+                            <td>No summary for class \App\EventSubscriber\SecuritySubscriber</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>41</td>
+                            <td>No summary for method shouldRedirectUser()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>53</td>
+                            <td>No summary for method redirectToCorrectPage()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>57</td>
+                            <td>Argument $route is missing from the Docblock of redirectToRoute</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>57</td>
+                            <td>No summary for method redirectToRoute()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>64</td>
+                            <td>No summary for method getSubscribedEvents()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>75</td>
+                            <td>No summary for method denyAccessToAdminSection()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>19</td>
+                            <td>No summary for property $login</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>24</td>
+                            <td>No summary for property $urlGenerator</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>29</td>
+                            <td>No summary for property $response</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Form/DeviceType.php" name="Form/DeviceType.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Form/DeviceType.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>14</td>
+                            <td>No summary for class \App\Form\DeviceType</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>Argument $builder is missing from the Docblock of buildForm</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>Argument $options is missing from the Docblock of buildForm</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method buildForm()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>31</td>
+                            <td>Argument $resolver is missing from the Docblock of configureOptions</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>31</td>
+                            <td>No summary for method configureOptions()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Form/GlobalRefreshTimeType.php" name="Form/GlobalRefreshTimeType.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Form/GlobalRefreshTimeType.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>13</td>
+                            <td>No summary for class \App\Form\GlobalRefreshTimeType</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>Argument $builder is missing from the Docblock of buildForm</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>Argument $options is missing from the Docblock of buildForm</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for method buildForm()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>28</td>
+                            <td>Argument $resolver is missing from the Docblock of configureOptions</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>28</td>
+                            <td>No summary for method configureOptions()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Form/LoginType.php" name="Form/LoginType.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Form/LoginType.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for class \App\Form\LoginType</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>Argument $builder is missing from the Docblock of buildForm</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>Argument $options is missing from the Docblock of buildForm</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>No summary for method buildForm()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>Argument $resolver is missing from the Docblock of configureOptions</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for method configureOptions()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Kernel.php" name="Kernel.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Kernel.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190420113407.php" name="Migrations/Version20190420113407.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190420113407.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>37</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190421112043.php" name="Migrations/Version20190421112043.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190421112043.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>38</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190421170003.php" name="Migrations/Version20190421170003.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190421170003.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>37</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190508230724.php" name="Migrations/Version20190508230724.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190508230724.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>38</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190510150350.php" name="Migrations/Version20190510150350.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190510150350.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>25</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>38</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190515191840.php" name="Migrations/Version20190515191840.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190515191840.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>24</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>37</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190515210739.php" name="Migrations/Version20190515210739.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190515210739.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>24</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>41</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Migrations/Version20190520195606.php" name="Migrations/Version20190520195606.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Migrations/Version20190520195606.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for method getDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>24</td>
+                            <td>No summary for method up()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>66</td>
+                            <td>No summary for method down()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/AlarmEntityRepository.php" name="Repository/AlarmEntityRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/AlarmEntityRepository.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for class \App\Repository\AlarmEntityRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>Argument $registry is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/CronRepository.php" name="Repository/CronRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/CronRepository.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/DeployOptionRepository.php" name="Repository/DeployOptionRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/DeployOptionRepository.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/DeviceEntityRepository.php" name="Repository/DeviceEntityRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/DeviceEntityRepository.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/Extension/TimeFormatExtension.php"
+                   name="Repository/Extension/TimeFormatExtension.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/Extension/TimeFormatExtension.php
+                    <small style="float: right;padding-right: 10px;">7</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>11</td>
+                            <td>No summary for class \App\Repository\Extension\TimeFormatExtension</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>23</td>
+                            <td>Argument $sqlWalker is missing from the Docblock of getSql</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>23</td>
+                            <td>No summary for method getSql()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>31</td>
+                            <td>No summary for method parse()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for property $time</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>21</td>
+                            <td>No summary for property $format</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/HardwareModuleEntityRepository.php"
+                   name="Repository/HardwareModuleEntityRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/HardwareModuleEntityRepository.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for class \App\Repository\HardwareModuleEntityRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>Argument $registry is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/SearchFieldsRepository.php" name="Repository/SearchFieldsRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/SearchFieldsRepository.php
+                    <small style="float: right;padding-right: 10px;">8</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>14</td>
+                            <td>No summary for class \App\Repository\SearchFieldsRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>200</td>
+                            <td>Argument $con is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>200</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>211</td>
+                            <td>No summary for method findAllDistinctValues()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>229</td>
+                            <td>No summary for method getTables()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for property $tables</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>198</td>
+                            <td>No summary for property $con</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/SettingsEntityRepository.php" name="Repository/SettingsEntityRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/SettingsEntityRepository.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/SyncSourceEntityRepository.php" name="Repository/SyncSourceEntityRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/SyncSourceEntityRepository.php
+                    <small style="float: right;padding-right: 10px;">4</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for class \App\Repository\SyncSourceEntityRepository</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>Argument $registry is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>17</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Repository/UserEntityRepository.php" name="Repository/UserEntityRepository.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Repository/UserEntityRepository.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/Login/FakeLogin.php" name="Service/Login/FakeLogin.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/Login/FakeLogin.php
+                    <small style="float: right;padding-right: 10px;">3</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>9</td>
+                            <td>No summary for class \App\Service\Login\FakeLogin</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>14</td>
+                            <td>No summary for method authenticate()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/Login/LdapLogin.php" name="Service/Login/LdapLogin.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/Login/LdapLogin.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/Login/LoginException.php" name="Service/Login/LoginException.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/Login/LoginException.php
+                    <small style="float: right;padding-right: 10px;">2</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>9</td>
+                            <td>No summary for class \App\Service\Login\LoginException</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/Login/LoginFactory.php" name="Service/Login/LoginFactory.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/Login/LoginFactory.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/Login/LoginInterface.php" name="Service/Login/LoginInterface.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/Login/LoginInterface.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/DataMapper.php" name="Service/SBTS/DataMapper.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/DataMapper.php
+                    <small style="float: right;padding-right: 10px;">8</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>14</td>
+                            <td>No summary for class \App\Service\SBTS\DataMapper</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>29</td>
+                            <td>No summary for method setData()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>51</td>
+                            <td>No summary for method mapGeneralDataToDevice()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>82</td>
+                            <td>No summary for method mapSyncDataToDevice()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>100</td>
+                            <td>No summary for method mapAlarmDataToDevice()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>128</td>
+                            <td>No summary for method mapHardwareModule()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>16</td>
+                            <td>No summary for property $procedureMapping</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/DeviceManager.php" name="Service/SBTS/DeviceManager.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/DeviceManager.php
+                    <small style="float: right;padding-right: 10px;">9</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>9</td>
+                            <td>No summary for class \App\Service\SBTS\DeviceManager</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>21</td>
+                            <td>Argument $syncFactory is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>21</td>
+                            <td>Argument $dataMapper is missing from the Docblock of __construct</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>21</td>
+                            <td>No summary for method __construct()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>26</td>
+                            <td>Argument $deviceEntity is missing from the Docblock of refreshDeviceData</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>26</td>
+                            <td>No summary for method refreshDeviceData()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>14</td>
+                            <td>No summary for property $sync</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>19</td>
+                            <td>No summary for property $dataMapper</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/FakeSync.php" name="Service/SBTS/FakeSync.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/FakeSync.php
+                    <small style="float: right;padding-right: 10px;">6</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>9</td>
+                            <td>No summary for class \App\Service\SBTS\FakeSync</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>11</td>
+                            <td>Argument $deviceEntity is missing from the Docblock of setDevice</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>11</td>
+                            <td>No summary for method setDevice()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for method getProcedures()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>19</td>
+                            <td>No summary for method fetchData()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/Sync.php" name="Service/SBTS/Sync.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/Sync.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/SyncException.php" name="Service/SBTS/SyncException.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/SyncException.php
+                    <small style="float: right;padding-right: 10px;">2</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>9</td>
+                            <td>No summary for class \App\Service\SBTS\SyncException</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/SyncFactory.php" name="Service/SBTS/SyncFactory.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/SyncFactory.php
+                    <small style="float: right;padding-right: 10px;">1</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="package-contents">
+                <a id="Service/SBTS/SyncInterface.php" name="Service/SBTS/SyncInterface.php"></a>
+                <h3>
+                    <i class="icon-file"></i>
+                    Service/SBTS/SyncInterface.php
+                    <small style="float: right;padding-right: 10px;">6</small>
+                </h3>
+                <div>
+                    <table class="table markers table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Line</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>error</td>
+                            <td>0</td>
+                            <td>No summary was found for this file</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>9</td>
+                            <td>No summary for interface \App\Service\SBTS\SyncInterface</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>11</td>
+                            <td>Argument $deviceEntity is missing from the Docblock of setDevice</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>11</td>
+                            <td>No summary for method setDevice()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>13</td>
+                            <td>No summary for method getProcedures()</td>
+                        </tr>
+                        <tr>
+                            <td>error</td>
+                            <td>15</td>
+                            <td>No summary for method fetchData()</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                            <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../namespaces/App.html">\App</a></li>
+                                    <li><a href="../namespaces/DoctrineMigrations.html">\DoctrineMigrations</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                            <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                            <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr/>
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 21st, 2019 at 13:58.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

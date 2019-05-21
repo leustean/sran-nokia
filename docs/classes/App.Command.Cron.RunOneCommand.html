@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta content="" name="author"/>
+    <meta content="" name="description"/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" media="all" rel="stylesheet"/>
+    <link href="../css/template.css" media="all" rel="stylesheet"/>
+
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        } else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        } else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function () {
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
+    <link href="../images/favicon.ico" rel="shortcut icon"/>
+    <link href="../images/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link href="../images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"/>
+    <link href="../images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="../index.html">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../namespaces/App.html">\App</a></li>
+                            <li><a href="../namespaces/DoctrineMigrations.html">\DoctrineMigrations</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="charts-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">218</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                    <i class="icon-list-alt"></i>&#160;Markers <span
+                                        class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                    <i class="icon-list-alt"></i>&#160;Deprecated <span
+                                        class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div class="container-fluid" id="___">
+    <section class="row-fluid">
+        <div class="span2 sidebar">
+            <div class="accordion" style="margin-bottom: 0">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle " data-target="#namespace-1880741502" data-toggle="collapse"></a>
+                        <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+                    </div>
+                    <div class="accordion-body collapse in" id="namespace-1880741502">
+                        <div class="accordion-inner">
+
+                            <div class="accordion" style="margin-bottom: 0">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle collapsed" data-target="#namespace-181715985"
+                                           data-toggle="collapse"></a>
+                                        <a href="../namespaces/App.html"
+                                           style="margin-left: 30px; padding-left: 0">App</a>
+                                    </div>
+                                    <div class="accordion-body collapse " id="namespace-181715985">
+                                        <div class="accordion-inner">
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-487306178"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Command.html"
+                                                           style="margin-left: 30px; padding-left: 0">Command</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-487306178">
+                                                        <div class="accordion-inner">
+
+                                                            <div class="accordion" style="margin-bottom: 0">
+                                                                <div class="accordion-group">
+                                                                    <div class="accordion-heading">
+                                                                        <a class="accordion-toggle collapsed"
+                                                                           data-target="#namespace-1347701590"
+                                                                           data-toggle="collapse"></a>
+                                                                        <a href="../namespaces/App.Command.Cron.html"
+                                                                           style="margin-left: 30px; padding-left: 0">Cron</a>
+                                                                    </div>
+                                                                    <div class="accordion-body collapse "
+                                                                         id="namespace-1347701590">
+                                                                        <div class="accordion-inner">
+
+
+                                                                            <ul>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Command.Cron.RunDueCommand.html">RunDueCommand</a>
+                                                                                </li>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Command.Cron.RunOneCommand.html">RunOneCommand</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <ul>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-953655177"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Controller.html"
+                                                           style="margin-left: 30px; padding-left: 0">Controller</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-953655177">
+                                                        <div class="accordion-inner">
+
+
+                                                            <ul>
+                                                                <li class="interface"><a
+                                                                        href="../classes/App.Controller.AdminControllerInterface.html">AdminControllerInterface</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Controller.AdminController.html">AdminController</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Controller.AuthenticationController.html">AuthenticationController</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Controller.LogController.html">LogController</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Controller.MainController.html">MainController</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-1700865875"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Cron.html"
+                                                           style="margin-left: 30px; padding-left: 0">Cron</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-1700865875">
+                                                        <div class="accordion-inner">
+
+
+                                                            <ul>
+                                                                <li class="interface"><a
+                                                                        href="../classes/App.Cron.CronInterface.html">CronInterface</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Cron.DataSyncCron.html">DataSyncCron</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-324491607"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Entity.html"
+                                                           style="margin-left: 30px; padding-left: 0">Entity</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-324491607">
+                                                        <div class="accordion-inner">
+
+
+                                                            <ul>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Entity.DeployResultEntity.html">DeployResultEntity</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Entity.LoginEntity.html">LoginEntity</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-826393727"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.EventSubscriber.html"
+                                                           style="margin-left: 30px; padding-left: 0">EventSubscriber</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-826393727">
+                                                        <div class="accordion-inner">
+
+
+                                                            <ul>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.EventSubscriber.SecuritySubscriber.html">SecuritySubscriber</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-1881567981"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Form.html"
+                                                           style="margin-left: 30px; padding-left: 0">Form</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-1881567981">
+                                                        <div class="accordion-inner">
+
+
+                                                            <ul>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Form.DeviceType.html">DeviceType</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Form.GlobalRefreshTimeType.html">GlobalRefreshTimeType</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Form.LoginType.html">LoginType</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-90990522" data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Repository.html"
+                                                           style="margin-left: 30px; padding-left: 0">Repository</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-90990522">
+                                                        <div class="accordion-inner">
+
+                                                            <div class="accordion" style="margin-bottom: 0">
+                                                                <div class="accordion-group">
+                                                                    <div class="accordion-heading">
+                                                                        <a class="accordion-toggle collapsed"
+                                                                           data-target="#namespace-1284409460"
+                                                                           data-toggle="collapse"></a>
+                                                                        <a href="../namespaces/App.Repository.Extension.html"
+                                                                           style="margin-left: 30px; padding-left: 0">Extension</a>
+                                                                    </div>
+                                                                    <div class="accordion-body collapse "
+                                                                         id="namespace-1284409460">
+                                                                        <div class="accordion-inner">
+
+
+                                                                            <ul>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Repository.Extension.TimeFormatExtension.html">TimeFormatExtension</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <ul>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Repository.AlarmEntityRepository.html">AlarmEntityRepository</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Repository.HardwareModuleEntityRepository.html">HardwareModuleEntityRepository</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Repository.SearchFieldsRepository.html">SearchFieldsRepository</a>
+                                                                </li>
+                                                                <li class="class"><a
+                                                                        href="../classes/App.Repository.SyncSourceEntityRepository.html">SyncSourceEntityRepository</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion" style="margin-bottom: 0">
+                                                <div class="accordion-group">
+                                                    <div class="accordion-heading">
+                                                        <a class="accordion-toggle collapsed"
+                                                           data-target="#namespace-1979532944"
+                                                           data-toggle="collapse"></a>
+                                                        <a href="../namespaces/App.Service.html"
+                                                           style="margin-left: 30px; padding-left: 0">Service</a>
+                                                    </div>
+                                                    <div class="accordion-body collapse " id="namespace-1979532944">
+                                                        <div class="accordion-inner">
+
+                                                            <div class="accordion" style="margin-bottom: 0">
+                                                                <div class="accordion-group">
+                                                                    <div class="accordion-heading">
+                                                                        <a class="accordion-toggle collapsed"
+                                                                           data-target="#namespace-643559241"
+                                                                           data-toggle="collapse"></a>
+                                                                        <a href="../namespaces/App.Service.Login.html"
+                                                                           style="margin-left: 30px; padding-left: 0">Login</a>
+                                                                    </div>
+                                                                    <div class="accordion-body collapse "
+                                                                         id="namespace-643559241">
+                                                                        <div class="accordion-inner">
+
+
+                                                                            <ul>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Service.Login.FakeLogin.html">FakeLogin</a>
+                                                                                </li>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Service.Login.LoginException.html">LoginException</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="accordion" style="margin-bottom: 0">
+                                                                <div class="accordion-group">
+                                                                    <div class="accordion-heading">
+                                                                        <a class="accordion-toggle collapsed"
+                                                                           data-target="#namespace-1851925130"
+                                                                           data-toggle="collapse"></a>
+                                                                        <a href="../namespaces/App.Service.SBTS.html"
+                                                                           style="margin-left: 30px; padding-left: 0">SBTS</a>
+                                                                    </div>
+                                                                    <div class="accordion-body collapse "
+                                                                         id="namespace-1851925130">
+                                                                        <div class="accordion-inner">
+
+
+                                                                            <ul>
+                                                                                <li class="interface"><a
+                                                                                        href="../classes/App.Service.SBTS.SyncInterface.html">SyncInterface</a>
+                                                                                </li>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Service.SBTS.DataMapper.html">DataMapper</a>
+                                                                                </li>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Service.SBTS.DeviceManager.html">DeviceManager</a>
+                                                                                </li>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Service.SBTS.FakeSync.html">FakeSync</a>
+                                                                                </li>
+                                                                                <li class="class"><a
+                                                                                        href="../classes/App.Service.SBTS.SyncException.html">SyncException</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <ul>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <ul>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion" style="margin-bottom: 0">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle collapsed" data-target="#namespace-920019520"
+                                           data-toggle="collapse"></a>
+                                        <a href="../namespaces/DoctrineMigrations.html"
+                                           style="margin-left: 30px; padding-left: 0">DoctrineMigrations</a>
+                                    </div>
+                                    <div class="accordion-body collapse " id="namespace-920019520">
+                                        <div class="accordion-inner">
+
+
+                                            <ul>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190420113407.html">Version20190420113407</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190421112043.html">Version20190421112043</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190421170003.html">Version20190421170003</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190508230724.html">Version20190508230724</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190510150350.html">Version20190510150350</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190515191840.html">Version20190515191840</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190515210739.html">Version20190515210739</a>
+                                                </li>
+                                                <li class="class"><a
+                                                        href="../classes/DoctrineMigrations.Version20190520195606.html">Version20190520195606</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                        <a href="../namespaces/App.Command.Cron.html">\App\Command\Cron</a> <i
+                            class="icon-level-up"></i>
+                    </nav>
+                    <a class="pull-right btn" data-toggle="modal" href="#source-view" role="button"><i
+                            class="icon-code"></i></a>
+
+                    <h1>
+                        <small>\App\Command\Cron</small>
+                        RunOneCommand
+                    </h1>
+                    <p><em></em></p>
+
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                <a class="" href="../classes/App.Command.Cron.RunOneCommand.html#method___construct">__construct()</a><br/>
+                            </section>
+                            <section class="span4">
+                                <em>No public properties found</em>
+                            </section>
+                            <section class="span4">
+                                <em>No constants found</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                <a class="" href="../classes/App.Command.Cron.RunOneCommand.html#method_configure">configure()</a><br/>
+                                <a class="" href="../classes/App.Command.Cron.RunOneCommand.html#method_execute">execute()</a><br/>
+                            </section>
+                            <section class="span4">
+                                <a class=""
+                                   href="../classes/App.Command.Cron.RunOneCommand.html#property_cronRepository">$cronRepository</a><br/>
+                                <a class="" href="../classes/App.Command.Cron.RunOneCommand.html#property_container">$container</a><br/>
+                                <a class="" href="../classes/App.Command.Cron.RunOneCommand.html#property_logger">$logger</a><br/>
+                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                <em>No private methods found</em>
+                            </section>
+                            <section class="span4">
+                                <em>No private properties found</em>
+                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+
+
+                    <dl>
+                        <dt>File</dt>
+                        <dd><a href="../files/Command.Cron.RunOneCommand.html">
+                            <div class="path-wrapper">Command/Cron/RunOneCommand.php</div>
+                        </a></dd>
+                        <dt>Package</dt>
+                        <dd>
+                            <div class="namespace-wrapper">Default</div>
+                        </dd>
+                        <dt>Class hierarchy</dt>
+                        <dd class="hierarchy">
+
+                            <div class="namespace-wrapper">\Symfony\Component\Console\Command\Command</div>
+                            <div class="namespace-wrapper">\App\Command\Cron\RunOneCommand</div>
+                        </dd>
+
+
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+
+            <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <a class="anchor" id="property_cronRepository" name="property_cronRepository"></a>
+                    <article class="property">
+                        <h3 class="protected ">$cronRepository</h3>
+                        <pre class="signature">$cronRepository : \App\Repository\CronRepository</pre>
+                        <p><em></em></p>
+
+
+                        <h4>Type</h4>
+                        \App\Repository\CronRepository
+                    </article>
+                </div>
+                <aside class="span4 detailsbar">
+                    <h1><i class="icon-arrow-down"></i></h1>
+                    <dl>
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <a class="anchor" id="property_container" name="property_container"></a>
+                    <article class="property">
+                        <h3 class="protected ">$container</h3>
+                        <pre class="signature">$container : \Symfony\Component\DependencyInjection\ContainerInterface</pre>
+                        <p><em></em></p>
+
+
+                        <h4>Type</h4>
+                        \Symfony\Component\DependencyInjection\ContainerInterface
+                    </article>
+                </div>
+                <aside class="span4 detailsbar">
+                    <h1><i class="icon-arrow-down"></i></h1>
+                    <dl>
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <a class="anchor" id="property_logger" name="property_logger"></a>
+                    <article class="property">
+                        <h3 class="protected ">$logger</h3>
+                        <pre class="signature">$logger : \Psr\Log\LoggerInterface</pre>
+                        <p><em></em></p>
+
+
+                        <h4>Type</h4>
+                        \Psr\Log\LoggerInterface
+                    </article>
+                </div>
+                <aside class="span4 detailsbar">
+                    <h1><i class="icon-arrow-down"></i></h1>
+                    <dl>
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+
+            <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <a class="anchor" id="method___construct" name="method___construct"></a>
+                    <article class="method">
+                        <h3 class="public ">__construct()</h3>
+                        <a class="pull-right btn" data-toggle="modal" href="#source-view" role="button"
+                           style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                        <pre class="signature"
+                             style="margin-right: 54px;">__construct(\App\Repository\CronRepository  <span
+                                class="argument">$cronRepository</span>, \Symfony\Component\DependencyInjection\ContainerInterface  <span
+                                class="argument">$container</span>, \Psr\Log\LoggerInterface  <span class="argument">$logger</span>) </pre>
+                        <p><em>RunOneCommand constructor.</em></p>
+
+
+                        <h4>Parameters</h4>
+                        <table class="table table-condensed table-hover">
+                            <tr>
+                                <td>\App\Repository\CronRepository</td>
+                                <td>$cronRepository</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>\Symfony\Component\DependencyInjection\ContainerInterface</td>
+                                <td>$container</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>\Psr\Log\LoggerInterface</td>
+                                <td>$logger</td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+
+                    </article>
+                </div>
+                <aside class="span4 detailsbar">
+                    <h1><i class="icon-arrow-down"></i></h1>
+                    <dl>
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <a class="anchor" id="method_configure" name="method_configure"></a>
+                    <article class="method">
+                        <h3 class="protected ">configure()</h3>
+                        <a class="pull-right btn" data-toggle="modal" href="#source-view" role="button"
+                           style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                        <pre class="signature" style="margin-right: 54px;">configure() </pre>
+                        <p><em></em></p>
+
+
+                    </article>
+                </div>
+                <aside class="span4 detailsbar">
+                    <h1><i class="icon-arrow-down"></i></h1>
+                    <dl>
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <a class="anchor" id="method_execute" name="method_execute"></a>
+                    <article class="method">
+                        <h3 class="protected ">execute()</h3>
+                        <a class="pull-right btn" data-toggle="modal" href="#source-view" role="button"
+                           style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                        <pre class="signature" style="margin-right: 54px;">execute(\Symfony\Component\Console\Input\InputInterface  <span
+                                class="argument">$input</span>, \Symfony\Component\Console\Output\OutputInterface  <span
+                                class="argument">$output</span>) : integer|void|null</pre>
+                        <p><em></em></p>
+
+
+                        <h4>Parameters</h4>
+                        <table class="table table-condensed table-hover">
+                            <tr>
+                                <td>\Symfony\Component\Console\Input\InputInterface</td>
+                                <td>$input</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>\Symfony\Component\Console\Output\OutputInterface</td>
+                                <td>$output</td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                        <h4>Throws</h4>
+                        <dl>
+                            <dt>\Exception</dt>
+                            <dd></dd>
+                        </dl>
+
+                        <h4>Returns</h4>
+                        integer|void|null
+
+                    </article>
+                </div>
+                <aside class="span4 detailsbar">
+                    <h1><i class="icon-arrow-down"></i></h1>
+                    <dl>
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td colspan="2"><em>None found</em></td>
+                        </tr>
+                    </table>
+                </aside>
+            </div>
+
+        </div>
+    </section>
+
+    <div aria-hidden="true" aria-labelledby="source-view-label" class="modal hide fade" id="source-view" role="dialog"
+         tabindex="-1">
+        <div class="modal-header">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+            <h3 id="source-view-label">RunOneCommand.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre class="language-php line-numbers" data-src="../files/Command/Cron/RunOneCommand.php.txt"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                            <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../namespaces/App.html">\App</a></li>
+                                    <li><a href="../namespaces/DoctrineMigrations.html">\DoctrineMigrations</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                            <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                            <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr/>
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 21st, 2019 at 13:57.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
