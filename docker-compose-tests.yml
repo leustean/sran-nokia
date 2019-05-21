@@ -1,25 +1,35 @@
 version: '3'
 services:
-    php-apache:
-        build:
-          ./docker/php/prod
-        container_name: sran-apache-server-test
+    nginx:
+        image: nginx:latest
+        container_name: sran-nginx-server
         ports:
             - 80:80
         volumes:
             - ./:/var/www/sran:z
-            - ./docker/apache/vhosts:/etc/apache2/sites-enabled
+            - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - php
+    php:
+        build:
+            ./docker/php/dev
+        container_name: sran-php-server
+        volumes:
+            - ./:/var/www/sran:z
         links:
             - 'mariadb'
+        environment:
+            TZ: "Europe/Bucharest"
+            DATABASE_URL: 'mysql://root@sran-mysql-server:3306/sran_test'
+        image: sran/dev:v5
 
     mariadb:
         image: mariadb:10.3
-        container_name: sran-mysql-server-test
+        container_name: sran-mysql-server
         environment:
             TZ: "Europe/Bucharest"
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
             MYSQL_ROOT_PASSWORD: ''
-            MYSQL_DATABASE: 'sran_test'
         ports:
             - 3306:3306
 

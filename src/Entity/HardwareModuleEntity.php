@@ -3,9 +3,20 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HardwareModuleEntityRepository")
+ * @ORM\Table(
+ * name="hardware_module_entity",
+ * indexes={
+ * 	@Index(name="product_name", columns={"product_name"}),
+ * 	@Index(name="product_code", columns={"product_code"}),
+ * 	@Index(name="serial_number", columns={"serial_number"}),
+ * 	@Index(name="usage_state", columns={"usage_state"}),
+ * 	@Index(name="type", columns={"type"})
+ * }
+ * )
  */
 class HardwareModuleEntity
 {

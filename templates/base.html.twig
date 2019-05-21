@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}SRAN{% endblock %}</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/css/style.css') }}" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -46,5 +46,7 @@
         {% endblock %}
     </div>
 </div>
+<script type="application/javascript" src="{{ asset('js/mdc.js') }}" defer="defer"></script>
+{% block js %}{% endblock %}
 </body>
 </html>

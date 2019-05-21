@@ -4,12 +4,11 @@
 namespace App\Tests\Command\Cron;
 
 use App\Command\Cron\RunOneCommand;
-use App\Tests\AbstractTest;
+use App\Tests\AbstractUnitTest;
 use Exception;
 use RuntimeException;
 
-
-class RunOneCommandTest extends AbstractTest {
+class RunOneCommandTest extends AbstractUnitTest {
 
 	/**
 	 * @throws Exception
@@ -22,7 +21,7 @@ class RunOneCommandTest extends AbstractTest {
 		$cronRepository
 			->method('find')
 			->willReturn(null);
-		$runOneCommand = new RunOneCommand($cronRepository);
+		$runOneCommand = new RunOneCommand($cronRepository, $this->getMockContainer(), $this->getMockLogger());
 
 		$runOneCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}
@@ -39,7 +38,7 @@ class RunOneCommandTest extends AbstractTest {
 		$cronRepository
 			->method('find')
 			->willReturn($cronInterface);
-		$runOneCommand = new RunOneCommand($cronRepository);
+		$runOneCommand = new RunOneCommand($cronRepository, $this->getMockContainer(), $this->getMockLogger());
 
 		$runOneCommand->run($this->getMockInputInterface(), $this->getMockOutputInterface());
 	}

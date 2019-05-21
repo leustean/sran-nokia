@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\DeviceEntity;
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -12,39 +14,75 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method DeviceEntity[]    findAll()
  * @method DeviceEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DeviceEntityRepository extends ServiceEntityRepository
-{
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, DeviceEntity::class);
-    }
+class DeviceEntityRepository extends ServiceEntityRepository {
 
-    // /**
-    //  * @return DeviceEntity[] Returns an array of DeviceEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+	public function __construct(RegistryInterface $registry) {
+		parent::__construct($registry, DeviceEntity::class);
+	}
 
-    /*
-    public function findOneBySomeField($value): ?DeviceEntity
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+	/**
+	 * @param int $sbtsId
+	 * @return DeviceEntity
+	 * @throws NonUniqueResultException
+	 */
+	public function getBySbtsId(int $sbtsId): ?DeviceEntity {
+		return $this->createQueryBuilder('device_entity')
+			->andWhere('device_entity.sbtsId = :sbtsId')
+			->setParameter('sbtsId', $sbtsId)
+			->setMaxResults(1)
+			->getQuery()
+			->getOneOrNullResult();
+	}
+
+	/**
+	 * @param DateTimeInterface $dateTime
+	 * @return DeviceEntity[]
+	 */
+	public function findDevicesThatNeedRefresh(DateTimeInterface $dateTime): array {
+		return $this->createQueryBuilder('device_entity')
+			->andWhere("TIME_FORMAT(device_entity.refreshTime ,'%H:%i') = :refreshTime")
+			->setParameter('refreshTime', $dateTime->format('H:i'))
+			->getQuery()
+			->getResult();
+	}
+
+	/**
+	 * @return DeviceEntity[]
+	 */
+	public function findDevicesThatUseTheDefaultRefreshTime(): array {
+		return $this->createQueryBuilder('device_entity')
+			->andWhere('device_entity.refreshTime IS NULL')
+			->getQuery()
+			->getResult();
+	}
+
+	/**
+	 * @param array $filters
+	 * @return DeviceEntity[]
+	 */
+	public function findSearchResult(array $filters): array {
+		$query = $this->createQueryBuilder('device_entity');
+		if (isset($filters['device'])) {
+			foreach ($filters['device']['fields'] as $filterName => $filterValue) {
+				$query->andWhere('device_entity.' . $filterName . ' = :' . $filterName);
+				$query->setParameter($filterName, $filterValue);
+			}
+			unset($filters['device']);
+		}
+		foreach ($filters as $tableAlias => $table) {
+			$query->join($table['table'], $tableAlias, 'WITH', $tableAlias . '.deviceEntity = device_entity.id');
+			if (isset($table['condition'])) {
+				$query->andWhere($tableAlias . '.' . $table['condition']);
+			}
+
+			foreach ($filters[$tableAlias]['fields'] as $filterName => $filterValue) {
+				$query->andWhere($tableAlias . '.' . $filterName . ' = :' . $tableAlias . '_' . $filterName);
+				$query->setParameter($tableAlias . '_' . $filterName, $filterValue);
+			}
+		}
+
+		$query->orderBy('device_entity.sbtsId');
+
+		return $query->getQuery()->getResult();
+	}
 }

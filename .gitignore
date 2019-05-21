@@ -1,6 +1,5 @@
 .idea*
 /node_modules/
-/public/css/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

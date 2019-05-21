@@ -1,0 +1,119 @@
+{
+   "time": "4:58:21 PM",
+   "requestId": 1,
+   "requestStatus": "completed",
+   "requestMessage": {
+      "name": "MockName",
+      "id": {
+         "configuration": "MRMOCK"
+      },
+      "swInfo": {
+         "swVersion": "SBTS_MOCK_MOCK_MOCK_MOCK",
+         "lteRatVersion": "LTE_MOCK_MOCK_MOCK_MOCK",
+         "wcdmaRatVersion": "WCDMA_MOCK_MOCK_MOCK_MOCK"
+      },
+      "status": {
+         "blockingState": "Unblocked",
+         "operationalState": "Enabled",
+         "proceduralState": "OnAir"
+      },
+      "ratState": {
+         "wcdma": "ALL_ENABLED",
+         "gsm": "NO_CELLS",
+         "nr": "NO_CELLS"
+      },
+      "systemModules": [
+         {
+            "productCode": "47MOCK",
+            "productName": "Flexi System Module Outdoor FSMF",
+            "serialNumber": "F7MOCK",
+            "status": {
+               "operationalState": "Enabled",
+               "availabilityStatus": "Online",
+               "usageState": "Active",
+               "administrativeState": "Unlocked"
+            }
+         }
+      ],
+      "radioModules": {
+         "rmod": [
+            {
+               "productName": "FXDB",
+               "productCode": "472MOCK",
+               "serialNumber": "F716MOCK",
+               "status": {
+                  "administrativeState": "Unlocked",
+                  "availabilityStatus": "Online",
+                  "operationalState": "Enabled",
+                  "usageState": "Active",
+                  "blockingState": "Unblocked"
+               }
+            },
+            {
+               "productName": "FXDB",
+               "productCode": "4725MOCK",
+               "serialNumber": "1M16MOCK",
+               "status": {
+                  "administrativeState": "Unlocked",
+                  "availabilityStatus": "Online",
+                  "operationalState": "Enabled",
+                  "usageState": "Active",
+                  "blockingState": "Unblocked"
+               }
+            },
+            {
+               "productName": "FRMOCK",
+               "productCode": "472MOCK",
+               "serialNumber": "EA17MOCK",
+               "status": {
+                  "administrativeState": "Unlocked",
+                  "availabilityStatus": "Online",
+                  "operationalState": "Enabled",
+                  "usageState": "Active",
+                  "blockingState": "Unblocked"
+               }
+            },
+            {
+               "productName": "FRMOCK",
+               "productCode": "47MOCK",
+               "serialNumber": "EA17MOCK",
+               "status": {
+                  "administrativeState": "Unlocked",
+                  "availabilityStatus": "Online",
+                  "operationalState": "Enabled",
+                  "usageState": "Active",
+                  "blockingState": "Unblocked"
+               }
+            }
+         ],
+         "asirmod": []
+      },
+      "basebandModules": [
+         {
+            "fullCapacityInUse": "Yes",
+            "productName": "Flexi Baseband Sub-Module FBBC",
+            "productCode": "472MOCK",
+            "serialNumber": "NKMOCK",
+            "status": {
+               "operationalState": "Enabled",
+               "availabilityStatus": "Online",
+               "usageState": "Busy",
+               "administrativeState": "Unlocked"
+            }
+         },
+         {
+            "fullCapacityInUse": "Yes",
+            "productName": "Flexi Baseband Sub-Module FBBC",
+            "productCode": "472MOCK",
+            "serialNumber": "NK1MOCK",
+            "status": {
+               "operationalState": "Enabled",
+               "availabilityStatus": "Online",
+               "usageState": "Busy",
+               "administrativeState": "Unlocked"
+            }
+         }
+      ]
+   },
+   "errorCode": 0
+}

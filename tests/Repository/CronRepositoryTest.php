@@ -5,11 +5,11 @@ namespace App\Tests\Repository;
 
 
 use App\Repository\CronRepository;
-use App\Tests\AbstractTest;
+use App\Tests\AbstractUnitTest;
 use ReflectionClass;
 use ReflectionException;
 
-class CronRepositoryTest extends AbstractTest {
+class CronRepositoryTest extends AbstractUnitTest {
 
 	/**
 	 *

@@ -1,11 +1,10 @@
 <?php
 
 
-namespace App\Tests\Controller;
+namespace App\Tests;
 
 use App\Entity\UserEntity;
 use App\Service\Login\LoginFactory;
-use App\Tests\MockMaker;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +17,7 @@ use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-abstract class AbstractControllerTest extends WebTestCase {
+abstract class AbstractIntegrationTest extends WebTestCase {
 	use MockMaker;
 
 	/**
@@ -121,7 +120,7 @@ abstract class AbstractControllerTest extends WebTestCase {
 	 * @param        $serviceInstance
 	 */
 	protected function setService(String $serviceName, $serviceInstance): void {
-		self::$container->set('test.' . $serviceName, $serviceInstance);
+		self::$container->set($serviceName, $serviceInstance);
 	}
 
 	/**
@@ -129,7 +128,7 @@ abstract class AbstractControllerTest extends WebTestCase {
 	 * @return object
 	 */
 	protected function getService(String $serviceName) {
-		return self::$container->get('test.' . $serviceName);
+		return self::$container->get($serviceName);
 	}
 
 	/**

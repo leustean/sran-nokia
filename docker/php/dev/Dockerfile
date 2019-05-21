@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.3-fpm
 
 RUN apt-get update && apt-get -y install gnupg git zip unzip
 
@@ -28,6 +28,5 @@ RUN pecl install xdebug; \
     echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini; \
     echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini; \
     echo "xdebug.remote_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini;
-
 
 WORKDIR /var/www/sran

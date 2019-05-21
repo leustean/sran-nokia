@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Cron\Prototype\CronInterface;
-use App\Cron\SampleCron;
+use App\Cron\CronInterface;
+use App\Cron\DataSyncCron;
 
 class CronRepository {
 
@@ -29,7 +29,7 @@ class CronRepository {
 	}
 
 	private function setUpCronJobs(): void {
-		$this->installCronJob(new SampleCron());
+		$this->installCronJob(new DataSyncCron());
 	}
 
 	/**

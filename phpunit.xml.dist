@@ -23,10 +23,8 @@
         <whitelist>
             <directory suffix="php">src</directory>
             <exclude>
-                <directory suffix=".php">src/Form/</directory>
                 <directory suffix=".php">src/Entity/</directory>
                 <directory suffix=".php">src/Migrations/</directory>
-                <file>src/Kernel.php</file>
             </exclude>
         </whitelist>
     </filter>

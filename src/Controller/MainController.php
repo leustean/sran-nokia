@@ -5,9 +5,12 @@ namespace App\Controller;
 
 use App\Form\DeviceType;
 use App\Repository\DeviceEntityRepository;
+use App\Repository\SearchFieldsRepository;
 use App\Service\Login\LoginFactory;
 use App\Service\Login\LoginInterface;
+use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,15 +45,39 @@ class MainController extends AbstractController {
 	}
 
 	/**
-	 * @Route("/sbts", name="main_sbts", methods={"GET"})
+	 * @Route("/sbts", name="main_sbts", methods={"GET","POST"})
 	 * @param DeviceEntityRepository $deviceEntityRepository
+	 * @param SearchFieldsRepository $searchFieldsRepository
 	 * @return Response
+	 * @throws DBALException
 	 */
-	public function sbtsAction(DeviceEntityRepository $deviceEntityRepository): Response {
+	public function sbtsAction(DeviceEntityRepository $deviceEntityRepository, SearchFieldsRepository $searchFieldsRepository, Request $request): Response {
+		$tables = $searchFieldsRepository->getTables();
+
+		$fieldsToSearchBy = [];
+
+		foreach ($tables as $alias => $table){
+			$requestTable = $request->get($alias, []);
+			foreach ($requestTable as $requestField => $requestValue){
+				if($requestValue !== ''){
+					$fieldsToSearchBy[$alias]['fields'][$requestField] = $requestValue;
+					$tables[$alias]['selected'][$requestField] = $requestValue;
+				}
+			}
+			if(!empty($fieldsToSearchBy[$alias]['fields'])){
+				$fieldsToSearchBy[$alias]['table'] = $table['tableName'];
+				if(!empty($table['tableCondition'])){
+					$fieldsToSearchBy[$alias]['condition'] = $table['tableCondition'];
+				}
+			}
+		}
+
 		return $this->render(
 			'home/sbts.html.twig',
 			[
-				'devices' => $deviceEntityRepository->findBy([], ['sbtsId' => 'ASC'])
+				'devices' => $deviceEntityRepository->findSearchResult($fieldsToSearchBy),
+				'tables' => $tables,
+				'showFiltersTab' => count($fieldsToSearchBy) !== 0
 			]
 		);
 	}
@@ -63,9 +90,10 @@ class MainController extends AbstractController {
 	 * @param EntityManagerInterface $entityManager
 	 * @param SessionInterface       $session
 	 * @return Response
+	 * @throws NonUniqueResultException
 	 */
 	public function showSbtsAction($sbtsId, DeviceEntityRepository $deviceEntityRepository, Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response {
-		$deviceEntity = $deviceEntityRepository->findOneBy(['sbtsId' => $sbtsId]);
+		$deviceEntity = $deviceEntityRepository->getBySbtsId($sbtsId);
 
 		if ($deviceEntity === null) {
 			$this->addFlash('notice', "SBTS with id [{$sbtsId}] does not exist");

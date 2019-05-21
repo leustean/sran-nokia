@@ -8,16 +8,17 @@ use App\Entity\SettingsEntity;
 use App\Entity\UserEntity;
 use App\Repository\DeviceEntityRepository;
 use App\Repository\SettingsEntityRepository;
+use App\Tests\AbstractIntegrationTest;
 use DateTime;
 use Exception;
 use ReflectionException;
 
-class AdminControllerTest extends AbstractControllerTest {
+class AdminControllerTest extends AbstractIntegrationTest {
 
 	/**
 	 * @throws ReflectionException
 	 */
-	public function test_adminPages(): void {
+	public function test_indexAction(): void {
 		$this->setMockLoginFactory();
 		$client = $this->getClient();
 
@@ -39,7 +40,7 @@ class AdminControllerTest extends AbstractControllerTest {
 		$time = new DateTime();
 		$time->setTime(5, 30);
 		$settingsEntity->setGlobalRefreshTime($time);
-		$settingsEntityRepository->method('findOneBy')->willReturn($settingsEntity);
+		$settingsEntityRepository->method('findLatest')->willReturn($settingsEntity);
 		$this->setService(SettingsEntityRepository::class, $settingsEntityRepository);
 
 		$client->request('GET', '/admin/refreshTime');

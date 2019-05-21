@@ -1,0 +1,21 @@
+{
+   "time": "5:07:21 PM",
+   "requestId": 1,
+   "requestStatus": "completed",
+   "requestMessage": {
+      "syncMode": "FreqSync",
+      "tuningMode": "Normal",
+      "syncSourceInfo": [
+         {
+            "syncInputType": "TOPF",
+            "syncInputPrio": 1,
+            "isActive": true,
+            "status": {
+               "availability": "Available",
+               "usability": "Usable"
+            }
+         }
+      ]
+   },
+   "errorCode": 0
+}

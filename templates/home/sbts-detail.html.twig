@@ -27,12 +27,8 @@
                     <div class="sbts-data__row__title">General</div>
                     <div class="sbts-data__row__data">
                         <div class="sbts-data__row">
-                            <div class="sbts-data__row__title">Active SW version</div>
-                            <div class="sbts-data__row__data">{{ device.activeSwVersion ?: 'N/A' }}</div>
-                        </div>
-                        <div class="sbts-data__row">
-                            <div class="sbts-data__row__title">Passive SW version</div>
-                            <div class="sbts-data__row__data">{{ device.passiveSwVersion ?: 'N/A' }}</div>
+                            <div class="sbts-data__row__title">Software Release</div>
+                            <div class="sbts-data__row__data">{{ device.sbtsSwRelease ?: 'N/A' }}</div>
                         </div>
                         <div class="sbts-data__row">
                             <div class="sbts-data__row__title">State</div>
@@ -220,10 +216,11 @@
         </div>
     </div>
     <script>
-        (function (linkClassName, tabClassName, activeClassName) {
+        (function (linkClassName, tabClassName, activeClassName, linkActiveClassName) {
             function dataLinkClick() {
                 if (this.hasAttribute('href')) {
-                    setTab(this.getAttribute('href').substr(1))
+                    setTab(this.getAttribute('href').substr(1));
+                    setActiveLink(this);
                 }
             }
 
@@ -237,15 +234,36 @@
                 }
             }
 
+            function setActiveLink(nextActiveLink) {
+                for (const link of document.getElementsByClassName(linkClassName)) {
+                    link.classList.remove(linkActiveClassName);
+                }
+                nextActiveLink.classList.add(linkActiveClassName);
+            }
+
             const dataLinks = document.getElementsByClassName(linkClassName);
             const url = window.location.href.split('#');
             if (typeof url[1] !== 'undefined') {
-                setTab(url[1]);
+                for (const link of document.getElementsByClassName(linkClassName)) {
+                    if (link.hasAttribute('href') && link.getAttribute('href').substr(1) === url[1]) {
+                        setTab(link.getAttribute('href').substr(1));
+                        setActiveLink(link);
+                        break;
+                    }
+                }
+            } else {
+                for (const link of document.getElementsByClassName(linkClassName)) {
+                    if (link.hasAttribute('href') && link.getAttribute('href').substr(1) === 'general') {
+                        setTab(link.getAttribute('href').substr(1));
+                        setActiveLink(link);
+                        break;
+                    }
+                }
             }
 
             for (const dataLink of dataLinks) {
                 dataLink.addEventListener('click', dataLinkClick)
             }
-        })('js-sbts-data-link', 'js-sbts-data-tab', 'sbts-data--active');
+        })('js-sbts-data-link', 'js-sbts-data-tab', 'sbts-data--active', 'wrapper__body__menu__option--active');
     </script>
 {% endblock %}

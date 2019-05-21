@@ -5,7 +5,6 @@ namespace App\Form;
 
 use App\Entity\DeviceEntity;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -25,7 +24,7 @@ class DeviceType extends AbstractType {
 			->add('ip', TextType::class)
             ->add('port', TextType::class)
             ->add('user', TextType::class)
-            ->add('password', PasswordType::class)
+			->add('password', TextType::class)
             ->add('submit', SubmitType::class);
 	}
 

@@ -6,14 +6,27 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeviceEntityRepository")
  * @ORM\Table(
- *     name="device_entity",
- *     uniqueConstraints={@UniqueConstraint(name="sbts_id", columns={"sbts_id"})})
+ * name="device_entity",
+ * uniqueConstraints={
+ *     @UniqueConstraint(name="sbts_id", columns={"sbts_id"})
+ * },
+ * indexes={
+ * 	@Index(name="sbts_status", columns={"sbts_status"}),
+ * 	@Index(name="sbts_hw_configuration", columns={"sbts_hw_configuration"}),
+ * 	@Index(name="sbts_sw_release", columns={"sbts_sw_release"}),
+ * 	@Index(name="sbts_state", columns={"sbts_state"}),
+ * 	@Index(name="lte_state", columns={"lte_state"}),
+ * 	@Index(name="wcdma_state", columns={"wcdma_state"}),
+ * 	@Index(name="gsm_state", columns={"gsm_state"}),
+ * 	@Index(name="refresh_time", columns={"refresh_time"})
+ * }
  * )
  */
 class DeviceEntity {
@@ -66,26 +79,13 @@ class DeviceEntity {
 	private $lastInformationRefresh;
 
 	/**
-	 * @Assert\NotBlank(
-	 *     message="Please input an owner"
-	 * )
 	 * @Assert\Length(
 	 *      max = 255,
 	 *      maxMessage = "An owner can't have more than {{ limit }} characters"
 	 * )
-	 * @ORM\Column(type="string", length=255)
+	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $sbtsOwner;
-
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $activeSwVersion;
-
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $passiveSwVersion;
 
 	/**
 	 * @ORM\Column(type="boolean", nullable=true)
@@ -108,22 +108,6 @@ class DeviceEntity {
 	private $gsmState;
 
 	/**
-	 * @ORM\Column(type="json", nullable=true)
-	 */
-	private $ipAddresses = [];
-
-	/**
-	 * @ORM\Column(type="json", nullable=true)
-	 */
-	private $controllers = [];
-
-
-	/**
-	 * @ORM\Column(type="json", nullable=true)
-	 */
-	private $timesources = [];
-
-	/**
 	 * @Assert\NotBlank(
 	 *     message="Please input an IP"
 	 * )
@@ -139,6 +123,9 @@ class DeviceEntity {
 	private $ip;
 
 	/**
+	 * @Assert\NotBlank(
+	 *     message="Please input a port"
+	 * )
 	 * @Assert\Type(
 	 *     type = "digit",
 	 *       message="A port must be a number"
@@ -181,17 +168,17 @@ class DeviceEntity {
 	private $refreshTime;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\HardwareModuleEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="App\Entity\HardwareModuleEntity", mappedBy="deviceEntity", orphanRemoval=true, cascade={"persist", "remove"})
 	 */
 	private $hardwareModules;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\SyncSourceEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="App\Entity\SyncSourceEntity", mappedBy="deviceEntity", orphanRemoval=true, cascade={"persist", "remove"})
 	 */
 	private $syncSources;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\AlarmEntity", mappedBy="deviceEntity", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="App\Entity\AlarmEntity", mappedBy="deviceEntity", orphanRemoval=true, cascade={"persist", "remove"})
 	 */
 	private $activeAlarms;
 
@@ -292,26 +279,6 @@ class DeviceEntity {
 		return $this;
 	}
 
-	public function getActiveSwVersion(): ?string {
-		return $this->activeSwVersion;
-	}
-
-	public function setActiveSwVersion(?string $activeSwVersion): self {
-		$this->activeSwVersion = $activeSwVersion;
-
-		return $this;
-	}
-
-	public function getPassiveSwVersion(): ?string {
-		return $this->passiveSwVersion;
-	}
-
-	public function setPassiveSwVersion(?string $passiveSwVersion): self {
-		$this->passiveSwVersion = $passiveSwVersion;
-
-		return $this;
-	}
-
 	public function getSbtsState(): ?bool {
 		return $this->sbtsState;
 	}
@@ -348,36 +315,6 @@ class DeviceEntity {
 
 	public function setGsmState(?string $gsmState): self {
 		$this->gsmState = $gsmState;
-
-		return $this;
-	}
-
-	public function getIpAddresses(): ?array {
-		return $this->ipAddresses;
-	}
-
-	public function setIpAddresses(?array $ipAddresses): self {
-		$this->ipAddresses = $ipAddresses;
-
-		return $this;
-	}
-
-	public function getControllers(): ?array {
-		return $this->controllers;
-	}
-
-	public function setControllers(?array $controllers): self {
-		$this->controllers = $controllers;
-
-		return $this;
-	}
-
-	public function getTimesources(): ?array {
-		return $this->timesources;
-	}
-
-	public function setTimesources(?array $timesources): self {
-		$this->timesources = $timesources;
 
 		return $this;
 	}
@@ -426,7 +363,7 @@ class DeviceEntity {
 		return $this->refreshTime;
 	}
 
-	public function setRefreshTime(DateTimeInterface $refreshTime): self {
+	public function setRefreshTime(?DateTimeInterface $refreshTime): self {
 		$this->refreshTime = $refreshTime;
 
 		return $this;
@@ -512,6 +449,33 @@ class DeviceEntity {
 				$activeAlarm->setDeviceEntity(null);
 			}
 		}
+
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearActiveAlarms(): self {
+		$this->activeAlarms->clear();
+
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearSyncSources(): self {
+		$this->syncSources->clear();
+
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearHardwareModules(): self {
+		$this->hardwareModules->clear();
 
 		return $this;
 	}

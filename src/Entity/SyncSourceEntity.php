@@ -3,9 +3,20 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SyncSourceEntityRepository")
+ * @ORM\Table(
+ * name="sync_source_entity",
+ * indexes={
+ * 	@Index(name="sync_input_type", columns={"sync_input_type"}),
+ * 	@Index(name="sync_input_prio", columns={"sync_input_prio"}),
+ * 	@Index(name="is_active", columns={"is_active"}),
+ * 	@Index(name="availability", columns={"availability"}),
+ * 	@Index(name="usability", columns={"usability"})
+ * }
+ * )
  */
 class SyncSourceEntity {
 	/**

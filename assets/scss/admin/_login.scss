@@ -1,16 +1,16 @@
 @import "../include/vars";
 
-.login{
+.login {
   display: flex;
   flex-direction: column;
   margin: $margin;
 
-  &__form{
+  &__form {
     margin-top: $margin;
     display: block;
   }
 
-  &__header{
+  &__header {
     text-align: center;
     margin: 0;
   }

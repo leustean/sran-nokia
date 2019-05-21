@@ -4,11 +4,11 @@
 namespace App\Tests\EventSubscriber;
 
 use App\EventSubscriber\SecuritySubscriber;
-use App\Tests\AbstractTest;
+use App\Tests\AbstractUnitTest;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class SecuritySubscriberTest extends AbstractTest {
+class SecuritySubscriberTest extends AbstractUnitTest {
 
 	/**
 	 * @throws ReflectionException

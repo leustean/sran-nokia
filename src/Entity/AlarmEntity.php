@@ -4,9 +4,24 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlarmEntityRepository")
+ * @ORM\Table(
+ * name="alarm_entity",
+ * indexes={
+ * 	@Index(name="severity", columns={"severity"}),
+ * 	@Index(name="observation_time", columns={"observation_time"}),
+ * 	@Index(name="alarm_id", columns={"alarm_id"}),
+ * 	@Index(name="fault_id", columns={"fault_id"}),
+ * 	@Index(name="alarm_name", columns={"alarm_name"}),
+ * 	@Index(name="fault_severity", columns={"fault_severity"}),
+ * 	@Index(name="alarm_detail", columns={"alarm_detail"}),
+ * 	@Index(name="alarm_detail_number", columns={"alarm_detail_number"}),
+ * 	@Index(name="fault_description", columns={"fault_description"})
+ * }
+ * )
  */
 class AlarmEntity {
 	/**

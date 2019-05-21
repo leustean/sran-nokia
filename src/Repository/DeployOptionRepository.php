@@ -6,7 +6,7 @@ use App\Entity\DeployOptionEntity;
 
 class DeployOptionRepository {
 
-	private static $options = [
+	private static $devOptions = [
 		['id' => 0, 'name' => 'test', 'command' => 'ls'],
 		['id' => 1, 'name' => 'git-pull', 'command' => 'git pull 2>&1'],
 		['id' => 2, 'name' => 'npm-install', 'command' => 'npm install 2>&1'],
@@ -20,11 +20,22 @@ class DeployOptionRepository {
 		['id' => 10, 'name' => 'perform-db-migration', 'command' => 'php bin/console doctrine:migrations:migrate --no-interaction'],
 	];
 
+	private static $prodOptions = [
+		['id' => 0, 'name' => 'test', 'command' => "echo 'ok'"],
+		['id' => 1, 'name' => 'deploy', 'command' => 'git reset --hard origin/master 2>&1 ; npm ci 2>&1 ; npm run compile-scss 2>&1 ; php bin/console doctrine:migrations:migrate --no-interaction ; composer dump-env prod 2>&1 ; composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader 2>&1']
+	];
+
 	private $deployOptions;
 
-	public function __construct() {
-		foreach (self::$options as $option){
-			$this->deployOptions[$option['id']] = new DeployOptionEntity($option['id'],$option['name'],$option['command']);
+	public function __construct(string $env) {
+		if ($env === 'prod') {
+			foreach (self::$prodOptions as $option) {
+				$this->deployOptions[$option['id']] = new DeployOptionEntity($option['id'], $option['name'], $option['command']);
+			}
+		} else {
+			foreach (self::$devOptions as $option) {
+				$this->deployOptions[$option['id']] = new DeployOptionEntity($option['id'], $option['name'], $option['command']);
+			}
 		}
 	}
 

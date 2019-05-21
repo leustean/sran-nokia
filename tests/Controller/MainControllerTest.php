@@ -5,13 +5,17 @@ namespace App\Tests\Controller;
 
 
 use App\Entity\DeviceEntity;
+use App\Entity\HardwareModuleEntity;
 use App\Entity\UserEntity;
 use App\Repository\DeviceEntityRepository;
 use App\Service\Login\LoginFactory;
+use App\Tests\AbstractIntegrationTest;
 use DateTime;
+use DateTimeImmutable;
+use Exception;
 use ReflectionException;
 
-class MainControllerTest extends AbstractControllerTest {
+class MainControllerTest extends AbstractIntegrationTest {
 
 	public function test_indexAction(): void {
 		$client = $this->getClient();
@@ -25,31 +29,61 @@ class MainControllerTest extends AbstractControllerTest {
 	}
 
 	/**
-	 * @throws ReflectionException
+	 * @throws Exception
 	 */
 	public function test_sbtsAction(): void {
 		$client = $this->getClient();
-		$deviceEntityRepository = $this->getMockDeviceEntityRepository();
 
 		$firstDevice = new DeviceEntity();
-		$firstDevice->setSbtsId(1);
+		$firstDevice
+			->setSbtsId(1)
+			->setSbtsOwner('pre@test.com')
+			->setRefreshTime(new DateTimeImmutable())
+			->setIp('192.168.1.2')
+			->setPort('3001')
+			->setUser('pre')
+			->setPassword('pre.test.pass');
 
 		$secondDevice = new DeviceEntity();
-		$secondDevice->setSbtsId(5);
+		$secondDevice
+			->setSbtsId(5)
+			->setSbtsState(true)
+			->setSbtsOwner('pre@test.com')
+			->setRefreshTime(new DateTimeImmutable())
+			->setIp('192.168.1.2')
+			->setPort('3001')
+			->setUser('pre')
+			->setPassword('pre.test.pass');
 
-		$deviceEntityRepository->method('findBy')->willReturn([
-			$firstDevice, $secondDevice
-		]);
+		$module = new HardwareModuleEntity();
+		$module->setType(1);
+		$module->setProductName('test');
 
-		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
+		$secondDevice->addHardwareModule($module);
 
-		$client->request('GET', '/sbts');
+		$entityManager = $this->getEntityManager();
+		$entityManager->persist($firstDevice);
+		$entityManager->persist($secondDevice);
+		$entityManager->flush();
+
+		$client->request('POST', '/sbts',
+			[
+				'device' => [
+					'sbtsState' => 1
+				],
+				'smod' => [
+					'productName' => 'test'
+				]
+			]
+		);
 		$response = $client->getResponse();
 		$crawler = $client->getCrawler();
 
 		self::assertEquals(200, $response->getStatusCode());
-		self::assertCount(1, $crawler->filter('a[href="/sbts/1"]'));
+		self::assertCount(0, $crawler->filter('a[href="/sbts/1"]'));
 		self::assertCount(1, $crawler->filter('a[href="/sbts/5"]'));
+		self::assertCount(1, $crawler->filter('select[name="device[sbtsState]"] > option[value="1"][selected]'));
+		self::assertCount(1, $crawler->filter('select[name="smod[productName]"] > option[value="test"][selected]'));
 	}
 
 	/**
@@ -77,7 +111,7 @@ class MainControllerTest extends AbstractControllerTest {
 		$device->setSbtsId(1);
 		$device->setSbtsOwner('other@test.com');
 
-		$deviceEntityRepository->method('findOneBy')->willReturn($device);
+		$deviceEntityRepository->method('getBySbtsId')->willReturn($device);
 
 		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 
@@ -115,7 +149,7 @@ class MainControllerTest extends AbstractControllerTest {
 		$device->setSbtsId(1);
 		$device->setSbtsOwner('test@test.com');
 
-		$deviceEntityRepository->method('findOneBy')->willReturn($device);
+		$deviceEntityRepository->method('getBySbtsId')->willReturn($device);
 
 		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 
@@ -152,7 +186,7 @@ class MainControllerTest extends AbstractControllerTest {
 		$device->setSbtsId(1);
 		$device->setSbtsOwner('other@test.com');
 
-		$deviceEntityRepository->method('findOneBy')->willReturn($device);
+		$deviceEntityRepository->method('getBySbtsId')->willReturn($device);
 
 		$this->setService(DeviceEntityRepository::class, $deviceEntityRepository);
 
@@ -222,7 +256,7 @@ class MainControllerTest extends AbstractControllerTest {
 		self::assertCount(1, $crawler->filter('input[name="device[ip]"][value="192.168.1.1"]'));
 		self::assertCount(1, $crawler->filter('input[name="device[port]"][value="3000"]'));
 		self::assertCount(1, $crawler->filter('input[name="device[user]"][value="test"]'));
-		self::assertCount(0, $crawler->filter('input[name="device[password]"][value]'));
+		self::assertCount(1, $crawler->filter('input[name="device[password]"][value="test.pass"]'));
 
 		$devices = $deviceEntityRepository->findAll();
 		self::assertCount(1, $devices);

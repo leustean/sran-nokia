@@ -5,21 +5,27 @@ namespace App\Tests;
 
 
 use App\Controller\AdminControllerInterface;
-use App\Cron\Prototype\CronInterface;
+use App\Cron\CronInterface;
 use App\Repository\CronRepository;
 use App\Repository\DeviceEntityRepository;
 use App\Repository\SettingsEntityRepository;
 use App\Repository\UserEntityRepository;
 use App\Service\Login\LoginFactory;
 use App\Service\Login\LoginInterface;
+use App\Service\SBTS\DataMapper;
+use App\Service\SBTS\DeviceManager;
+use App\Service\SBTS\SyncFactory;
+use App\Service\SBTS\SyncInterface;
 use Cron\CronExpression;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\LoggerInterface;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -157,6 +163,54 @@ trait MockMaker {
 	 */
 	public function getMockEntityManager(): MockObject {
 		return $this->getMockBuilder(EntityManagerInterface::class)->getMock();
+	}
+
+	/**
+	 * @return Container|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockContainer(): MockObject {
+		return $this->getMockBuilder(Container::class)->getMock();
+	}
+
+	/**
+	 * @return LoggerInterface|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockLogger(): MockObject {
+		return $this->getMockBuilder(LoggerInterface::class)->getMock();
+	}
+
+	/**
+	 * @return SyncInterface|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockSync(): MockObject {
+		return $this->getMockBuilder(SyncInterface::class)->getMock();
+	}
+
+	/**
+	 * @return DataMapper|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockDataMapper(): MockObject {
+		return $this->getMockBuilder(DataMapper::class)->getMock();
+	}
+
+	/**
+	 * @return SyncFactory|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockSyncFactory(): MockObject {
+		return $this->getMockBuilder(SyncFactory::class)->disableOriginalConstructor()->getMock();
+	}
+
+	/**
+	 * @return DeviceManager|MockObject
+	 * @throws ReflectionException
+	 */
+	public function getMockDeviceManager(): MockObject {
+		return $this->getMockBuilder(DeviceManager::class)->disableOriginalConstructor()->getMock();
 	}
 
 }

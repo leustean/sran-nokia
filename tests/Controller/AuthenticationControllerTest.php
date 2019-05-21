@@ -10,10 +10,11 @@ use App\Repository\UserEntityRepository;
 use App\Service\Login\FakeLogin;
 use App\Service\Login\LoginException;
 use App\Service\Login\LoginFactory;
+use App\Tests\AbstractIntegrationTest;
 use Exception;
 use ReflectionException;
 
-class AuthenticationControllerTest extends AbstractControllerTest {
+class AuthenticationControllerTest extends AbstractIntegrationTest {
 
 	protected const EMAIL = 'test@test.com';
 
@@ -73,7 +74,7 @@ class AuthenticationControllerTest extends AbstractControllerTest {
 	/**
 	 * @throws Exception
 	 */
-	public function test_loginAction_willRedirectWithValidCredentials_andIsNotAdmin(): void {
+	public function test_loginAction_willCreateUserAndRedirect_whenThereIsAnAdmin(): void {
 		$client = $this->getClient();
 		$client->disableReboot();
 
@@ -95,6 +96,14 @@ class AuthenticationControllerTest extends AbstractControllerTest {
 
 		$this->setService(LoginFactory::class, $loginFactory);
 
+		$userEntity = new UserEntity();
+		$userEntity->setEmail('test-admin@test.com');
+		$userEntity->setIsAdmin(true);
+
+		$entityManager = $this->getEntityManager();
+		$entityManager->persist($userEntity);
+		$entityManager->flush();
+
 		$client->request('POST', '/login', [
 			'login' => [
 				'email' => self::EMAIL,
@@ -113,8 +122,64 @@ class AuthenticationControllerTest extends AbstractControllerTest {
 		self::assertStringEndsWith($url, $client->getRequest()->getUri());
 
 		$users = $userEntityRepository->findAll();
-		self::assertSame(count($users), 1);
-		$user = $users[0];
+		self::assertSame(count($users), 2);
+		$user = $users[1];
+		self::assertSame($user->getEmail(), 'test@test.com');
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function test_loginAction_willCreateAdminUser_ifNoAdminUserExists(): void {
+		$client = $this->getClient();
+		$client->disableReboot();
+
+		$loginFactory = $this->getMockLoginFactory();
+
+		/**
+		 * @var UserEntityRepository $userEntityRepository
+		 */
+		$userEntityRepository = $this->getService(UserEntityRepository::class);
+
+		/** @noinspection PhpParamsInspection */
+		$loginService = new FakeLogin(
+			$this->getSession(),
+			$userEntityRepository,
+			$this->getEntityManager()
+		);
+
+		$loginFactory->method('getLogin')->willReturn($loginService);
+
+		$userEntity = new UserEntity();
+		$userEntity->setEmail('test-admin@test.com');
+		$userEntity->setIsAdmin(false);
+
+		$entityManager = $this->getEntityManager();
+		$entityManager->persist($userEntity);
+		$entityManager->flush();
+
+		$this->setService(LoginFactory::class, $loginFactory);
+
+		$client->request('POST', '/login', [
+			'login' => [
+				'email' => self::EMAIL,
+				'password' => self::PASS,
+				'domain' => self::DOMAIN
+			]
+		]);
+
+		$response = $client->getResponse();
+		self::assertEquals(302, $response->getStatusCode());
+		$client->followRedirect();
+
+		$response = $client->getResponse();
+		self::assertEquals(200, $response->getStatusCode());
+		$url = $client->getContainer()->get('router')->generate('admin_index', [], false);
+		self::assertStringEndsWith($url, $client->getRequest()->getUri());
+
+		$users = $userEntityRepository->findAll();
+		self::assertSame(count($users), 2);
+		$user = $users[1];
 		self::assertSame($user->getEmail(),'test@test.com');
 	}
 

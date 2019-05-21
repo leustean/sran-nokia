@@ -4,6 +4,51 @@
     <div class="wrapper__body__content">
         <div class="wrapper__body__content__box">
             <div class="sbts">
+                <form class="sbts__filter" action="{{ path('main_sbts') }}" method="post">
+                    {% for alias,table in tables %}
+                        <div class="sbts__filter__column {{ showFiltersTab ? 'sbts__filter__column--active' : '' }} js-filter-column">
+                            <div class="sbts__filter__column__row">
+                                {{ table['tableDisplayName'] }}
+                            </div>
+                            {% for field in table['tableColumns'] %}
+                                <div class="sbts__filter__column__row">
+                                    <div class="mdc-select">
+                                        <i class="mdc-select__dropdown-icon"></i>
+                                        <select name="{{ alias }}[{{ field['columnName'] }}]"
+                                                class="mdc-select__native-control">
+
+                                            {% if table['selected'][field['columnName']] is defined %}
+                                                <option value=""></option>
+                                                {% for value in field['data'] %}
+                                                    <option
+                                                            value="{{ value }}"
+                                                            {{ table['selected'][field['columnName']] == value ? 'selected' : '' }}
+                                                    >
+                                                        {{ value }}
+                                                    </option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="" selected></option>
+                                                {% for value in field['data'] %}
+                                                    <option value="{{ value }}">
+                                                        {{ value }}
+                                                    </option>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                        <label class="mdc-floating-label">{{ field['displayName'] }}</label>
+                                        <div class="mdc-line-ripple"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="sbts__filter__submit">
+                        <button class="mdc-button js-toggle-filters" type="button">Toggle filters tab</button>
+                        <button class="mdc-button" type="submit">Search</button>
+                        <a class="mdc-button" href="{{ path('main_sbts') }}">Reset filters</a>
+                    </div>
+                </form>
                 <table class="sbts__table">
                     <thead class="sbts__table__header">
                     <tr class="sbts__table__header__row">
@@ -19,7 +64,8 @@
                     {% for device in devices %}
                         <tr class="sbts__table__body__row">
                             <td class="sbts__table__body__row__column">
-                                <a class="sbts__table__body__row__column__id" href="{{ path('main_sbts_details', {'sbtsId' : device.sbtsId}) }}">
+                                <a class="sbts__table__body__row__column__id"
+                                   href="{{ path('main_sbts_details', {'sbtsId' : device.sbtsId}) }}">
                                     <span class="sbts__table__body__row__column__id__text">#{{ device.sbtsId }}</span>
                                     <i class="sbts__table__body__row__column__id__icon material-icons ">add_circle</i>
                                 </a>
@@ -36,4 +82,21 @@
             </div>
         </div>
     </div>
+    <script>
+        (function (toggleButtonClass, columnClassName, activeClassName) {
+            function toggleSearchFilter() {
+                const columns = document.getElementsByClassName(columnClassName);
+                for (const column of columns) {
+                    column.classList.toggle(activeClassName);
+                }
+            }
+
+            const toggleButtons = document.getElementsByClassName(toggleButtonClass);
+            for (const toggleButton of toggleButtons) {
+                toggleButton.addEventListener('click', function () {
+                    toggleSearchFilter();
+                })
+            }
+        })('js-toggle-filters', 'js-filter-column', 'sbts__filter__column--active');
+    </script>
 {% endblock %}
