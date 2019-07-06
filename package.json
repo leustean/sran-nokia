@@ -7,13 +7,16 @@
     "@material/textfield": "^2.1.1",
     "browserify": "^16.2.3",
     "node-sass": "^4.11.0",
-    "watchify": "^3.11.1"
+    "watchify": "^3.11.1",
+    "snyk": "^1.189.0"
   },
   "scripts": {
     "watch-scss": "node-sass --source-map true --source-map-embed true --watch assets/scss/ --output public/bundles/css/",
     "compile-scss": "node-sass --source-map true --source-map-embed true --output public/bundles/css/ assets/scss/",
     "build": "browserify assets/js/mdc.js -o public/js/mdc.js",
-    "watch": "watchify assets/js/mdc.js -o public/js/mdc.js -v"
+    "watch": "watchify assets/js/mdc.js -o public/js/mdc.js -v",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "Botici Alexandru",
@@ -34,5 +37,6 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babelify": "^10.0.0"
-  }
+  },
+  "snyk": true
 }
