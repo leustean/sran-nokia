@@ -67,9 +67,8 @@ class AdminController extends AbstractController implements AdminControllerInter
 	* @param bool $isAdmin
 	*/
 	private function setAdminPermission($user, bool $isAdmin) {
-		foreach ($request->get('normalUsers', []) as $user) {
 		$dbUser = $userEntityRepository->find($user);
-			
+
 		if ($dbUser !== null) {
 			$dbUser->setIsAdmin($isAdmin);
 			$entityManager->persist($dbUser);
