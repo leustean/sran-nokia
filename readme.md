@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/leustean/sran-nokia/badge.svg?branch=master)](https://coveralls.io/github/leustean/sran-nokia?branch=master)
 
 
-This project has the objective of detecting the state of user defined network resources.
+This project has the objective of detecting the state of user defined network resources from an SRAN infrastructure.
 
 ## Getting Started
 
