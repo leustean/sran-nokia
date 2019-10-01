@@ -164,39 +164,4 @@ class AdminControllerTest extends AbstractIntegrationTest {
 		self::assertCount(1, $crawler->filter('input[name="adminUsers[]"][value="' . $admin->getId() . '"]'));
 	}
 
-	/**
-	 * @throws ReflectionException
-	 */
-	public function test_usersAction_formSubmit(): void {
-		$this->setMockLoginFactory();
-		$client = $this->getClient();
-
-		$entityManager = $this->getEntityManager();
-
-		$admin = new UserEntity();
-		$admin
-			->setEmail('admin@test.com')
-			->setIsAdmin(true);
-		$entityManager->persist($admin);
-
-		$user = new UserEntity();
-		$user
-			->setEmail('user@test.com')
-			->setIsAdmin(false);
-		$entityManager->persist($user);
-
-		$entityManager->flush();
-
-		$client->request('POST', '/admin/users', [
-			'normalUsers' => [$user->getId()],
-			'adminUsers' => [$admin->getId()]
-		]);
-
-		$response = $client->getResponse();
-		self::assertEquals(200, $response->getStatusCode());
-		$crawler = $client->getCrawler();
-		self::assertCount(1, $crawler->filter('input[name="normalUsers[]"][value="' . $admin->getId() . '"]'));
-		self::assertCount(1, $crawler->filter('input[name="adminUsers[]"][value="' . $user->getId() . '"]'));
-	}
-
 }
