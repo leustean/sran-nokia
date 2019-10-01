@@ -61,7 +61,21 @@ class AdminController extends AbstractController implements AdminControllerInter
 			]
 		);
 	}
-
+	/**
+	* Sets the admin permission of an user
+	* @param string $user
+	* @param bool $isAdmin
+	*/
+	private function setAdminPermission($user, bool $isAdmin) {
+		foreach ($request->get('normalUsers', []) as $user) {
+		$dbUser = $userEntityRepository->find($user);
+			
+		if ($dbUser !== null) {
+			$dbUser->setIsAdmin($isAdmin);
+			$entityManager->persist($dbUser);
+		}
+	}
+	
 	/**
 	 * @Route("/users", name="admin_users", methods={"GET","POST"})
 	 * @param UserEntityRepository   $userEntityRepository
@@ -71,19 +85,13 @@ class AdminController extends AbstractController implements AdminControllerInter
 	 */
 	public function usersAction(UserEntityRepository $userEntityRepository, Request $request, EntityManagerInterface $entityManager): Response {
 		foreach ($request->get('normalUsers', []) as $user) {
-			$dbUser = $userEntityRepository->find($user);
-			if ($dbUser !== null) {
-				$dbUser->setIsAdmin(true);
-				$entityManager->persist($dbUser);
-			}
+			$this->setAdminPermission($user, true);
 		}
+		
 		foreach ($request->get('adminUsers', []) as $user) {
-			$dbUser = $userEntityRepository->find($user);
-			if ($dbUser !== null) {
-				$dbUser->setIsAdmin(false);
-				$entityManager->persist($dbUser);
-			}
+			$this->setAdminPermission($user, false);
 		}
+		
 		$entityManager->flush();
 
 		return $this->render(
