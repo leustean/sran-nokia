@@ -8,7 +8,7 @@
     "browserify": "^16.2.3",
     "node-sass": "^4.11.0",
     "watchify": "^3.11.1",
-    "snyk": "^1.230.5"
+    "snyk": "^1.258.2"
   },
   "scripts": {
     "watch-scss": "node-sass --source-map true --source-map-embed true --watch assets/scss/ --output public/bundles/css/",
