@@ -75,3 +75,5 @@ patch:
         patched: '2020-05-01T04:39:59.303Z'
     - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
         patched: '2020-05-01T04:39:59.303Z'
+    - node-sass > lodash:
+        patched: '2020-05-21T14:38:55.174Z'
