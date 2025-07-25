@@ -6,7 +6,7 @@
     "@material/select": "^2.2.0",
     "@material/textfield": "^2.1.1",
     "browserify": "^16.2.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "snyk": "^1.323.2",
     "watchify": "^3.11.1"
   },
